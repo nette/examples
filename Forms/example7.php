@@ -13,7 +13,7 @@ require_once '../../Nette/loader.php';
 /*use Nette::Debug;*/
 /*use Nette::Web::Html;*/
 
-Debug::enable();
+Debug::enable(E_ALL | E_STRICT);
 
 
 $countries = array(
@@ -40,7 +40,7 @@ $form->encoding = 'ISO-8859-1';
 $form->addGroup('Personal data');
 $form->addText('name', 'Your name:', 35);
 
-$form->addSelect('country', 'Country:')
+$form->addMultiSelect('country', 'Country:')
 	->skipFirst()
     ->setItems($countries, FALSE);
 

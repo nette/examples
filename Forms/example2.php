@@ -15,7 +15,7 @@ require_once '../../Nette/loader.php';
 /*use Nette::Debug;*/
 /*use Nette::Web::Html;*/
 
-Debug::enable();
+Debug::enable(E_ALL | E_STRICT);
 
 
 $countries = array(
@@ -55,7 +55,9 @@ $sex = array(
 $form = new Form;
 
 // group Personal data
-$form->addGroup('Personal data');
+$form->addGroup('Personal data')
+    ->setOption('description', 'We value your privacy and we ensure that the information you give to us will not be shared to other entities.');
+
 $form->addText('name', 'Your name:', 35)
 	->addRule(Form::FILLED, 'Enter your name');
 
