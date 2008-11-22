@@ -25,8 +25,9 @@ class AuthPresenter extends BasePresenter
 		$form->addSubmit('login', 'Login');
 		$form->onSubmit[] = array($this, 'loginFormSubmitted');
 
+		$form->addProtection('Please submit this form again (security token has expired).');
+
 		$this->template->form = $form;
-		$this->template->title = "Log in";
 	}
 
 
@@ -34,14 +35,13 @@ class AuthPresenter extends BasePresenter
 	public function loginFormSubmitted($form)
 	{
 		try {
-			require_once 'models/Users.php';
 			$user = Environment::getUser();
 			$user->authenticate($form['username']->getValue(), $form['password']->getValue());
 			$this->getApplication()->restoreRequest($this->backlink);
 			$this->redirect('Dashboard:');
 
 		} catch (AuthenticationException $e) {
-			$form->addError('Login failed.');
+			$form->addError($e->getMessage());
 		}
 	}
 

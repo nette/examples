@@ -52,7 +52,7 @@ class FifteenControl extends /*Nette\Application\*/Control
 	public function handleClick($x, $y)
 	{
 		if (!$this->isClickable($x, $y)) {
-			throw new /*Nette\Application\*/BadRequestException('Action not allowed.');
+			throw new /*Nette\Application\*/BadSignalException('Action not allowed.');
 		}
 
 		if ($this->presenter->isAjax()) {
@@ -60,10 +60,10 @@ class FifteenControl extends /*Nette\Application\*/Control
 			$pos = $x + $y * $this->width;
 			$empty = $this->searchEmpty();
 			$id = $this->getSnippetId();
-			if ($pos === $empty - 1) $ajax->fireEvent('fifteen.move', $id, $x, $y, -1, 0);
-			elseif ($pos === $empty + 1) $ajax->fireEvent('fifteen.move', $id, $x, $y, +1, 0);
-			elseif ($pos > $empty) $ajax->fireEvent('fifteen.move', $id, $x, $y, 0, +1);
-			else $ajax->fireEvent('fifteen.move', $id, $x, $y, 0, -1);
+			if ($pos === $empty - 1) $ajax->events[] = array('fifteen.move', $id, $x, $y, -1, 0);
+			elseif ($pos === $empty + 1) $ajax->events[] = array('fifteen.move', $id, $x, $y, +1, 0);
+			elseif ($pos > $empty) $ajax->events[] = array('fifteen.move', $id, $x, $y, 0, +1);
+			else $ajax->events[] = array('fifteen.move', $id, $x, $y, 0, -1);
 		}
 
 		$this->move($x, $y);
@@ -136,7 +136,7 @@ class FifteenControl extends /*Nette\Application\*/Control
 	{
 		$template = $this->template;
 		$template->setFile(dirname(__FILE__) . '/FifteenControl.phtml');
-		$template->registerFilter(/*Nette\Templates\*/'TemplateFilters::curlyBrackets');
+		$template->registerFilter(/*Nette\Templates\*/'CurlyBracketsFilter::invoke');
 		$template->width = $this->width;
 		$template->order = $this->order;
 		$template->useAjax = $this->useAjax;
@@ -153,7 +153,7 @@ class FifteenControl extends /*Nette\Application\*/Control
 	public function loadState(array $params)
 	{
 		if (isset($params['order'])) {
-			$params['order'] = explode('.', $params['order']);
+			$params['order'] = explode('.', (string) $params['order']);
 
 			// validate
 			$copy = $params['order'];

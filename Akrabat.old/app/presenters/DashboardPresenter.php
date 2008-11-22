@@ -10,11 +10,12 @@ class DashboardPresenter extends BasePresenter
 
 	protected function startup()
 	{
-		require_once 'models/Albums.php';
-
 		// user authentication
 		$user = Environment::getUser();
 		if (!$user->isAuthenticated()) {
+			if ($user->getSignOutReason() === User::INACTIVITY) {
+				$this->flashMessage('You have been logged out due to inactivity. Please login again.');
+			}
 			$backlink = $this->getApplication()->storeRequest();
 			$this->redirect('Auth:login', $backlink);
 		}
@@ -32,7 +33,7 @@ class DashboardPresenter extends BasePresenter
 	{
 		$this->template->title = "My Albums";
 
-		$album = new Albums();
+		$album = new Albums;
 		$this->template->albums = $album->findAll('artist', 'title');
 	}
 
@@ -56,6 +57,7 @@ class DashboardPresenter extends BasePresenter
 				$album = new Albums();
 				$album->insert($data);
 
+				$this->flashMessage('The album has been added.');
 				$this->redirect('default');
 			}
 		}
@@ -92,6 +94,7 @@ class DashboardPresenter extends BasePresenter
 					$album = new Albums();
 					$album->update($id, $data);
 
+					$this->flashMessage('The album has been updated.');
 					$this->redirect('default');
 				}
 			}
@@ -100,6 +103,10 @@ class DashboardPresenter extends BasePresenter
 		$album = new Albums();
 		if ($id > 0) {
 			$this->template->album = $album->fetch($id);
+			if (!$this->template->album) {
+				throw new /*Nette\Application\*/BadRequestException('Record not found');
+			}
+
 		} else {
 			$this->template->album = $album->createBlank();
 		}
@@ -107,7 +114,7 @@ class DashboardPresenter extends BasePresenter
 		$this->template->title = "Edit Album";
 
 		// additional view fields required by form
-		$this->template->buttonText = 'Update';
+		$this->template->buttonText = 'Save';
 		$this->template->action = $this->link('edit', $id);
 	}
 
@@ -120,10 +127,10 @@ class DashboardPresenter extends BasePresenter
 	public function presentDelete($id = 0)
 	{
 		if ($this->request->isMethod('post')) {
-			$del = $this->request->post['del'];
-			if ($del == 'Yes' && $id > 0) {
+			if (isset($this->request->post['delete']) && $id > 0) {
 				$album = new Albums();
 				$album->delete($id);
+				$this->flashMessage('Album has been deleted.');
 			}
 			$this->redirect('default');
 		}
@@ -133,7 +140,7 @@ class DashboardPresenter extends BasePresenter
 			$album = new Albums();
 			$this->template->album = $album->fetch($id);
 			if (!$this->template->album) {
-				$this->redirect('default');
+				throw new /*Nette\Application\*/BadRequestException('Record not found');
 			}
 		}
 
@@ -150,7 +157,8 @@ class DashboardPresenter extends BasePresenter
 	public function presentLogout()
 	{
 		Environment::getUser()->signOut();
-		$this->redirect('default');
+		$this->flashMessage('You have been logged off.');
+		$this->redirect('Auth:login');
 	}
 
 }
