@@ -1,20 +1,15 @@
 <?php
 
 /**
- * Nette\Forms example 3
+ * Nette\Forms example 2
  *
- * - localization (with Zend_Translate)
+ * - form definition using fluent interfaces
+ * - form groups usage
+ * - default rendering
  */
 
 
-require_once '../../Nette/loader.php';
-
-// set_include_path();
-include_once 'Zend/Translate.php';
-
-if (!class_exists('Zend_Translate')) {
-	die('This example requires Zend Framework');
-}
+require '../../Nette/loader.php';
 
 /*use Nette\Forms\Form;*/
 /*use Nette\Debug;*/
@@ -23,28 +18,29 @@ if (!class_exists('Zend_Translate')) {
 Debug::enable();
 
 
-class MyTranslator extends Zend_Translate implements /*Nette\*/ITranslator
-{
-	/**
-	 * Translates the given string.
-	 * @param  string   message
-	 * @param  int      plural count
-	 * @return string
-	 */
-	public function translate($message, $count = NULL)
-	{
-		return parent::translate($message);
-	}
-}
-
-
 $countries = array(
 	'Select your country',
 	'Europe' => array(
 		'CZ' => 'Czech Republic',
+		'FR' => 'France',
+		'DE' => 'Germany',
+		'GR' => 'Greece',
+		'HU' => 'Hungary',
+		'IE' => 'Ireland',
+		'IT' => 'Italy',
+		'NL' => 'Netherlands',
+		'PL' => 'Poland',
 		'SK' => 'Slovakia',
+		'ES' => 'Spain',
+		'CH' => 'Switzerland',
+		'UA' => 'Ukraine',
+		'GB' => 'United Kingdom',
 	),
-	'US' => 'USA',
+	'AU' => 'Australia',
+	'CA' => 'Canada',
+	'EG' => 'Egypt',
+	'JP' => 'Japan',
+	'US' => 'United States',
 	'?'  => 'other',
 );
 
@@ -57,13 +53,11 @@ $sex = array(
 
 // Step 1: Define form with validation rules
 $form = new Form;
-// enable translator
-$translator = new MyTranslator('gettext', dirname(__FILE__) . '/messages.mo', 'cs');
-$translator->setLocale('cs');
-$form->setTranslator($translator);
 
 // group Personal data
-$form->addGroup('Personal data');
+$form->addGroup('Personal data')
+	->setOption('description', 'We value your privacy and we ensure that the information you give to us will not be shared to other entities.');
+
 $form->addText('name', 'Your name:', 35)
 	->addRule(Form::FILLED, 'Enter your name');
 
@@ -117,7 +111,9 @@ $form->addPassword('password2', 'Reenter password:', 20)
 		->addRule(Form::FILLED, 'Reenter your password')
 		->addRule(Form::EQUAL, 'Passwords do not match', $form['password']);
 
-$form->addFile('avatar', 'Picture:');
+$form->addFile('avatar', 'Picture:')
+	->addCondition(Form::FILLED)
+		->addRule(Form::MIME_TYPE, 'Uploaded file is not image', 'image/*');
 
 $form->addHidden('userid');
 
@@ -128,6 +124,7 @@ $form->addTextArea('note', 'Comment:', 30, 5);
 $form->addGroup();
 
 $form->addSubmit('submit1', 'Send');
+
 
 
 
@@ -169,7 +166,7 @@ if ($form->isSubmitted()) {
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta http-equiv="content-language" content="en" />
 
-	<title>Nette\Forms example 3 | Nette Framework</title>
+	<title>Nette\Forms example 2 | Nette Framework</title>
 
 	<style type="text/css">
 	<!--
@@ -197,7 +194,7 @@ if ($form->isSubmitted()) {
 </head>
 
 <body>
-	<h1>Nette\Forms example 3</h1>
+	<h1>Nette\Forms example 2</h1>
 
 	<?php echo $form ?>
 </body>
