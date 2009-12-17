@@ -13,7 +13,7 @@ class Users extends Object implements /*Nette\Security\*/IAuthenticator
 	/**
 	 * Performs an authentication
 	 * @param  array
-	 * @return void
+	 * @return IIdentity
 	 * @throws AuthenticationException
 	 */
 	public function authenticate(array $credentials)
