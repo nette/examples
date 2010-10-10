@@ -5,7 +5,7 @@
  */
 
 
-require_once __DIR__ . '/../../Nette/loader.php';
+require_once __DIR__ . '/../libs/Nette/Nette/loader.php';
 
 // set_include_path();
 include_once 'Zend/Translate.php';

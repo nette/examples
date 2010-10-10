@@ -9,7 +9,7 @@
  */
 
 
-require_once __DIR__ . '/../../Nette/loader.php';
+require_once __DIR__ . '/../libs/Nette/Nette/loader.php';
 
 use Nette\Forms\Form,
 	Nette\Debug,
