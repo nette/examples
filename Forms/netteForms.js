@@ -8,6 +8,15 @@
 
 var nette = nette || { };
 
+nette.addEvent = function (element, on, callback) {
+	var original = element['on' + on];
+	element['on' + on] = function () {
+		if (typeof original === 'function' && original.apply(element, arguments) === false) return false;
+		return callback.apply(element, arguments);
+	};
+};
+
+
 nette.getValue = function(elem) {
 	if (!elem) {
 		return null;
@@ -197,12 +206,12 @@ nette.toggleControl = function(elem, rules, firsttime) {
 			if (firsttime) {
 				if (!el.nodeName) { // radio
 					for (var i in el) {
-						el[i].onclick = function() { nette.toggleForm(elem.form); };
+						nette.addEvent(el[i], 'click', function() { nette.toggleForm(elem.form); });
 					}
 				} else if (el.nodeName.toLowerCase() === 'select') {
-					el.onchange = function() { nette.toggleForm(elem.form); };
+					nette.addEvent(el, 'change', function() { nette.toggleForm(elem.form); });
 				} else {
-					el.onclick = function() { nette.toggleForm(elem.form); };
+					nette.addEvent(el, 'click', function() { nette.toggleForm(elem.form); });
 				}
 			}
 			for (var id in rule.toggle || []) {
@@ -223,15 +232,15 @@ nette.toggle = function(id, visible) {
 
 
 nette.initForm = function(form) {
-	form.onsubmit = function() {
+	nette.addEvent(form, 'submit', function() {
 		return nette.validateForm(form);
-	};
+	});
 
-	form.onclick = function(e) {
+	nette.addEvent(form, 'click', function(e) {
 		e = e || event;
 		var target = e.target || e.srcElement;
 		form['nette-submittedBy'] = (target.type in {submit:1, image:1}) ? target.name : null;
-	};
+	});
 
 	for (var i = 0; i < form.elements.length; i++) {
 		nette.toggleControl(form.elements[i], null, true);
@@ -244,18 +253,15 @@ nette.initForm = function(form) {
 		}
 
 		for (i = 0, elms = form.getElementsByTagName('select'); i < elms.length; i++) {
-			elms[i].onmousewheel = function() { return false };	// prevents accidental change in IE
+			nette.addEvent(elms[i], 'mousewheel', function() { return false }); // prevents accidental change in IE
 			if (labels[elms[i].htmlId]) {
-				labels[elms[i].htmlId].onclick = function() { document.getElementById(this.htmlFor).focus(); return false }; // prevents deselect in IE 5 - 6
+				nette.addEvent(labels[elms[i].htmlId], 'click', function() { document.getElementById(this.htmlFor).focus(); return false }); // prevents deselect in IE 5 - 6
 			}
 		}
 	}
 };
 
 
-(function(onloadOrig) {
-	window.onload = function() {
-		if (typeof onloadOrig === 'function') onloadOrig();
-		for (var i = 0; i < document.forms.length; i++) nette.initForm(document.forms[i]);
-	};
-})(window.onload);
+nette.addEvent(window, 'load', function () {
+	for (var i = 0; i < document.forms.length; i++) nette.initForm(document.forms[i]);
+});
