@@ -15,7 +15,7 @@ Debug::enable();
 
 
 // Step 0: Define custom validator
-function myValidator($item, $arg)
+function divisibilityValidator($item, $arg)
 {
 	return $item->value % $arg === 0;
 }
@@ -26,10 +26,10 @@ function myValidator($item, $arg)
 $form = new Form;
 
 $form->addText('num1', 'Multiple of 8:')
-	->addRule('myValidator', 'First number must be %d multiple', 8);
+	->addRule('divisibilityValidator', 'First number must be %d multiple', 8);
 
 $form->addText('num2', 'Not multiple of 5:')
-	->addRule(~'myValidator', 'Second number must not be %d multiple', 5); // negative
+	->addRule(~'divisibilityValidator', 'Second number must not be %d multiple', 5); // negative
 
 
 $form->addSubmit('submit', 'Send');

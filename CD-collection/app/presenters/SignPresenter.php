@@ -6,7 +6,7 @@ use Nette\Application\AppForm,
 
 
 
-class AuthPresenter extends BasePresenter
+class SignPresenter extends BasePresenter
 {
 	/** @persistent */
 	public $backlink = '';
@@ -26,10 +26,10 @@ class AuthPresenter extends BasePresenter
 
 
 	/**
-	 * Login form component factory.
-	 * @return mixed
+	 * Sign in form component factory.
+	 * @return Nette\Application\AppForm
 	 */
-	protected function createComponentLoginForm()
+	protected function createComponentSignInForm()
 	{
 		$form = new AppForm;
 		$form->addText('username', 'Username:')
@@ -38,17 +38,15 @@ class AuthPresenter extends BasePresenter
 		$form->addPassword('password', 'Password:')
 			->addRule(Form::FILLED, 'Please provide a password.');
 
-		$form->addSubmit('login', 'Login');
+		$form->addSubmit('send', 'Sign in');
 
-		$form->addProtection('Please submit this form again (security token has expired or you have disabled cookies).');
-
-		$form->onSubmit[] = callback($this, 'loginFormSubmitted');
+		$form->onSubmit[] = callback($this, 'signInFormSubmitted');
 		return $form;
 	}
 
 
 
-	public function loginFormSubmitted($form)
+	public function signInFormSubmitted($form)
 	{
 		try {
 			$this->user->login($form['username']->value, $form['password']->value);
@@ -58,6 +56,15 @@ class AuthPresenter extends BasePresenter
 		} catch (AuthenticationException $e) {
 			$form->addError($e->getMessage());
 		}
+	}
+
+
+
+	public function actionOut()
+	{
+		$this->getUser()->logout();
+		$this->flashMessage('You have been signed out.');
+		$this->redirect('in');
 	}
 
 }

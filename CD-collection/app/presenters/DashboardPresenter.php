@@ -13,10 +13,10 @@ class DashboardPresenter extends BasePresenter
 		// user authentication
 		if (!$this->user->isLoggedIn()) {
 			if ($this->user->logoutReason === Nette\Web\User::INACTIVITY) {
-				$this->flashMessage('You have been logged out due to inactivity. Please login again.');
+				$this->flashMessage('You have been signed out due to inactivity. Please sign in again.');
 			}
 			$backlink = $this->application->storeRequest();
-			$this->redirect('Auth:login', array('backlink' => $backlink));
+			$this->redirect('Sign:in', array('backlink' => $backlink));
 		}
 
 		parent::startup();
@@ -73,19 +73,6 @@ class DashboardPresenter extends BasePresenter
 		if (!$this->template->album) {
 			throw new Nette\Application\BadRequestException('Record not found');
 		}
-	}
-
-
-
-	/********************* action logout *********************/
-
-
-
-	public function actionLogout()
-	{
-		$this->user->logout();
-		$this->flashMessage('You have been logged off.');
-		$this->redirect('Auth:login');
 	}
 
 
