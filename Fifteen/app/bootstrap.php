@@ -2,7 +2,7 @@
 
 use Nette\Debug,
 	Nette\Environment,
-	Nette\Loaders\RobotLoader;
+	Nette\Application\SimpleRouter;
 
 
 
@@ -18,14 +18,13 @@ require LIBS_DIR . '/Nette/Nette/loader.php';
 Debug::enable();
 
 // 2b) enable RobotLoader - this allows load all classes automatically
-$loader = Environment::getRobotLoader();
-$loader->addDirectory(APP_DIR);
-$loader->register();
+Environment::getRobotLoader()->register();
 
 
 
 // Step 3: Configure application
 $application = Environment::getApplication();
+$application->router[] = new SimpleRouter('Default:default');
 
 
 
