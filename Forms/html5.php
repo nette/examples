@@ -91,7 +91,7 @@ if ($form->isSubmitted() && $form->isValid()) {
 	}
 	</style>
 	<link rel="stylesheet" type="text/css" media="screen" href="files/style.css" />
-	<script src="netteForms.js"></script>
+	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
 </head>
 
 <body>
