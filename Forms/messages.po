@@ -54,7 +54,7 @@ msgid "Your gender:"
 msgstr "Pohlaví:"
 
 #: test.example1.php:34
-msgid "E-Mail:"
+msgid "Email:"
 msgstr "E-mail:"
 
 #: test.example1.php:36
@@ -111,7 +111,7 @@ msgid "Age must be in range from %d to %d"
 msgstr "Věk musí být v rozmezí %d až %d"
 
 #: test.example1.php:59
-msgid "Incorrect E-mail Address"
+msgid "Incorrect email address"
 msgstr "Zadaný e-mail není platný"
 
 #: test.example1.php:64
