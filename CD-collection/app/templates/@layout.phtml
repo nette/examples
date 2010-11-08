@@ -31,6 +31,6 @@
 		{include #content}
 	</div>
 
-	<p id="logged-in" n:if="$user->loggedIn">Signed in as {$user->identity->real_name}. <a href="{link Sign:out}">Sign out</a></p>
+	<p id="logged-in" n:if="$user->loggedIn">Signed in as {$user->identity->real_name}. <a n:href="Sign:out">Sign out</a></p>
 </body>
 </html>

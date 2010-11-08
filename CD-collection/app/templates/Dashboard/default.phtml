@@ -2,7 +2,7 @@
 
 <h1 n:block="title">My Albums</h1>
 
-<p><a href="{link add}">Add new album</a></p>
+<p><a n:href="add">Add new album</a></p>
 
 <table class="grid">
 <tr>
@@ -16,8 +16,8 @@
 	<td>{$album->title}</td>
 	<td>{$album->artist}</td>
 	<td>
-		<a href="{link edit, $album->id}">Edit</a>
-		<a href="{link delete, $album->id}">Delete</a>
+		<a n:href="edit, $album->id">Edit</a>
+		<a n:href="delete, $album->id">Delete</a>
 	</td>
 </tr>
 {/foreach}
