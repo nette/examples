@@ -131,7 +131,7 @@ class FifteenControl extends Nette\Application\Control
 	public function render()
 	{
 		$template = $this->template;
-		$template->setFile(__DIR__ . '/FifteenControl.phtml');
+		$template->setFile(__DIR__ . '/FifteenControl.latte');
 		$template->width = $this->width;
 		$template->order = $this->order;
 		$template->render();
