@@ -37,16 +37,9 @@ $router = $application->getRouter();
 
 // mod_rewrite detection
 if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
-	$router[] = new Route('index.php', array(
-		'presenter' => 'Dashboard',
-		'action' => 'default',
-	), Route::ONE_WAY);
+	$router[] = new Route('index.php', 'Dashboard:default', Route::ONE_WAY);
 
-	$router[] = new Route('<presenter>/<action>/<id>', array(
-		'presenter' => 'Dashboard',
-		'action' => 'default',
-		'id' => NULL,
-	));
+	$router[] = new Route('<presenter>/<action>[/<id>]', 'Dashboard:default');
 
 } else {
 	$router[] = new SimpleRouter('Dashboard:default');
