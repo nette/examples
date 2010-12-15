@@ -28,7 +28,9 @@ Environment::loadConfig();
 $application = Environment::getApplication();
 
 // 3b) establish database connection
-$application->onStartup[] = 'Albums::initialize';
+$application->onStartup[] = function() {
+	Model::initialize(Environment::getConfig()->database);
+};
 
 
 

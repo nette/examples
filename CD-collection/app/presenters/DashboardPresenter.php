@@ -30,8 +30,7 @@ class DashboardPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-		$album = new Albums;
-		$this->template->albums = $album->findAll()->orderBy('artist')->orderBy('title');
+		$this->template->albums = Model::albums()->order('artist')->order('title');
 	}
 
 
@@ -51,8 +50,7 @@ class DashboardPresenter extends BasePresenter
 	{
 		$form = $this['albumForm'];
 		if (!$form->isSubmitted()) {
-			$album = new Albums;
-			$row = $album->find($id)->fetch();
+			$row = Model::albums()->get($id);
 			if (!$row) {
 				throw new Nette\Application\BadRequestException('Record not found');
 			}
@@ -68,8 +66,7 @@ class DashboardPresenter extends BasePresenter
 
 	public function renderDelete($id = 0)
 	{
-		$album = new Albums;
-		$this->template->album = $album->find($id)->fetch();
+		$this->template->album = Model::albums()->get($id);
 		if (!$this->template->album) {
 			throw new Nette\Application\BadRequestException('Record not found');
 		}
@@ -108,12 +105,11 @@ class DashboardPresenter extends BasePresenter
 	{
 		if ($form['save']->isSubmittedBy()) {
 			$id = (int) $this->getParam('id');
-			$album = new Albums;
 			if ($id > 0) {
-				$album->update($id, $form->values);
+				Model::albums()->find($id)->update($form->values);
 				$this->flashMessage('The album has been updated.');
 			} else {
-				$album->insert($form->values);
+				Model::albums()->insert($form->values);
 				$this->flashMessage('The album has been added.');
 			}
 		}
@@ -142,8 +138,7 @@ class DashboardPresenter extends BasePresenter
 	public function deleteFormSubmitted(AppForm $form)
 	{
 		if ($form['delete']->isSubmittedBy()) {
-			$album = new Albums;
-			$album->delete($this->getParam('id'));
+			Model::albums()->find($this->getParam('id'))->delete();
 			$this->flashMessage('Album has been deleted.');
 		}
 

@@ -19,7 +19,7 @@ class UsersModel extends Object implements Nette\Security\IAuthenticator
 	public function authenticate(array $credentials)
 	{
 		list($username, $password) = $credentials;
-		$row = dibi::select('*')->from('users')->where('username=%s', $username)->fetch();
+		$row = Model::$database->table('users')->where('username', $username)->fetch();
 
 		if (!$row) {
 			throw new AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
@@ -30,7 +30,7 @@ class UsersModel extends Object implements Nette\Security\IAuthenticator
 		}
 
 		unset($row->password);
-		return new Nette\Security\Identity($row->id, NULL, $row);
+		return new Nette\Security\Identity($row->id, NULL, $row->toArray());
 	}
 
 
