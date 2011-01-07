@@ -1,17 +1,6 @@
 <?php
 
 /**
- * Nette Framework "Fifteen" Example
- *
- * Copyright (c) 2004, 2010 David Grudl (http://davidgrudl.com)
- *
- * This source file is subject to the "Nette license" that is bundled
- * with this package in the file license.txt.
- */
-
-
-
-/**
  * The Fifteen game control
  *
  * @author     David Grudl
