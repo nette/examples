@@ -6,7 +6,7 @@
  */
 
 
-require_once __DIR__ . '/../libs/Nette/Nette/loader.php';
+require __DIR__ . '/../../Nette/loader.php';
 
 use Nette\Image,
 	Nette\Debug;

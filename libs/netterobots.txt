@@ -1,4 +1,0 @@
-Disallow: Nette/tests
-Disallow: dibi/examples
-Disallow: dibi/tests
-Disallow: dibi/dibi-minified

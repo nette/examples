@@ -18,6 +18,7 @@ technologies and approaches like AJAX, HTML5, SEO, DRY, KISS, MVC, etc.
 Requirements
 ------------
 
+All examples use framework located in parent folder Nette.
 Nette Framework requires PHP 5.2.0 and/or 5.3.0.
 
 
