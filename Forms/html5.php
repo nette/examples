@@ -55,7 +55,7 @@ if ($form->isSubmitted() && $form->isValid()) {
 	Debug::dump($values);
 
 	// this is the end, my friend :-)
-	if (empty($disableExit)) exit;
+	exit;
 }
 
 

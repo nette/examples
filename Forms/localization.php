@@ -139,7 +139,7 @@ if ($form->isSubmitted()) {
 		Debug::dump($form->values);
 
 		// this is the end, my friend :-)
-		if (empty($disableExit)) exit;
+		exit;
 	}
 
 } else {
