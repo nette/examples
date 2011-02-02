@@ -1,6 +1,7 @@
 Nette Framework Examples
 ========================
 
+This examples are part of the Nette Framework (http://nette.org).
 
 What is Nette Framework?
 ------------------------
@@ -22,10 +23,18 @@ All examples use framework located in parent folder Nette.
 Nette Framework requires PHP 5.2.0 and/or 5.3.0.
 
 
-
 Documentation, Examples, Sandbox, Tools
 ---------------------------------------
 
 Nette Framework: homepage http://nette.org and repository http://github.com/nette/nette
 Sandbox, pre-packaged and configured project: http://github.com/nette/sandbox
 Examples repository: http://github.com/nette/examples
+
+
+License
+-------
+
+This examples are part of the Nette Framework (http://nette.org). For the full
+copyright and license information, please view the file license.txt.
+
+Copyright (c) 2004, 2011 David Grudl (http://davidgrudl.com)
