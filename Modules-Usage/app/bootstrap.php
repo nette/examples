@@ -19,7 +19,7 @@ require __DIR__ . '/../../../Nette/loader.php';
 // 2a) enable Nette\Debug for better exception and error visualisation
 Debug::enable();
 
-// 2b) load configuration from config.ini file
+// 2b) load configuration from config.neon file
 Environment::loadConfig();
 
 

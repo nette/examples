@@ -1,0 +1,22 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# http://nette.org/security-warning
+#
+common:
+	php:
+		date.timezone: Europe/Prague
+
+	service:
+		Nette\Security\IAuthenticator: UsersModel
+		Nette\Loaders\RobotLoader:
+			option:
+				directory: [%appDir%]
+			run: true
+
+	database:
+		dsn: sqlite2:%appDir%/models/demo.db
+
+
+production < common:
+
+development < production:
