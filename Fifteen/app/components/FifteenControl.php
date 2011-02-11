@@ -1,11 +1,13 @@
 <?php
 
+use Nette\Application as NA;
+
 /**
  * The Fifteen game control
  *
  * @author     David Grudl
  */
-class FifteenControl extends Nette\Application\Control
+class FifteenControl extends NA\Control
 {
 	/** @var int */
 	protected $width = 4;
@@ -35,7 +37,7 @@ class FifteenControl extends Nette\Application\Control
 	public function handleClick($x, $y)
 	{
 		if (!$this->isClickable($x, $y)) {
-			throw new Nette\Application\BadSignalException('Action not allowed.');
+			throw new NA\BadSignalException('Action not allowed.');
 		}
 
 		$this->move($x, $y);

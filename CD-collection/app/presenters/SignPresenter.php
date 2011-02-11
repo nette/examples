@@ -1,8 +1,7 @@
 <?php
 
 use Nette\Application\AppForm,
-	Nette\Forms\Form,
-	Nette\Security\AuthenticationException;
+	Nette\Security as NS;
 
 
 
@@ -33,10 +32,10 @@ class SignPresenter extends BasePresenter
 	{
 		$form = new AppForm;
 		$form->addText('username', 'Username:')
-			->addRule(Form::FILLED, 'Please provide a username.');
+			->setRequired('Please provide a username.');
 
 		$form->addPassword('password', 'Password:')
-			->addRule(Form::FILLED, 'Please provide a password.');
+			->setRequired('Please provide a password.');
 
 		$form->addSubmit('send', 'Sign in');
 
@@ -53,7 +52,7 @@ class SignPresenter extends BasePresenter
 			$this->application->restoreRequest($this->backlink);
 			$this->redirect('Dashboard:');
 
-		} catch (AuthenticationException $e) {
+		} catch (NS\AuthenticationException $e) {
 			$form->addError($e->getMessage());
 		}
 	}

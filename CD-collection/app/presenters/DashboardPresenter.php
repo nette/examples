@@ -1,7 +1,7 @@
 <?php
 
 use Nette\Application\AppForm,
-	Nette\Forms\Form;
+	Nette\Application as NA;
 
 
 
@@ -52,7 +52,7 @@ class DashboardPresenter extends BasePresenter
 		if (!$form->isSubmitted()) {
 			$row = Model::albums()->get($id);
 			if (!$row) {
-				throw new Nette\Application\BadRequestException('Record not found');
+				throw new NA\BadRequestException('Record not found');
 			}
 			$form->setDefaults($row);
 		}
@@ -68,7 +68,7 @@ class DashboardPresenter extends BasePresenter
 	{
 		$this->template->album = Model::albums()->get($id);
 		if (!$this->template->album) {
-			throw new Nette\Application\BadRequestException('Record not found');
+			throw new NA\BadRequestException('Record not found');
 		}
 	}
 
@@ -86,10 +86,10 @@ class DashboardPresenter extends BasePresenter
 	{
 		$form = new AppForm;
 		$form->addText('artist', 'Artist:')
-			->addRule(Form::FILLED, 'Please enter an artist.');
+			->setRequired('Please enter an artist.');
 
 		$form->addText('title', 'Title:')
-			->addRule(Form::FILLED, 'Please enter a title.');
+			->setRequired('Please enter a title.');
 
 		$form->addSubmit('save', 'Save')->setAttribute('class', 'default');
 		$form->addSubmit('cancel', 'Cancel')->setValidationScope(NULL);

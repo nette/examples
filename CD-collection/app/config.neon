@@ -19,4 +19,4 @@ common:
 
 production < common:
 
-development < production:
+development < common:

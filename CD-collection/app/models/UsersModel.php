@@ -1,13 +1,13 @@
 <?php
 
 use Nette\Object,
-	Nette\Security\AuthenticationException;
+	Nette\Security as NS;
 
 
 /**
  * Users authenticator.
  */
-class UsersModel extends Object implements Nette\Security\IAuthenticator
+class UsersModel extends Object implements NS\IAuthenticator
 {
 
 	/**
@@ -22,15 +22,15 @@ class UsersModel extends Object implements Nette\Security\IAuthenticator
 		$row = Model::$database->table('users')->where('username', $username)->fetch();
 
 		if (!$row) {
-			throw new AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
+			throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
 		}
 
 		if ($row->password !== $this->calculateHash($password)) {
-			throw new AuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
+			throw new NS\AuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
 		}
 
 		unset($row->password);
-		return new Nette\Security\Identity($row->id, NULL, $row->toArray());
+		return new NS\Identity($row->id, NULL, $row->toArray());
 	}
 
 

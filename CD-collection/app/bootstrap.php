@@ -6,48 +6,45 @@ use Nette\Debug,
 	Nette\Application\SimpleRouter;
 
 
-
-// Step 1: Load Nette Framework
+// Load Nette Framework
 // this allows load Nette Framework classes automatically so that
 // you don't have to litter your code with 'require' statements
 require __DIR__ . '/../../../Nette/loader.php';
 
 
-
-// Step 2: Configure environment
-// 2a) enable Nette\Debug for better exception and error visualisation
+// Enable Nette\Debug for error visualisation & logging
 Debug::enable();
 
-// 2b) load configuration from config.neon file
+
+// Load configuration from config.neon file
 Environment::loadConfig();
 
 
-
-// Step 3: Configure application
-// 3a) get and setup a front controller
+// Configure application
 $application = Environment::getApplication();
 
-// 3b) establish database connection
+
+// Establish database connection
 $application->onStartup[] = function() {
 	Model::initialize(Environment::getConfig()->database);
 };
 
 
+// Setup router
+$application->onStartup[] = function() use ($application) {
+	$router = $application->getRouter();
 
-// Step 4: Setup application router
-$router = $application->getRouter();
+	// mod_rewrite detection
+	if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
+		$router[] = new Route('index.php', 'Dashboard:default', Route::ONE_WAY);
 
-// mod_rewrite detection
-if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
-	$router[] = new Route('index.php', 'Dashboard:default', Route::ONE_WAY);
+		$router[] = new Route('<presenter>/<action>[/<id>]', 'Dashboard:default');
 
-	$router[] = new Route('<presenter>/<action>[/<id>]', 'Dashboard:default');
-
-} else {
-	$router[] = new SimpleRouter('Dashboard:default');
-}
+	} else {
+		$router[] = new SimpleRouter('Dashboard:default');
+	}
+};
 
 
-
-// Step 5: Run the application!
+// Run the application!
 $application->run();
