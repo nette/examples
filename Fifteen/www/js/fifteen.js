@@ -6,8 +6,9 @@ jQuery(function($) {
 
 	var active = false;
 
-	$('.fifteen a.ajax').die('click').live('click', function(event) {
+	$('.fifteen a.ajax').live('click', function(event) {
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		if (active || $.active) return;
 
 		active = true;
@@ -24,7 +25,7 @@ jQuery(function($) {
 			if (payload) $.nette.success(payload);
 		});
 
-		$.post(this.href, function(data) {
+		$.post($.nette.href = this.href, function(data) {
 			payload = data;
 			if (!active) $.nette.success(payload);
 		});

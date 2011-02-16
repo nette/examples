@@ -35,6 +35,11 @@ if (typeof jQuery != 'function') {
 					$.nette.updateSnippet(i, payload.snippets[i]);
 				}
 			}
+
+			// change URL (requires HTML5)
+			if (window.history && history.pushState && $.nette.href) {
+				history.pushState({href: $.nette.href}, '', $.nette.href);
+			}
 		},
 
 		updateSnippet: function(id, html)
@@ -60,6 +65,7 @@ if (typeof jQuery != 'function') {
 
 		// current page state
 		state: null,
+		href: null,
 
 		// spinner element
 		spinner: null
@@ -71,6 +77,11 @@ if (typeof jQuery != 'function') {
 
 
 jQuery(function($) {
+	// HTML 5 popstate event
+	$(window).bind('popstate', function(event) {
+		$.nette.href = null;
+		$.post(event.originalEvent.state.href, $.nette.success);
+	});
 
 	$.ajaxSetup({
 		success: $.nette.success,
@@ -84,7 +95,7 @@ jQuery(function($) {
 		event.preventDefault();
 		if ($.active) return;
 
-		$.post(this.href, $.nette.success);
+		$.post($.nette.href = this.href, $.nette.success);
 
 		$.nette.spinner.css({
 			position: 'absolute',
