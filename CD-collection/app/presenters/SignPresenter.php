@@ -48,7 +48,8 @@ class SignPresenter extends BasePresenter
 	public function signInFormSubmitted($form)
 	{
 		try {
-			$this->user->login($form['username']->value, $form['password']->value);
+			$values = $form->getValues();
+			$this->user->login($values->username, $values->password);
 			$this->application->restoreRequest($this->backlink);
 			$this->redirect('Dashboard:');
 
