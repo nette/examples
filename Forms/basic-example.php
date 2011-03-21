@@ -45,19 +45,19 @@ $form->addGroup('Personal data')
 	->setOption('description', 'We value your privacy and we ensure that the information you give to us will not be shared to other entities.');
 
 $form->addText('name', 'Your name:')
-	->addRule(Form::FILLED, 'Enter your name');
+	->setRequired('Enter your name');
 
 $form->addText('age', 'Your age:')
-	->addRule(Form::FILLED, 'Enter your age')
-	->addRule(Form::INTEGER, 'Age must be numeric value')
-	->addRule(Form::RANGE, 'Age must be in range from %d to %d', array(10, 100));
+	->setRequired('Enter your age')
+	->addRule($form::INTEGER, 'Age must be numeric value')
+	->addRule($form::RANGE, 'Age must be in range from %d to %d', array(10, 100));
 
 $form->addRadioList('gender', 'Your gender:', $sex);
 
 $form->addText('email', 'Email:')
 	->setEmptyValue('@')
-	->addCondition(Form::FILLED) // conditional rule: if is email filled, ...
-		->addRule(Form::EMAIL, 'Incorrect email address'); // ... then check email
+	->addCondition($form::FILLED) // conditional rule: if is email filled, ...
+		->addRule($form::EMAIL, 'Incorrect email address'); // ... then check email
 
 
 // group Shipping address
@@ -65,7 +65,7 @@ $form->addGroup('Shipping address')
 	->setOption('embedNext', TRUE);
 
 $form->addCheckbox('send', 'Ship to address')
-	->addCondition(Form::EQUAL, TRUE) // conditional rule: if is checkbox checked...
+	->addCondition($form::EQUAL, TRUE) // conditional rule: if is checkbox checked...
 		->toggle('sendBox'); // toggle div #sendBox
 
 
@@ -76,30 +76,30 @@ $form->addGroup()
 $form->addText('street', 'Street:');
 
 $form->addText('city', 'City:')
-	->addConditionOn($form['send'], Form::EQUAL, TRUE)
-		->addRule(Form::FILLED, 'Enter your shipping address');
+	->addConditionOn($form['send'], $form::EQUAL, TRUE)
+		->addRule($form::FILLED, 'Enter your shipping address');
 
 $form->addSelect('country', 'Country:', $countries)
 	->skipFirst()
-	->addConditionOn($form['send'], Form::EQUAL, TRUE)
-		->addRule(Form::FILLED, 'Select your country');
+	->addConditionOn($form['send'], $form::EQUAL, TRUE)
+		->addRule($form::FILLED, 'Select your country');
 
 
 // group Your account
 $form->addGroup('Your account');
 
 $form->addPassword('password', 'Choose password:')
-	->addRule(Form::FILLED, 'Choose your password')
-	->addRule(Form::MIN_LENGTH, 'The password is too short: it must be at least %d characters', 3);
+	->setRequired('Choose your password')
+	->addRule($form::MIN_LENGTH, 'The password is too short: it must be at least %d characters', 3);
 
 $form->addPassword('password2', 'Reenter password:')
-	->addConditionOn($form['password'], Form::VALID)
-		->addRule(Form::FILLED, 'Reenter your password')
-		->addRule(Form::EQUAL, 'Passwords do not match', $form['password']);
+	->addConditionOn($form['password'], $form::VALID)
+		->addRule($form::FILLED, 'Reenter your password')
+		->addRule($form::EQUAL, 'Passwords do not match', $form['password']);
 
 $form->addFile('avatar', 'Picture:')
-	->addCondition(Form::FILLED)
-		->addRule(Form::IMAGE, 'Uploaded file is not image');
+	->addCondition($form::FILLED)
+		->addRule($form::IMAGE, 'Uploaded file is not image');
 
 $form->addHidden('userid');
 

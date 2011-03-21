@@ -57,33 +57,33 @@ $form->addSubmit('submit');
 
 
 // Step 1b: Define validation rules
-$form['name']->addRule(Form::FILLED, 'Enter your name');
+$form['name']->setRequired('Enter your name');
 
-$form['age']->addRule(Form::FILLED, 'Enter your age');
-$form['age']->addRule(Form::INTEGER, 'Age must be numeric value');
-$form['age']->addRule(Form::RANGE, 'Age must be in range from %d to %d', array(10, 100));
+$form['age']->setRequired('Enter your age');
+$form['age']->addRule($form::INTEGER, 'Age must be numeric value');
+$form['age']->addRule($form::RANGE, 'Age must be in range from %d to %d', array(10, 100));
 
 // conditional rule: if is email filled, ...
-$form['email']->addCondition(Form::FILLED)
-	->addRule(Form::EMAIL, 'Incorrect email address'); // ... then check email
+$form['email']->addCondition($form::FILLED)
+	->addRule($form::EMAIL, 'Incorrect email address'); // ... then check email
 
 // another conditional rule: if is checkbox checked...
-$form['send']->addCondition(Form::EQUAL, TRUE)
+$form['send']->addCondition($form::EQUAL, TRUE)
 	// toggle div #sendBox
 	->toggle('sendBox');
 
-$form['city']->addConditionOn($form['send'], Form::EQUAL, TRUE)
-	->addRule(Form::FILLED, 'Enter your shipping address');
+$form['city']->addConditionOn($form['send'], $form::EQUAL, TRUE)
+	->addRule($form::FILLED, 'Enter your shipping address');
 
-$form['country']->addConditionOn($form['send'], Form::EQUAL, TRUE)
-	->addRule(Form::FILLED, 'Select your country');
+$form['country']->addConditionOn($form['send'], $form::EQUAL, TRUE)
+	->addRule($form::FILLED, 'Select your country');
 
-$form['password']->addRule(Form::FILLED, 'Choose your password');
-$form['password']->addRule(Form::MIN_LENGTH, 'The password is too short: it must be at least %d characters', 3);
+$form['password']->setRequired('Choose your password');
+$form['password']->addRule($form::MIN_LENGTH, 'The password is too short: it must be at least %d characters', 3);
 
-$form['password2']->addConditionOn($form['password'], Form::VALID)
-	->addRule(Form::FILLED, 'Reenter your password')
-	->addRule(Form::EQUAL, 'Passwords do not match', $form['password']);
+$form['password2']->addConditionOn($form['password'], $form::VALID)
+	->addRule($form::FILLED, 'Reenter your password')
+	->addRule($form::EQUAL, 'Passwords do not match', $form['password']);
 
 
 
