@@ -9,27 +9,27 @@
 
 require __DIR__ . '/../../Nette/loader.php';
 
-use Nette\Finder,
+use Nette\Utils\Finder,
 	Nette\Tools,
-	Nette\Debug;
+	Nette\Diagnostics\Debugger;
 
 
-Debug::enable();
+Debugger::enable();
 
 
 
 /**
  * Restricts the search by number of lines.
  * @param  string
- * @return Finder  provides a fluent interface
+ * @return Nette\Utils\Finder  provides a fluent interface
  */
 Finder::extensionMethod('lines', function($finder, $predicate){
 	if (!preg_match('#^([=<>!]+)\s*(\d+)$#i', $predicate, $matches)) {
-		throw new \InvalidArgumentException('Invalid lines predicate format.');
+		throw new InvalidArgumentException('Invalid lines predicate format.');
 	}
 	list(, $operator, $nubmer) = $matches;
 	return $finder->filter(function($file) use ($operator, $nubmer) {
-		return Tools::compare(count(file($file->getPathname())), $operator, $nubmer);
+		return Finder::compare(count(file($file->getPathname())), $operator, $nubmer);
 	});
 });
 
@@ -39,16 +39,16 @@ Finder::extensionMethod('lines', function($finder, $predicate){
  * Restricts the search by images dimensions.
  * @param  string
  * @param  string
- * @return Finder  provides a fluent interface
+ * @return Nette\Utils\Finder  provides a fluent interface
  */
 Finder::extensionMethod('dimensions', function($finder, $width, $height){
 	if (!preg_match('#^([=<>!]+)\s*(\d+)$#i', $width, $mW) || !preg_match('#^([=<>!]+)\s*(\d+)$#i', $height, $mH)) {
-		throw new \InvalidArgumentException('Invalid dimensions predicate format.');
+		throw new InvalidArgumentException('Invalid dimensions predicate format.');
 	}
 	return $finder->filter(function($file) use ($mW, $mH) {
 		return $file->getSize() >= 12 && ($size = getimagesize($file->getPathname()))
-			&& (!$mW || Tools::compare($size[0], $mW[1], $mW[2]))
-			&& (!$mH || Tools::compare($size[1], $mH[1], $mH[2]));
+			&& (!$mW || Finder::compare($size[0], $mW[1], $mW[2]))
+			&& (!$mH || Finder::compare($size[1], $mH[1], $mH[2]));
 	});
 });
 

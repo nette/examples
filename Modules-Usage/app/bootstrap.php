@@ -1,10 +1,10 @@
 <?php
 
-use Nette\Debug,
+use Nette\Diagnostics\Debugger,
 	Nette\Environment,
-	Nette\Application\Route,
-	Nette\Application\MultiRouter,
-	Nette\Application\SimpleRouter;
+	Nette\Application\Routers\Route,
+	Nette\Application\Routers\RouteList,
+	Nette\Application\Routers\SimpleRouter;
 
 
 // Load Nette Framework
@@ -14,7 +14,7 @@ require __DIR__ . '/../../../Nette/loader.php';
 
 
 // Enable Nette\Debug for error visualisation & logging
-Debug::enable();
+Debugger::enable();
 
 
 // Load configuration from config.neon file
@@ -33,10 +33,10 @@ $application->onStartup[] = function() use ($application) {
 	if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
 		$router[] = new Route('index.php', 'Front:Default:default', Route::ONE_WAY);
 
-		$router[] = $adminRouter = new MultiRouter('Admin');
+		$router[] = $adminRouter = new RouteList('Admin');
 		$adminRouter[] = new Route('admin/<presenter>/<action>', 'Default:default');
 
-		$router[] = $frontRouter = new MultiRouter('Front');
+		$router[] = $frontRouter = new RouteList('Front');
 		$frontRouter[] = new Route('<presenter>/<action>[/<id>]', 'Default:default');
 
 	} else {

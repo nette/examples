@@ -1,6 +1,6 @@
 <?php
 
-use Nette\Application\AppForm,
+use Nette\Application\UI\Form,
 	Nette\Application as NA;
 
 
@@ -12,7 +12,7 @@ class DashboardPresenter extends BasePresenter
 	{
 		// user authentication
 		if (!$this->user->isLoggedIn()) {
-			if ($this->user->logoutReason === Nette\Web\User::INACTIVITY) {
+			if ($this->user->logoutReason === Nette\Http\User::INACTIVITY) {
 				$this->flashMessage('You have been signed out due to inactivity. Please sign in again.');
 			}
 			$backlink = $this->application->storeRequest();
@@ -84,7 +84,7 @@ class DashboardPresenter extends BasePresenter
 	 */
 	protected function createComponentAlbumForm()
 	{
-		$form = new AppForm;
+		$form = new Form;
 		$form->addText('artist', 'Artist:')
 			->setRequired('Please enter an artist.');
 
@@ -101,7 +101,7 @@ class DashboardPresenter extends BasePresenter
 
 
 
-	public function albumFormSubmitted(AppForm $form)
+	public function albumFormSubmitted(Form $form)
 	{
 		if ($form['save']->isSubmittedBy()) {
 			$id = (int) $this->getParam('id');
@@ -125,7 +125,7 @@ class DashboardPresenter extends BasePresenter
 	 */
 	protected function createComponentDeleteForm()
 	{
-		$form = new AppForm;
+		$form = new Form;
 		$form->addSubmit('cancel', 'Cancel');
 		$form->addSubmit('delete', 'Delete')->setAttribute('class', 'default');
 		$form->onSubmit[] = callback($this, 'deleteFormSubmitted');
@@ -135,7 +135,7 @@ class DashboardPresenter extends BasePresenter
 
 
 
-	public function deleteFormSubmitted(AppForm $form)
+	public function deleteFormSubmitted(Form $form)
 	{
 		if ($form['delete']->isSubmittedBy()) {
 			Model::albums()->find($this->getParam('id'))->delete();

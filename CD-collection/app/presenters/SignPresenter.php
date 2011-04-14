@@ -1,6 +1,6 @@
 <?php
 
-use Nette\Application\AppForm,
+use Nette\Application\UI\Form,
 	Nette\Security as NS;
 
 
@@ -26,11 +26,11 @@ class SignPresenter extends BasePresenter
 
 	/**
 	 * Sign in form component factory.
-	 * @return Nette\Application\AppForm
+	 * @return Nette\Application\UI\Form
 	 */
 	protected function createComponentSignInForm()
 	{
-		$form = new AppForm;
+		$form = new Form;
 		$form->addText('username', 'Username:')
 			->setRequired('Please provide a username.');
 

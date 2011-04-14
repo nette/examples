@@ -15,13 +15,13 @@ if (!class_exists('Zend_Translate')) {
 }
 
 use Nette\Forms\Form,
-	Nette\Debug,
-	Nette\Web\Html;
+	Nette\Diagnostics\Debugger,
+	Nette\Utils\Html;
 
-Debug::enable();
+Debugger::enable();
 
 
-class MyTranslator extends Zend_Translate implements Nette\ITranslator
+class MyTranslator extends Zend_Translate implements Nette\Localization\ITranslator
 {
 	/**
 	 * Translates the given string.
@@ -136,7 +136,7 @@ if ($form->isSubmitted()) {
 	if ($form->isValid()) {
 		echo '<h2>Form was submitted and successfully validated</h2>';
 
-		Debug::dump($form->values);
+		Debugger::dump($form->values);
 
 		// this is the end, my friend :-)
 		exit;

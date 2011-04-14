@@ -1,8 +1,8 @@
 <?php
 
-use Nette\Debug,
+use Nette\Diagnostics\Debugger,
 	Nette\Environment,
-	Nette\Application\SimpleRouter;
+	Nette\Application\Routers\SimpleRouter;
 
 
 
@@ -13,7 +13,7 @@ require __DIR__ . '/../../../Nette/loader.php';
 
 
 // Enable Nette\Debug for error visualisation & logging
-Debug::enable();
+Debugger::enable();
 
 // Enable RobotLoader - this allows load all classes automatically
 // so that you don't have to litter your code with 'require' statements

@@ -8,9 +8,9 @@
 require __DIR__ . '/../../Nette/loader.php';
 
 use Nette\Forms\Form,
-	Nette\Debug;
+	Nette\Diagnostics\Debugger;
 
-Debug::enable();
+Debugger::enable();
 
 
 
@@ -43,7 +43,7 @@ if ($form->isSubmitted()) {
 	if ($form->isValid()) {
 		echo '<h2>Form was submitted and successfully validated</h2>';
 
-		Debug::dump($form->values);
+		Debugger::dump($form->values);
 
 		// this is the end, my friend :-)
 		exit;

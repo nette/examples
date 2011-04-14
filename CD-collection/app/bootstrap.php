@@ -1,9 +1,9 @@
 <?php
 
-use Nette\Debug,
+use Nette\Diagnostics\Debugger,
 	Nette\Environment,
-	Nette\Application\Route,
-	Nette\Application\SimpleRouter;
+	Nette\Application\Routers\Route,
+	Nette\Application\Routers\SimpleRouter;
 
 
 // Load Nette Framework
@@ -13,7 +13,7 @@ require __DIR__ . '/../../../Nette/loader.php';
 
 
 // Enable Nette\Debug for error visualisation & logging
-Debug::enable();
+Debugger::enable();
 
 
 // Load configuration from config.neon file

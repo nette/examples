@@ -10,9 +10,9 @@
 require __DIR__ . '/../../Nette/loader.php';
 
 use Nette\Forms\Form,
-	Nette\Debug;
+	Nette\Diagnostics\Debugger;
 
-Debug::enable();
+Debugger::enable();
 
 
 // Step 1: Define form with validation rules
@@ -52,7 +52,7 @@ if ($form->isSubmitted() && $form->isValid()) {
 	echo '<h2>Form was submitted and successfully validated</h2>';
 
 	$values = $form->values;
-	Debug::dump($values);
+	Debugger::dump($values);
 
 	// this is the end, my friend :-)
 	exit;

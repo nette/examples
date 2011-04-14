@@ -1,6 +1,6 @@
 <?php
 
-use Nette\Application\Presenter;
+use Nette\Application\UI\Presenter;
 
 
 abstract class BasePresenter extends Presenter

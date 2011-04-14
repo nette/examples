@@ -9,10 +9,10 @@
 require __DIR__ . '/../../Nette/loader.php';
 
 use Nette\Image,
-	Nette\Debug;
+	Nette\Diagnostics\Debugger;
 
 
-Debug::enable();
+Debugger::enable();
 
 
 
