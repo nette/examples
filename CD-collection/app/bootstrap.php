@@ -17,7 +17,7 @@ Debugger::enable();
 
 
 // Load configuration from config.neon file
-Environment::loadConfig();
+Environment::loadConfig(__DIR__ . '/config.neon');
 
 
 // Configure application

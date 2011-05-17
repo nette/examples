@@ -6,10 +6,8 @@ common:
 	php:
 		date.timezone: Europe/Prague
 
-	service:
-		Nette\Loaders\RobotLoader:
-			option:
-				directory: [%appDir%]
+	services:
+		robotLoader:
 			run: true
 
 production < common:
