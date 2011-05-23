@@ -9,18 +9,26 @@ use Nette\Object;
 class Model extends Object
 {
 	/** @var Nette\Database\Connection */
-	public static $database;
+	public $database;
 
 
-	public static function initialize($options)
+	public function __construct(Nette\Database\Connection $database)
 	{
-		self::$database = new Nette\Database\Connection($options->dsn, $options->user, $options->pass);
+		$this->database = $database;
 	}
 
 
-	public static function albums()
+
+	public function getAlbums()
 	{
-		return self::$database->table('albums');
+		return $this->database->table('albums');
+	}
+
+
+
+	public function getAuthenticatorService()
+	{
+		return new Authenticator($this->database->table('users'));
 	}
 
 }

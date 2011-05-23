@@ -7,14 +7,19 @@ common:
 		date.timezone: Europe/Prague
 
 	services:
-		authenticator: UsersModel
+		authenticator: 
+			factory: ["@model", getAuthenticatorService]
+
 		robotLoader:
 			run: true
 
-	database:
-		dsn: sqlite2:%appDir%/models/demo.db
-		user:
-		pass:
+		database:
+			class: Nette\Database\Connection
+			arguments: [sqlite2:%appDir%/models/demo.db]
+
+		model:
+			class: Model
+			arguments: ["@database"]
 
 
 production < common:

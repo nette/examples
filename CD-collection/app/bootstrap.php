@@ -24,12 +24,6 @@ Environment::loadConfig(__DIR__ . '/config.neon');
 $application = Environment::getApplication();
 
 
-// Establish database connection
-$application->onStartup[] = function() {
-	Model::initialize(Environment::getConfig()->database);
-};
-
-
 // Setup router
 $application->onStartup[] = function() use ($application) {
 	$router = $application->getRouter();

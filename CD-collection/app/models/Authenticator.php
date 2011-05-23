@@ -7,8 +7,18 @@ use Nette\Object,
 /**
  * Users authenticator.
  */
-class UsersModel extends Object implements NS\IAuthenticator
+class Authenticator extends Object implements NS\IAuthenticator
 {
+	/** @var Nette\Database\Table\Selection */
+	private $users;
+
+
+	public function __construct(Nette\Database\Table\Selection $users)
+	{
+		$this->users = $users;
+	}
+
+
 
 	/**
 	 * Performs an authentication
@@ -19,7 +29,7 @@ class UsersModel extends Object implements NS\IAuthenticator
 	public function authenticate(array $credentials)
 	{
 		list($username, $password) = $credentials;
-		$row = Model::$database->table('users')->where('username', $username)->fetch();
+		$row = $this->users->where('username', $username)->fetch();
 
 		if (!$row) {
 			throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);

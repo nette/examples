@@ -7,9 +7,17 @@ use Nette\Application\UI\Form,
 
 class DashboardPresenter extends BasePresenter
 {
+	/** @var Nette\Database\Table\Selection */
+	private $albums;
+
+
 
 	protected function startup()
 	{
+		parent::startup();
+
+		$this->albums = $this->getService('model')->getAlbums();
+
 		// user authentication
 		if (!$this->user->isLoggedIn()) {
 			if ($this->user->logoutReason === Nette\Http\User::INACTIVITY) {
@@ -18,8 +26,6 @@ class DashboardPresenter extends BasePresenter
 			$backlink = $this->application->storeRequest();
 			$this->redirect('Sign:in', array('backlink' => $backlink));
 		}
-
-		parent::startup();
 	}
 
 
@@ -30,7 +36,7 @@ class DashboardPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-		$this->template->albums = Model::albums()->order('artist')->order('title');
+		$this->template->albums = $this->albums->order('artist')->order('title');
 	}
 
 
@@ -50,7 +56,7 @@ class DashboardPresenter extends BasePresenter
 	{
 		$form = $this['albumForm'];
 		if (!$form->isSubmitted()) {
-			$row = Model::albums()->get($id);
+			$row = $this->albums->get($id);
 			if (!$row) {
 				throw new NA\BadRequestException('Record not found');
 			}
@@ -66,7 +72,7 @@ class DashboardPresenter extends BasePresenter
 
 	public function renderDelete($id = 0)
 	{
-		$this->template->album = Model::albums()->get($id);
+		$this->template->album = $this->albums->get($id);
 		if (!$this->template->album) {
 			throw new NA\BadRequestException('Record not found');
 		}
@@ -106,10 +112,10 @@ class DashboardPresenter extends BasePresenter
 		if ($form['save']->isSubmittedBy()) {
 			$id = (int) $this->getParam('id');
 			if ($id > 0) {
-				Model::albums()->find($id)->update($form->values);
+				$this->albums->find($id)->update($form->values);
 				$this->flashMessage('The album has been updated.');
 			} else {
-				Model::albums()->insert($form->values);
+				$this->albums->insert($form->values);
 				$this->flashMessage('The album has been added.');
 			}
 		}
@@ -138,7 +144,7 @@ class DashboardPresenter extends BasePresenter
 	public function deleteFormSubmitted(Form $form)
 	{
 		if ($form['delete']->isSubmittedBy()) {
-			Model::albums()->find($this->getParam('id'))->delete();
+			$this->albums->find($this->getParam('id'))->delete();
 			$this->flashMessage('Album has been deleted.');
 		}
 
