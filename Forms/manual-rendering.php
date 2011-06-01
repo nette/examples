@@ -17,7 +17,6 @@ Debugger::enable();
 
 
 $countries = array(
-	'Select your country',
 	'Europe' => array(
 		'CZ' => 'Czech Republic',
 		'SK' => 'Slovakia',
@@ -45,11 +44,11 @@ $form->addText('email')->setEmptyValue('@');
 $form->addCheckbox('send');
 $form->addText('street');
 $form->addText('city');
-$form->addSelect('country', NULL, $countries)->skipFirst();
+$form->addSelect('country', NULL, $countries)->setPrompt('Select your country');
 
 $form->addPassword('password');
 $form->addPassword('password2');
-$form->addFile('avatar');
+$form->addUpload('avatar');
 $form->addHidden('userid');
 $form->addTextArea('note');
 

@@ -15,7 +15,6 @@ Debugger::enable();
 
 
 $countries = array(
-	'Select your country',
 	'Europe' => array(
 		'CZ' => 'Czech Republic',
 		'SK' => 'Slovakia',
@@ -89,7 +88,7 @@ $form->addText('city', 'City')
 		->addRule($form::FILLED, 'Enter your shipping address');
 
 $form->addSelect('country', 'Country', $countries)
-	->skipFirst()
+	->setPrompt('Select your country')
 	->addConditionOn($form['send'], $form::EQUAL, TRUE)
 		->addRule($form::FILLED, 'Select your country');
 
@@ -107,7 +106,7 @@ $form->addPassword('password2', 'Reenter password')
 		->addRule($form::FILLED, 'Reenter your password')
 		->addRule($form::EQUAL, 'Passwords do not match', $form['password']);
 
-$form->addFile('avatar', 'Picture');
+$form->addUpload('avatar', 'Picture');
 
 $form->addHidden('userid');
 
