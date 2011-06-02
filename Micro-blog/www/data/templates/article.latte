@@ -1,0 +1,24 @@
+{url article/<id>}
+{layout "@layout.latte"}
+
+{var $article = $context->database->table('article')->get($id) OR $presenter->error(404)}
+
+{block #content}
+<p><a href="{$basePath}">← back</a></p>
+
+<div class="article">
+	<div class="date">{$article->created|date:'F j, Y'}</div>
+
+	<h1 n:block="title">{$article->title}</h1>
+
+	{!$article->content}
+</div>
+
+<h2>Comments</h2>
+
+<div class="comments">
+{foreach $article->related('comment')->order('created') as $comment}
+	<p><b>{$comment->name}</b> said…</p>
+	{!$comment->content}
+{/foreach}
+</div>
