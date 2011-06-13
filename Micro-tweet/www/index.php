@@ -18,8 +18,10 @@ Debugger::enable();
 
 
 // create application
-$application = Nette\Environment::getApplication();
-Nette\Environment::setVariable('tempDir', __DIR__ . '/data/temp');
+$configurator = new Nette\Configurator;
+$context = $configurator->container;
+$application = $context->application;
+$context->params['tempDir'] = __DIR__ . '/data/temp';
 
 
 $application->router[] = new Route('[index.php]', function() {
