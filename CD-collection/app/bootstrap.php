@@ -1,7 +1,6 @@
 <?php
 
 use Nette\Diagnostics\Debugger,
-	Nette\Environment,
 	Nette\Application\Routers\Route,
 	Nette\Application\Routers\SimpleRouter;
 
@@ -17,11 +16,12 @@ Debugger::enable();
 
 
 // Load configuration from config.neon file
-Environment::loadConfig(__DIR__ . '/config.neon');
+$configurator = new Nette\Configurator;
+$configurator->loadConfig(__DIR__ . '/config.neon');
 
 
 // Configure application
-$application = Environment::getApplication();
+$application = $configurator->container->application;
 
 
 // Setup router

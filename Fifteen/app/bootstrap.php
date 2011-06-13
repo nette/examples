@@ -1,7 +1,6 @@
 <?php
 
 use Nette\Diagnostics\Debugger,
-	Nette\Environment,
 	Nette\Application\Routers\SimpleRouter;
 
 
@@ -17,11 +16,12 @@ Debugger::enable();
 
 // Enable RobotLoader - this allows load all classes automatically
 // so that you don't have to litter your code with 'require' statements
-Environment::getRobotLoader()->register();
+$configurator = new Nette\Configurator;
+$configurator->container->robotLoader;
 
 
 // Configure application
-$application = Environment::getApplication();
+$application = $configurator->container->application;
 $application->router[] = new SimpleRouter('Default:default');
 
 

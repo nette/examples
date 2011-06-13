@@ -17,7 +17,8 @@ Debugger::enable();
 
 
 // enable template router
-$context = Nette\Environment::getContext();
+$configurator = new Nette\Configurator;
+$context = $configurator->container;
 $context->params['tempDir'] = __DIR__ . '/data/temp';
 $context->application->router[] = new TemplateRouter('data/templates');
 
