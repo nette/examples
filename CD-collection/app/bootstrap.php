@@ -2,6 +2,7 @@
 
 use Nette\Diagnostics\Debugger,
 	Nette\Application\Routers\Route,
+	Nette\Application\Routers\RouteList,
 	Nette\Application\Routers\SimpleRouter;
 
 
@@ -17,28 +18,18 @@ Debugger::enable();
 
 // Load configuration from config.neon file
 $configurator = new Nette\Configurator;
-$configurator->loadConfig(__DIR__ . '/config.neon');
+$container = $configurator->loadConfig(__DIR__ . '/config.neon');
 
 
-// Configure application
-$application = $configurator->container->application;
+// Setup router using mod_rewrite detection
+if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
+	$container->router = new RouteList;
+	$container->router[] = new Route('index.php', 'Dashboard:default', Route::ONE_WAY);
+	$container->router[] = new Route('<presenter>/<action>[/<id>]', 'Dashboard:default');
 
-
-// Setup router
-$application->onStartup[] = function() use ($application) {
-	$router = $application->getRouter();
-
-	// mod_rewrite detection
-	if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
-		$router[] = new Route('index.php', 'Dashboard:default', Route::ONE_WAY);
-
-		$router[] = new Route('<presenter>/<action>[/<id>]', 'Dashboard:default');
-
-	} else {
-		$router[] = new SimpleRouter('Dashboard:default');
-	}
-};
-
+} else {
+	$container->router = new SimpleRouter('Dashboard:default');
+}
 
 // Run the application!
-$application->run();
+$container->application->run();

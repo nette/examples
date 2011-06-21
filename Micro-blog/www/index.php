@@ -20,7 +20,7 @@ Debugger::enable();
 $configurator = new Nette\Configurator;
 $context = $configurator->container;
 $context->params['tempDir'] = __DIR__ . '/data/temp';
-$context->application->router[] = new TemplateRouter('data/templates');
+$context->router = new TemplateRouter('data/templates');
 
 
 // add access to database

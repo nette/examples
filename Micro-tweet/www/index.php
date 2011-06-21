@@ -19,16 +19,15 @@ Debugger::enable();
 
 // create application
 $configurator = new Nette\Configurator;
-$context = $configurator->container;
-$application = $context->application;
-$context->params['tempDir'] = __DIR__ . '/data/temp';
+$container = $configurator->container;
+$container->params['tempDir'] = __DIR__ . '/data/temp';
 
 
-$application->router[] = new Route('[index.php]', function() {
+$container->router[] = new Route('[index.php]', function() {
 	return 'Hello! Would you like to search <a href="search/nettefw">#nettefw</a> on Twitter?';
 });
 
-$application->router[] = new Route('search/<hashtag \w+>', function($hashtag, $presenter) {
+$container->router[] = new Route('search/<hashtag \w+>', function($hashtag, $presenter) {
 	$params['response'] = Json::decode(file_get_contents('http://search.twitter.com/search.json?q=' . urlencode("#$hashtag")));
 	return array('
 		<h1>Results for #{$hashtag}</h1>
@@ -42,4 +41,4 @@ $application->router[] = new Route('search/<hashtag \w+>', function($hashtag, $p
 
 
 // run the application!
-$application->run();
+$container->application->run();

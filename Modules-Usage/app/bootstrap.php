@@ -18,32 +18,24 @@ Debugger::enable();
 
 // Load configuration from config.neon file
 $configurator = new Nette\Configurator;
-$configurator->loadConfig(__DIR__ . '/config.neon');
+$container = $configurator->loadConfig(__DIR__ . '/config.neon');
 
 
-// Configure application
-$application = $configurator->container->application;
+// Setup router using mod_rewrite detection
+if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
+	$container->router = $router = new RouteList;
+	$router[] = new Route('index.php', 'Front:Default:default', Route::ONE_WAY);
 
+	$router[] = $adminRouter = new RouteList('Admin');
+	$adminRouter[] = new Route('admin/<presenter>/<action>', 'Default:default');
 
-// Setup router
-$application->onStartup[] = function() use ($application) {
-	$router = $application->getRouter();
+	$router[] = $frontRouter = new RouteList('Front');
+	$frontRouter[] = new Route('<presenter>/<action>[/<id>]', 'Default:default');
 
-	// mod_rewrite detection
-	if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
-		$router[] = new Route('index.php', 'Front:Default:default', Route::ONE_WAY);
-
-		$router[] = $adminRouter = new RouteList('Admin');
-		$adminRouter[] = new Route('admin/<presenter>/<action>', 'Default:default');
-
-		$router[] = $frontRouter = new RouteList('Front');
-		$frontRouter[] = new Route('<presenter>/<action>[/<id>]', 'Default:default');
-
-	} else {
-		$router[] = new SimpleRouter('Front:Default:default');
-	}
-};
+} else {
+	$container->router = new SimpleRouter('Front:Default:default');
+}
 
 
 // Run the application!
-$application->run();
+$container->application->run();
