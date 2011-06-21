@@ -92,6 +92,12 @@ if ($form->isSubmitted()) {
 	}
 	</style>
 	<link rel="stylesheet" type="text/css" media="screen" href="files/style.css" />
+	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
+	<script>
+		Nette.validators.divisibilityValidator = function(elem, args, val) {
+			return val % args === 0;
+		};
+	</script>
 </head>
 
 <body>
