@@ -26,7 +26,7 @@ class Model extends Object
 
 
 
-	public function getAuthenticatorService()
+	public function createAuthenticatorService()
 	{
 		return new Authenticator($this->database->table('users'));
 	}

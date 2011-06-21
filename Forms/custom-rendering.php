@@ -32,10 +32,10 @@ $sex = array(
 
 
 
-// Step 1: Define form with validation rules
+// Define form with validation rules
 $form = new Form;
 // setup custom rendering
-$renderer = $form->renderer;
+$renderer = $form->getRenderer();
 $renderer->wrappers['form']['container'] = Html::el('div')->id('form');
 $renderer->wrappers['form']['errors'] = FALSE;
 $renderer->wrappers['group']['container'] = NULL;
@@ -120,17 +120,16 @@ $form->addSubmit('submit', 'Send');
 
 
 
-// Step 2: Check if form was submitted?
+// Check if form was submitted?
 if ($form->isSubmitted()) {
 
-	// Step 2c: Check if form is valid
+	// Check if form is valid
 	if ($form->isValid()) {
 		echo '<h2>Form was submitted and successfully validated</h2>';
 
 		Debugger::dump($form->values);
 
-		// this is the end, my friend :-)
-		exit;
+		exit; // here is usually redirect to another page
 	}
 
 } else {
@@ -146,7 +145,7 @@ if ($form->isSubmitted()) {
 
 
 
-// Step 3: Render form
+// Render form
 ?>
 <!DOCTYPE html>
 <html lang="en">

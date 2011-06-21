@@ -23,23 +23,18 @@ $form->addSubmit('submit', 'Delete item');
 
 
 
-// Step 2: Check if form was submitted?
-if ($form->isSubmitted()) {
+// Check if form was successfully submitted?
+if ($form->isSubmitted() && $form->isValid()) {
+	echo '<h2>Form was submitted and successfully validated</h2>';
 
-	// Step 2c: Check if form is valid
-	if ($form->isValid()) {
-		echo '<h2>Form was submitted and successfully validated</h2>';
+	Debugger::dump($form->values);
 
-		Debugger::dump($form->values);
-
-		// this is the end, my friend :-)
-		exit;
-	}
+	exit; // here is usually redirect to another page
 }
 
 
 
-// Step 3: Render form
+// Render form
 ?>
 <!DOCTYPE html>
 <html lang="en">

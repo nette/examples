@@ -15,7 +15,7 @@ use Nette\Forms\Form,
 Debugger::enable();
 
 
-// Step 1: Define form with validation rules
+// Define form with validation rules
 $form = new Form;
 
 $form->addGroup();
@@ -47,20 +47,18 @@ $form->addSubmit('submit', 'Send');
 
 
 
-// Step 2: Check if form was submitted?
+// Check if form was successfully submitted?
 if ($form->isSubmitted() && $form->isValid()) {
 	echo '<h2>Form was submitted and successfully validated</h2>';
 
-	$values = $form->values;
-	Debugger::dump($values);
+	Debugger::dump($form->values);
 
-	// this is the end, my friend :-)
-	exit;
+	exit; // here is usually redirect to another page
 }
 
 
 
-// Step 3: Render form
+// Render form
 ?>
 <!DOCTYPE html>
 <html lang="en">

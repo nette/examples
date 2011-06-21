@@ -14,7 +14,7 @@ Debugger::enable();
 
 
 
-// Step 0: Define custom validator
+// Define custom validator
 function divisibilityValidator($item, $arg)
 {
 	return $item->value % $arg === 0;
@@ -22,7 +22,7 @@ function divisibilityValidator($item, $arg)
 
 
 
-// Step 1: Define form with validation rules
+// Define form with validation rules
 $form = new Form;
 
 $form->addText('num1', 'Multiple of 8:')
@@ -36,17 +36,16 @@ $form->addSubmit('submit', 'Send');
 
 
 
-// Step 2: Check if form was submitted?
+// Check if form was submitted?
 if ($form->isSubmitted()) {
 
-	// Step 2c: Check if form is valid
+	// Check if form is valid
 	if ($form->isValid()) {
 		echo '<h2>Form was submitted and successfully validated</h2>';
 
 		Debugger::dump($form->values);
 
-		// this is the end, my friend :-)
-		exit;
+		exit; // here is usually redirect to another page
 	}
 
 } else {
@@ -61,7 +60,7 @@ if ($form->isSubmitted()) {
 
 
 
-// Step 3: Render form
+// Render form
 ?>
 <!DOCTYPE html>
 <html lang="en">

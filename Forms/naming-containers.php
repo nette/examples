@@ -34,26 +34,26 @@ $sex = array(
 
 
 
-// Step 1: Define form with validation rules
+// Define form with validation rules
 $form = new Form;
 
 // group First person
 $form->addGroup('First person');
-$sub = $form->addContainer('first');
-$sub->addText('name', 'Your name:');
-$sub->addText('email', 'Email:');
-$sub->addText('street', 'Street:');
-$sub->addText('city', 'City:');
-$sub->addSelect('country', 'Country:', $countries);
+$first = $form->addContainer('first');
+$first->addText('name', 'Your name:');
+$first->addText('email', 'Email:');
+$first->addText('street', 'Street:');
+$first->addText('city', 'City:');
+$first->addSelect('country', 'Country:', $countries);
 
 // group Second person
 $form->addGroup('Second person');
-$sub = $form->addContainer('second');
-$sub->addText('name', 'Your name:');
-$sub->addText('email', 'Email:');
-$sub->addText('street', 'Street:');
-$sub->addText('city', 'City:');
-$sub->addSelect('country', 'Country:', $countries);
+$second = $form->addContainer('second');
+$second->addText('name', 'Your name:');
+$second->addText('email', 'Email:');
+$second->addText('street', 'Street:');
+$second->addText('city', 'City:');
+$second->addSelect('country', 'Country:', $countries);
 
 // group for buttons
 $form->addGroup();
@@ -62,25 +62,18 @@ $form->addSubmit('submit', 'Send');
 
 
 
-// Step 2: Check if form was submitted?
-if ($form->isSubmitted()) {
+// Check if form was successfully submitted?
+if ($form->isSubmitted() && $form->isValid()) {
+	echo '<h2>Form was submitted and successfully validated</h2>';
 
-	// Step 2c: Check if form is valid
-	if ($form->isValid()) {
-		echo '<h2>Form was submitted and successfully validated</h2>';
+	Debugger::dump($form->values);
 
-		Debugger::dump($form->values);
-
-		// this is the end, my friend :-)
-		exit;
-	}
-
-} else {
+	exit; // here is usually redirect to another page
 }
 
 
 
-// Step 3: Render form
+// Render form
 ?>
 <!DOCTYPE html>
 <html lang="en">
