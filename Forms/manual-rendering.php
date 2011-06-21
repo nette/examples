@@ -123,7 +123,7 @@ if ($form->isSubmitted()) {
 
 	<style type="text/css">
 	.required {
-		color: darkred
+		color: maroon
 	}
 
 	fieldset {
