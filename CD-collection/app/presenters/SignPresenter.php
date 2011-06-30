@@ -12,18 +12,6 @@ class SignPresenter extends BasePresenter
 
 
 
-	public function startup()
-	{
-		parent::startup();
-		$this->session->start(); // required by $form->addProtection()
-	}
-
-
-
-	/********************* component factories *********************/
-
-
-
 	/**
 	 * Sign in form component factory.
 	 * @return Nette\Application\UI\Form
