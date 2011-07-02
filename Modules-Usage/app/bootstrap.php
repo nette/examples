@@ -7,17 +7,19 @@ use Nette\Diagnostics\Debugger,
 
 
 // Load Nette Framework
-// this allows load Nette Framework classes automatically so that
-// you don't have to litter your code with 'require' statements
 require __DIR__ . '/../../../Nette/loader.php';
 
 
-// Enable Nette\Debug for error visualisation & logging
+// Enable Nette Debugger for error visualisation & logging
+Debugger::$strictMode = TRUE;
+Debugger::$logDirectory = __DIR__ . '/../log';
 Debugger::enable();
 
 
 // Load configuration from config.neon file
 $configurator = new Nette\Configurator;
+$configurator->container->params += $params;
+$configurator->container->params['tempDir'] = __DIR__ . '/../temp';
 $container = $configurator->loadConfig(__DIR__ . '/config.neon');
 
 
