@@ -17,10 +17,10 @@ Debugger::$strictMode = TRUE;
 Debugger::enable();
 
 
-// create application
-$configurator = new Nette\Configurator;
-$container = $configurator->container;
-$container->params['tempDir'] = __DIR__ . '/data/temp';
+// configure application
+$configurator = new Nette\Config\Configurator;
+$configurator->setCacheDirectory(__DIR__ . '/data/temp');
+$container = $configurator->getContainer();
 
 
 $container->router[] = new Route('[index.php]', function() {

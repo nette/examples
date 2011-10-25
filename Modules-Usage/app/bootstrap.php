@@ -16,9 +16,16 @@ Debugger::$logDirectory = __DIR__ . '/../log';
 Debugger::enable();
 
 
-// Load configuration from config.neon file
-$configurator = new Nette\Configurator;
-$configurator->container->params['tempDir'] = __DIR__ . '/../temp';
+// Configure application
+$configurator = new Nette\Config\Configurator;
+$configurator->setCacheDirectory(__DIR__ . '/../temp');
+
+// Enable RobotLoader - this will load all classes automatically
+$configurator->createRobotLoader()
+	->addDirectory(__DIR__)
+	->register();
+
+// Create Dependency Injection container from config.neon file
 $container = $configurator->loadConfig(__DIR__ . '/config.neon');
 
 

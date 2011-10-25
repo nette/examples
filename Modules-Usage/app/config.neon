@@ -6,10 +6,6 @@ common:
 	php:
 		date.timezone: Europe/Prague
 
-	services:
-		robotLoader:
-			run: true
-
 production < common:
 
 development < common:

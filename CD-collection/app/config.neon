@@ -7,19 +7,14 @@ common:
 		date.timezone: Europe/Prague
 
 	services:
-		robotLoader:
-			run: true
-
 		database:
-			class: Nette\Database\Connection
-			arguments: [sqlite2:%appDir%/models/demo.db]
+			class: Nette\Database\Connection ("sqlite2:%appDir%/models/demo.db")
 
 		model:
 			class: Model
-			arguments: [@database]
 
 		authenticator:
-			factory: [@model, createAuthenticatorService]
+			factory: @model::createAuthenticatorService
 
 
 production < common:

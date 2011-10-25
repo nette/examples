@@ -14,17 +14,20 @@ Debugger::$logDirectory = __DIR__ . '/../log';
 Debugger::enable();
 
 
-// Load default configuration
-$configurator = new Nette\Configurator;
-$configurator->container->params['tempDir'] = __DIR__ . '/../temp';
-$container = $configurator->container;
-
-// Enable RobotLoader - this allows load all classes automatically
-// so that you don't have to litter your code with 'require' statements
-$container->robotLoader;
-
-
 // Configure application
+$configurator = new Nette\Config\Configurator;
+$configurator->setCacheDirectory(__DIR__ . '/../temp');
+
+// Enable RobotLoader - this will load all classes automatically
+$configurator->createRobotLoader()
+	->addDirectory(__DIR__)
+	->register();
+
+// Create default Dependency Injection container
+$container = $configurator->getContainer();
+
+
+// Setup router
 $container->router = new SimpleRouter('Default:default');
 
 

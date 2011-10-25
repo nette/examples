@@ -110,7 +110,7 @@ class DashboardPresenter extends BasePresenter
 	public function albumFormSubmitted(Form $form)
 	{
 		if ($form['save']->isSubmittedBy()) {
-			$id = (int) $this->getParam('id');
+			$id = (int) $this->getParameter('id');
 			if ($id > 0) {
 				$this->albums->find($id)->update($form->values);
 				$this->flashMessage('The album has been updated.');
@@ -144,7 +144,7 @@ class DashboardPresenter extends BasePresenter
 	public function deleteFormSubmitted(Form $form)
 	{
 		if ($form['delete']->isSubmittedBy()) {
-			$this->albums->find($this->getParam('id'))->delete();
+			$this->albums->find($this->getParameter('id'))->delete();
 			$this->flashMessage('Album has been deleted.');
 		}
 
