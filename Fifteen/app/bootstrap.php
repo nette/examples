@@ -16,13 +16,12 @@ Debugger::enable();
 
 // Load default configuration
 $configurator = new Nette\Configurator;
-$configurator->container->params += $params;
 $configurator->container->params['tempDir'] = __DIR__ . '/../temp';
 $container = $configurator->container;
 
 // Enable RobotLoader - this allows load all classes automatically
 // so that you don't have to litter your code with 'require' statements
-$container->robotLoader->register();
+$container->robotLoader;
 
 
 // Configure application

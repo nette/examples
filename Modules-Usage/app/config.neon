@@ -9,9 +9,6 @@ common:
 	services:
 		robotLoader:
 			run: true
-			
-	const:
-		APP_DIR: %appDir%
 
 production < common:
 
