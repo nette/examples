@@ -29,7 +29,7 @@ class DefaultPresenter extends Nette\Application\UI\Presenter
 
 	public function gameOver($sender, $round)
 	{
-		$this->template->flash = 'Congratulate!';
+		$this->template->flash = 'Congratulations!';
 		$this->invalidateControl('flash');
 	}
 
