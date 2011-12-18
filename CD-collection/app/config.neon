@@ -7,15 +7,12 @@ common:
 		date.timezone: Europe/Prague
 
 	services:
-		database:
-			class: Nette\Database\Connection ("sqlite2:%appDir%/models/demo.db")
+		database: Nette\Database\Connection("sqlite2:%appDir%/models/demo.db")
 
-		model:
-			class: Model
+		authenticator: Authenticator(@database::table(users))
 
-		authenticator:
-			factory: @model::createAuthenticatorService
-
+		albums:
+			factory: @database::table(albums)
 
 production < common:
 

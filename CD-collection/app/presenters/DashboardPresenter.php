@@ -16,7 +16,7 @@ class DashboardPresenter extends BasePresenter
 	{
 		parent::startup();
 
-		$this->albums = $this->getService('model')->getAlbums();
+		$this->albums = $this->getService('albums');
 
 		// user authentication
 		if (!$this->user->isLoggedIn()) {
