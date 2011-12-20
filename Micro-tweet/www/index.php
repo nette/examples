@@ -19,8 +19,8 @@ Debugger::enable();
 
 // configure application
 $configurator = new Nette\Config\Configurator;
-$configurator->setCacheDirectory(__DIR__ . '/data/temp');
-$container = $configurator->getContainer();
+$configurator->setTempDirectory(__DIR__ . '/data/temp');
+$container = $configurator->createContainer();
 
 
 $container->router[] = new Route('[index.php]', function() {

@@ -16,7 +16,7 @@ Debugger::enable();
 
 // Configure application
 $configurator = new Nette\Config\Configurator;
-$configurator->setCacheDirectory(__DIR__ . '/../temp');
+$configurator->setTempDirectory(__DIR__ . '/../temp');
 
 // Enable RobotLoader - this will load all classes automatically
 $configurator->createRobotLoader()
@@ -24,7 +24,7 @@ $configurator->createRobotLoader()
 	->register();
 
 // Create default Dependency Injection container
-$container = $configurator->getContainer();
+$container = $configurator->createContainer();
 
 
 // Setup router

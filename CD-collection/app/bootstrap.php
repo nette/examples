@@ -18,7 +18,7 @@ Debugger::enable();
 
 // Configure application
 $configurator = new Nette\Config\Configurator;
-$configurator->setCacheDirectory(__DIR__ . '/../temp');
+$configurator->setTempDirectory(__DIR__ . '/../temp');
 
 // Enable RobotLoader - this will load all classes automatically
 $configurator->createRobotLoader()
@@ -26,7 +26,8 @@ $configurator->createRobotLoader()
 	->register();
 
 // Create Dependency Injection container from config.neon file
-$container = $configurator->loadConfig(__DIR__ . '/config.neon');
+$configurator->addConfig(__DIR__ . '/config.neon');
+$container = $configurator->createContainer();
 
 // Opens already started session
 if ($container->session->exists()) {
