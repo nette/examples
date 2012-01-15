@@ -6,8 +6,13 @@ common:
 	php:
 		date.timezone: Europe/Prague
 
+	nette:
+		database:
+			demo:
+				dsn: "sqlite2:%appDir%/models/demo.db"
+
 	services:
-		database: Nette\Database\Connection("sqlite2:%appDir%/models/demo.db")
+		database: @Nette\Database\Connection
 
 		authenticator: Authenticator(@database::table(users))
 

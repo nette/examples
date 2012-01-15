@@ -38,7 +38,7 @@ class SignPresenter extends BasePresenter
 		try {
 			$values = $form->getValues();
 			$this->user->login($values->username, $values->password);
-			$this->application->restoreRequest($this->backlink);
+			$this->restoreRequest($this->backlink);
 			$this->redirect('Dashboard:');
 
 		} catch (NS\AuthenticationException $e) {

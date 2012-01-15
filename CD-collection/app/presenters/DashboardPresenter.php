@@ -23,8 +23,7 @@ class DashboardPresenter extends BasePresenter
 			if ($this->user->logoutReason === Nette\Http\UserStorage::INACTIVITY) {
 				$this->flashMessage('You have been signed out due to inactivity. Please sign in again.');
 			}
-			$backlink = $this->application->storeRequest();
-			$this->redirect('Sign:in', array('backlink' => $backlink));
+			$this->redirect('Sign:in', array('backlink' => $this->storeRequest()));
 		}
 	}
 
@@ -58,7 +57,7 @@ class DashboardPresenter extends BasePresenter
 		if (!$form->isSubmitted()) {
 			$row = $this->albums->get($id);
 			if (!$row) {
-				throw new NA\BadRequestException('Record not found');
+				$this->error('Record not found');
 			}
 			$form->setDefaults($row);
 		}
@@ -74,7 +73,7 @@ class DashboardPresenter extends BasePresenter
 	{
 		$this->template->album = $this->albums->get($id);
 		if (!$this->template->album) {
-			throw new NA\BadRequestException('Record not found');
+			$this->error('Record not found');
 		}
 	}
 
