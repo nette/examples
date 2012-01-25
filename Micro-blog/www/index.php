@@ -22,7 +22,7 @@ $configurator->setTempDirectory(__DIR__ . '/data/temp');
 $container = $configurator->createContainer();
 
 // enable template router
-$container->router = new TemplateRouter('data/templates');
+$container->router = new TemplateRouter('data/templates', __DIR__ . '/data/temp');
 
 
 // add access to database

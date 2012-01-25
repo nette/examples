@@ -17,10 +17,9 @@ use Nette\Application\Routers,
 class TemplateRouter extends Routers\RouteList
 {
 
-	public function __construct($path)
+	public function __construct($path, $cachePath)
 	{
-		$cacheFile = $path . '/routes.php';
-		if (is_file($cacheFile = $path . '/routes.php')) {
+		if (is_file($cacheFile = $cachePath . '/routes.php')) {
 			$routes = require $cacheFile;
 		} else {
 			$routes = array();
