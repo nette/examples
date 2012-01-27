@@ -7,6 +7,9 @@ common:
 		date.timezone: Europe/Prague
 
 	nette:
+		session:
+			autoStart: smart
+
 		database:
 			demo:
 				dsn: "sqlite2:%appDir%/models/demo.db"

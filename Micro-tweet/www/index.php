@@ -2,27 +2,25 @@
 
 // Nette Framework TweetReader example
 
-use Nette\Diagnostics\Debugger,
-	Nette\Application\Routers\Route,
+use Nette\Application\Routers\Route,
 	Nette\Utils\Json;
 
 
-// load framework
+// Load Nette Framework
 require __DIR__ . '/../../../Nette/loader.php';
 
 
-// enable Debugger
-Debugger::$logDirectory = __DIR__ . '/data/log';
-Debugger::$strictMode = TRUE;
-Debugger::enable();
-
-
-// configure application
+// Configure application
 $configurator = new Nette\Config\Configurator;
 $configurator->setTempDirectory(__DIR__ . '/data/temp');
+
+// Enable Nette Debugger for error visualisation & logging
+$configurator->enableDebugger(__DIR__ . '/data/log');
+
+// Create Dependency Injection container
 $container = $configurator->createContainer();
 
-
+// Setup router using mod_rewrite detection
 $container->router[] = new Route('[index.php]', function() {
 	return 'Hello! Would you like to search <a href="search/nettefw">#nettefw</a> on Twitter?';
 });
@@ -39,6 +37,5 @@ $container->router[] = new Route('search/<hashtag \w+>', function($hashtag, $pre
 	', $params);
 });
 
-
-// run the application!
+// Run the application!
 $container->application->run();

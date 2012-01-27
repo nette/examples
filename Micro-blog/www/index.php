@@ -2,34 +2,29 @@
 
 // Nette Framework Microblog example
 
-use Nette\Diagnostics\Debugger;
 
-
-// load libraries
+// Load Nette Framework
 require __DIR__ . '/../../../Nette/loader.php';
 require __DIR__ . '/data/TemplateRouter.php';
 
 
-// enable Nette Debugger for error visualisation & logging
-Debugger::$logDirectory = __DIR__ . '/data/log';
-Debugger::$strictMode = TRUE;
-Debugger::enable();
-
-
-// configure application
+// Configure application
 $configurator = new Nette\Config\Configurator;
 $configurator->setTempDirectory(__DIR__ . '/data/temp');
+
+// Enable Nette Debugger for error visualisation & logging
+$configurator->enableDebugger(__DIR__ . '/data/log');
+
+// Create Dependency Injection container
 $container = $configurator->createContainer();
 
-// enable template router
+// Enable template router
 $container->router = new TemplateRouter('data/templates', __DIR__ . '/data/temp');
 
-
-// add access to database
+// Add access to database
 $container->addService('database', function() {
 	return new Nette\Database\Connection('sqlite2:data/blog.sdb');
 });
 
-
-// run the application!
+// Run the application!
 $container->application->run();
