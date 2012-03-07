@@ -15,9 +15,12 @@ Debugger::enable();
 
 
 // Define custom validator
-function divisibilityValidator($item, $arg)
+class MyValidators
 {
-	return $item->value % $arg === 0;
+	static function divisibilityValidator($item, $arg)
+	{
+		return $item->value % $arg === 0;
+	}
 }
 
 
@@ -26,10 +29,10 @@ function divisibilityValidator($item, $arg)
 $form = new Form;
 
 $form->addText('num1', 'Multiple of 8:')
-	->addRule('divisibilityValidator', 'First number must be %d multiple', 8);
+	->addRule('MyValidators::divisibilityValidator', 'First number must be %d multiple', 8);
 
 $form->addText('num2', 'Not multiple of 5:')
-	->addRule(~'divisibilityValidator', 'Second number must not be %d multiple', 5); // negative
+	->addRule(~'MyValidators::divisibilityValidator', 'Second number must not be %d multiple', 5); // negative
 
 
 $form->addSubmit('submit', 'Send');
@@ -93,7 +96,7 @@ if ($form->isSubmitted()) {
 	<link rel="stylesheet" type="text/css" media="screen" href="files/style.css" />
 	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
 	<script>
-		Nette.validators.divisibilityValidator = function(elem, args, val) {
+		Nette.validators.MyValidators_divisibilityValidator = function(elem, args, val) {
 			return val % args === 0;
 		};
 	</script>
