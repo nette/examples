@@ -10,12 +10,12 @@ require __DIR__ . '/../../../Nette/loader.php';
 
 // Configure application
 $configurator = new Nette\Config\Configurator;
-$configurator->setTempDirectory(__DIR__ . '/../temp');
 
 // Enable Nette Debugger for error visualisation & logging
 $configurator->enableDebugger(__DIR__ . '/../log');
 
 // Enable RobotLoader - this will load all classes automatically
+$configurator->setTempDirectory(__DIR__ . '/../temp');
 $configurator->createRobotLoader()
 	->addDirectory(__DIR__)
 	->register();

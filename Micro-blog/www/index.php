@@ -10,12 +10,12 @@ require __DIR__ . '/data/TemplateRouter.php';
 
 // Configure application
 $configurator = new Nette\Config\Configurator;
-$configurator->setTempDirectory(__DIR__ . '/data/temp');
 
 // Enable Nette Debugger for error visualisation & logging
 $configurator->enableDebugger(__DIR__ . '/data/log');
 
 // Create Dependency Injection container
+$configurator->setTempDirectory(__DIR__ . '/data/temp');
 $container = $configurator->createContainer();
 
 // Enable template router
