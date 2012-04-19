@@ -9,12 +9,12 @@ common:
 	nette:
 		database:
 			demo:
-				dsn: "sqlite2:%appDir%/models/demo.db"
+				dsn: "sqlite2:%appDir%/model/demo.db"
 
 	services:
 		database: @Nette\Database\Connection
 
-		authenticator: Authenticator(@database::table(users))
+		authenticator: Authenticator
 
 		albums:
 			factory: @database::table(albums)
