@@ -6,6 +6,11 @@ common:
 	php:
 		date.timezone: Europe/Prague
 
+	nette:
+		application:
+			mapping:
+				*: DemoApp\*Module\*Presenter
+
 production < common:
 
 development < common:
