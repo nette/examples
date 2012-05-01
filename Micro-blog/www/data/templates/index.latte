@@ -2,7 +2,7 @@
 {url [page-<page=1>]}
 {layout "@layout.latte"}
 
-{block #content}
+{#content}
 {default $page = 1}
 
 {foreach $context->database->table('article')->order('created')->page($page, 5) as $article}
