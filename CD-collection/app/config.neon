@@ -9,8 +9,8 @@ common:
 	nette:
 		database:
 			demo:
-				dsn: "sqlite2:%appDir%/model/demo.db"
-
+				dsn: "sqlite:%appDir%/model/demo.db3"
+			
 	services:
 		database: @Nette\Database\Connection
 
