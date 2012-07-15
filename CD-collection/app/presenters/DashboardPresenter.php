@@ -98,7 +98,7 @@ class DashboardPresenter extends BasePresenter
 
 		$form->addSubmit('save', 'Save')->setAttribute('class', 'default');
 		$form->addSubmit('cancel', 'Cancel')->setValidationScope(NULL);
-		$form->onSuccess[] = callback($this, 'albumFormSubmitted');
+		$form->onSuccess[] = $this->albumFormSubmitted;
 
 		$form->addProtection('Please submit this form again (security token has expired).');
 		return $form;
@@ -133,7 +133,7 @@ class DashboardPresenter extends BasePresenter
 		$form = new Form;
 		$form->addSubmit('cancel', 'Cancel');
 		$form->addSubmit('delete', 'Delete')->setAttribute('class', 'default');
-		$form->onSuccess[] = callback($this, 'deleteFormSubmitted');
+		$form->onSuccess[] = $this->deleteFormSubmitted;
 		$form->addProtection('Please submit this form again (security token has expired).');
 		return $form;
 	}
