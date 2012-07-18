@@ -23,7 +23,7 @@ $container->router = new TemplateRouter('data/templates', __DIR__ . '/data/temp'
 
 // Add access to database
 $container->addService('database', function() {
-	return new Nette\Database\Connection('sqlite2:data/blog.sdb');
+	return new Nette\Database\Connection('sqlite:data/blog.db3');
 });
 
 // Run the application!
