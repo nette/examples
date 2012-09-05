@@ -11,12 +11,8 @@ common:
 			dsn: "sqlite:%appDir%/model/demo.db3"
 
 	services:
-		database: @Nette\Database\Connection
-
 		authenticator: Authenticator
-
-		albums:
-			factory: @database::table(albums)
+		albumRepository: AlbumRepository
 
 production < common:
 

@@ -1,12 +1,13 @@
 <?php
 
-use Nette\Security as NS;
+use Nette\Security,
+	Nette\Utils\Strings;
 
 
 /**
  * Users authenticator.
  */
-class Authenticator extends Nette\Object implements NS\IAuthenticator
+class Authenticator extends Nette\Object implements Security\IAuthenticator
 {
 	/** @var Nette\Database\Connection */
 	private $database;
@@ -21,7 +22,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator
 
 
 	/**
-	 * Performs an authentication
+	 * Performs an authentication.
 	 * @param  array
 	 * @return Nette\Security\Identity
 	 * @throws Nette\Security\AuthenticationException
@@ -32,15 +33,15 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator
 		$row = $this->database->table('users')->where('username', $username)->fetch();
 
 		if (!$row) {
-			throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
+			throw new Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
 		}
 
-		if ($row->password !== $this->calculateHash($password)) {
-			throw new NS\AuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
+		if ($row->password !== $this->generateHash($password, $row->password)) {
+			throw new Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
 		}
 
 		unset($row->password);
-		return new NS\Identity($row->id, NULL, $row->toArray());
+		return new Security\Identity($row->id, NULL, $row->toArray());
 	}
 
 
@@ -48,11 +49,15 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator
 	/**
 	 * Computes salted password hash.
 	 * @param  string
+	 * @param  string
 	 * @return string
 	 */
-	public function calculateHash($password)
+	public function generateHash($password, $salt = NULL)
 	{
-		return md5($password . str_repeat('*random salt*', 10));
+		if ($password === Strings::upper($password)) { // perhaps caps lock is on
+			$password = Strings::lower($password);
+		}
+		return crypt($password, $salt ?: '$2a$07$' . Strings::random(23));
 	}
 
 }

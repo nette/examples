@@ -1,8 +1,6 @@
 <?php
 
-use Nette\Application\UI\Form,
-	Nette\Security as NS;
-
+use Nette\Application\UI;
 
 
 class SignPresenter extends BasePresenter
@@ -13,17 +11,17 @@ class SignPresenter extends BasePresenter
 
 
 	/**
-	 * Sign in form component factory.
+	 * Sign-in form factory.
 	 * @return Nette\Application\UI\Form
 	 */
 	protected function createComponentSignInForm()
 	{
-		$form = new Form;
+		$form = new UI\Form;
 		$form->addText('username', 'Username:')
-			->setRequired('Please provide a username.');
+			->setRequired('Please enter your username.');
 
 		$form->addPassword('password', 'Password:')
-			->setRequired('Please provide a password.');
+			->setRequired('Please enter your password.');
 
 		$form->addSubmit('send', 'Sign in');
 
@@ -37,13 +35,15 @@ class SignPresenter extends BasePresenter
 	{
 		try {
 			$values = $form->getValues();
-			$this->user->login($values->username, $values->password);
-			$this->restoreRequest($this->backlink);
-			$this->redirect('Dashboard:');
+			$this->getUser()->login($values->username, $values->password);
 
-		} catch (NS\AuthenticationException $e) {
+		} catch (Nette\Security\AuthenticationException $e) {
 			$form->addError($e->getMessage());
+			return;
 		}
+
+		$this->restoreRequest($this->backlink);
+		$this->redirect('Dashboard:');
 	}
 
 

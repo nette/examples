@@ -15,7 +15,7 @@ class DefaultPresenter extends Nette\Application\UI\Presenter
 
 	/**
 	 * Fifteen game control factory.
-	 * @return mixed
+	 * @return FifteenControl
 	 */
 	protected function createComponentFifteen()
 	{

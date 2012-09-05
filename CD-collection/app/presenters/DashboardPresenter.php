@@ -1,14 +1,19 @@
 <?php
 
-use Nette\Application\UI\Form,
-	Nette\Application as NA;
+use Nette\Application\UI\Form;
 
 
 
 class DashboardPresenter extends BasePresenter
 {
-	/** @var Nette\Database\Table\Selection */
+	/** @var AlbumRepository */
 	private $albums;
+
+
+	public function inject(AlbumRepository $albums)
+	{
+		$this->albums = $albums;
+	}
 
 
 
@@ -16,9 +21,6 @@ class DashboardPresenter extends BasePresenter
 	{
 		parent::startup();
 
-		$this->albums = $this->getService('albums');
-
-		// user authentication
 		if (!$this->user->isLoggedIn()) {
 			if ($this->user->logoutReason === Nette\Http\UserStorage::INACTIVITY) {
 				$this->flashMessage('You have been signed out due to inactivity. Please sign in again.');
@@ -35,7 +37,7 @@ class DashboardPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-		$this->template->albums = $this->albums->order('artist')->order('title');
+		$this->template->albums = $this->albums->findAll()->order('artist')->order('title');
 	}
 
 
@@ -55,11 +57,11 @@ class DashboardPresenter extends BasePresenter
 	{
 		$form = $this['albumForm'];
 		if (!$form->isSubmitted()) {
-			$row = $this->albums->get($id);
-			if (!$row) {
+			$album = $this->albums->findById($id);
+			if (!$album) {
 				$this->error('Record not found');
 			}
-			$form->setDefaults($row);
+			$form->setDefaults($album);
 		}
 	}
 
@@ -71,7 +73,7 @@ class DashboardPresenter extends BasePresenter
 
 	public function renderDelete($id = 0)
 	{
-		$this->template->album = $this->albums->get($id);
+		$this->template->album = $this->albums->findById($id);
 		if (!$this->template->album) {
 			$this->error('Record not found');
 		}
@@ -84,8 +86,8 @@ class DashboardPresenter extends BasePresenter
 
 
 	/**
-	 * Album edit form component factory.
-	 * @return mixed
+	 * Edit form factory.
+	 * @return Form
 	 */
 	protected function createComponentAlbumForm()
 	{
@@ -96,57 +98,67 @@ class DashboardPresenter extends BasePresenter
 		$form->addText('title', 'Title:')
 			->setRequired('Please enter a title.');
 
-		$form->addSubmit('save', 'Save')->setAttribute('class', 'default');
-		$form->addSubmit('cancel', 'Cancel')->setValidationScope(NULL);
-		$form->onSuccess[] = $this->albumFormSubmitted;
+		$form->addSubmit('save', 'Save')
+			->setAttribute('class', 'default')
+			->onClick[] = $this->albumFormSubmitted;
 
-		$form->addProtection('Please submit this form again (security token has expired).');
+		$form->addSubmit('cancel', 'Cancel')
+			->setValidationScope(NULL)
+			->onClick[] = $this->formCancelled;
+
+		$form->addProtection();
 		return $form;
 	}
 
 
 
-	public function albumFormSubmitted(Form $form)
+	public function albumFormSubmitted($button)
 	{
-		if ($form['save']->isSubmittedBy()) {
-			$id = (int) $this->getParameter('id');
-			if ($id > 0) {
-				$this->albums->find($id)->update($form->values);
-				$this->flashMessage('The album has been updated.');
-			} else {
-				$this->albums->insert($form->values);
-				$this->flashMessage('The album has been added.');
-			}
+		$values = $button->getForm()->getValues();
+		$id = (int) $this->getParameter('id');
+		if ($id) {
+			$this->albums->findById($id)->update($values);
+			$this->flashMessage('The album has been updated.');
+		} else {
+			$this->albums->insert($values);
+			$this->flashMessage('The album has been added.');
 		}
-
 		$this->redirect('default');
 	}
 
 
 
 	/**
-	 * Album delete form component factory.
-	 * @return mixed
+	 * Delete form factory.
+	 * @return Form
 	 */
 	protected function createComponentDeleteForm()
 	{
 		$form = new Form;
-		$form->addSubmit('cancel', 'Cancel');
-		$form->addSubmit('delete', 'Delete')->setAttribute('class', 'default');
-		$form->onSuccess[] = $this->deleteFormSubmitted;
-		$form->addProtection('Please submit this form again (security token has expired).');
+		$form->addSubmit('cancel', 'Cancel')
+			->onClick[] = $this->formCancelled;
+
+		$form->addSubmit('delete', 'Delete')
+			->setAttribute('class', 'default')
+			->onClick[] = $this->deleteFormSubmitted;
+
+		$form->addProtection();
 		return $form;
 	}
 
 
 
-	public function deleteFormSubmitted(Form $form)
+	public function deleteFormSubmitted()
 	{
-		if ($form['delete']->isSubmittedBy()) {
-			$this->albums->find($this->getParameter('id'))->delete();
-			$this->flashMessage('Album has been deleted.');
-		}
+		$this->albums->findById($this->getParameter('id'))->delete();
+		$this->flashMessage('Album has been deleted.');
+		$this->redirect('default');
+	}
 
+
+
+	public function formCancelled()
+	{
 		$this->redirect('default');
 	}
 
