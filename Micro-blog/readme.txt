@@ -1,2 +1,0 @@
-Nette Framework Micro-blog
---------------------------
