@@ -24,7 +24,7 @@ Debugger::enable();
  * @return Nette\Utils\Finder  provides a fluent interface
  */
 Finder::extensionMethod('lines', function($finder, $predicate){
-	if (!preg_match('#^([=<>!]+)\s*(\d+)$#i', $predicate, $matches)) {
+	if (!preg_match('#^([=<>!]+)\s*(\d+)\z#i', $predicate, $matches)) {
 		throw new InvalidArgumentException('Invalid lines predicate format.');
 	}
 	list(, $operator, $nubmer) = $matches;
@@ -42,7 +42,7 @@ Finder::extensionMethod('lines', function($finder, $predicate){
  * @return Nette\Utils\Finder  provides a fluent interface
  */
 Finder::extensionMethod('dimensions', function($finder, $width, $height){
-	if (!preg_match('#^([=<>!]+)\s*(\d+)$#i', $width, $mW) || !preg_match('#^([=<>!]+)\s*(\d+)$#i', $height, $mH)) {
+	if (!preg_match('#^([=<>!]+)\s*(\d+)\z#i', $width, $mW) || !preg_match('#^([=<>!]+)\s*(\d+)\z#i', $height, $mH)) {
 		throw new InvalidArgumentException('Invalid dimensions predicate format.');
 	}
 	return $finder->filter(function($file) use ($mW, $mH) {
