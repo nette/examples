@@ -70,8 +70,13 @@ if ($form->isSuccess()) {
 	<title>Nette\Forms naming containers example | Nette Framework</title>
 
 	<style>
-	.required {
-		color: maroon
+	.required label {
+		font-weight: bold;
+	}
+
+	.error {
+		color: #D00;
+		font-weight: bold;
 	}
 
 	fieldset {
@@ -88,6 +93,7 @@ if ($form->isSuccess()) {
 	th {
 		width: 10em;
 		text-align: right;
+		font-weight: normal;
 	}
 	<link rel="stylesheet" media="screen" href="files/style.css" />
 	</style>
