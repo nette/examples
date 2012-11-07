@@ -60,11 +60,9 @@ Finder::extensionMethod('dimensions', function($finder, $width, $height){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
+	<meta charset="utf-8">
 	<title>Nette\Finder custom filters | Nette Framework</title>
-
-	<link rel="stylesheet" type="text/css" media="screen" href="files/style.css" />
+	<link rel="stylesheet" media="screen" href="files/style.css" />
 </head>
 
 <body>

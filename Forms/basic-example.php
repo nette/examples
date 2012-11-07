@@ -2,10 +2,6 @@
 
 /**
  * Nette\Forms basic example.
- *
- * - form definition using fluent interfaces
- * - form groups usage
- * - default rendering
  */
 
 
@@ -18,25 +14,6 @@ use Nette\Forms\Form,
 Debugger::enable();
 
 
-$countries = array(
-	'Europe' => array(
-		'CZ' => 'Czech Republic',
-		'SK' => 'Slovakia',
-		'GB' => 'United Kingdom',
-	),
-	'CA' => 'Canada',
-	'US' => 'United States',
-	'?'  => 'other',
-);
-
-$sex = array(
-	'm' => 'male',
-	'f' => 'female',
-);
-
-
-
-// Define form with validation rules
 $form = new Form;
 
 // group Personal data
@@ -51,7 +28,10 @@ $form->addText('age', 'Your age:')
 	->addRule($form::INTEGER, 'Age must be numeric value')
 	->addRule($form::RANGE, 'Age must be in range from %d to %d', array(10, 100));
 
-$form->addRadioList('gender', 'Your gender:', $sex);
+$form->addRadioList('gender', 'Your gender:', array(
+	'm' => 'male',
+	'f' => 'female',
+));
 
 $form->addText('email', 'Email:')
 	->setEmptyValue('@')
@@ -78,6 +58,14 @@ $form->addText('city', 'City:')
 	->addConditionOn($form['send'], $form::EQUAL, TRUE)
 		->addRule($form::FILLED, 'Enter your shipping address');
 
+$countries = array(
+	'Europe' => array(
+		'CZ' => 'Czech Republic',
+		'SK' => 'Slovakia',
+	),
+	'US' => 'USA',
+	'?'  => 'other',
+);
 $form->addSelect('country', 'Country:', $countries)
 	->setPrompt('Select your country')
 	->addConditionOn($form['send'], $form::EQUAL, TRUE)
@@ -112,41 +100,32 @@ $form->addSubmit('submit', 'Send');
 
 
 
-// Check if form was submitted?
 if ($form->isSubmitted()) {
-
-	// Check if form is valid
 	if ($form->isValid()) {
 		echo '<h2>Form was submitted and successfully validated</h2>';
-
 		Debugger::dump($form->values);
 
 		exit; // here is usually redirect to another page
 	}
 
 } else {
-	// not submitted, define default values
-	$defaults = array(
+	$form->setDefaults(array( // not submitted, define default values
 		'name'    => 'John Doe',
 		'userid'  => 231,
-		'country' => 'CZ', // Czech Republic
-	);
-
-	$form->setDefaults($defaults);
+		'country' => 'CZ',
+	));
 }
 
 
 
-// Render form
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
+	<meta charset="utf-8">
 	<title>Nette\Forms basic example | Nette Framework</title>
 
-	<style type="text/css">
+	<style>
 	.required {
 		color: maroon
 	}
@@ -167,7 +146,7 @@ if ($form->isSubmitted()) {
 		text-align: right;
 	}
 	</style>
-	<link rel="stylesheet" type="text/css" media="screen" href="files/style.css" />
+	<link rel="stylesheet" media="screen" href="files/style.css" />
 	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
 </head>
 

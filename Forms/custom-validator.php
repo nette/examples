@@ -25,7 +25,6 @@ class MyValidators
 
 
 
-// Define form with validation rules
 $form = new Form;
 
 $form->addText('num1', 'Multiple of 8:')
@@ -34,45 +33,31 @@ $form->addText('num1', 'Multiple of 8:')
 $form->addText('num2', 'Not multiple of 5:')
 	->addRule(~'MyValidators::divisibilityValidator', 'Second number must not be %d multiple', 5); // negative
 
-
 $form->addSubmit('submit', 'Send');
 
 
 
-// Check if form was submitted?
-if ($form->isSubmitted()) {
-
-	// Check if form is valid
-	if ($form->isValid()) {
-		echo '<h2>Form was submitted and successfully validated</h2>';
-
-		Debugger::dump($form->values);
-
-		exit; // here is usually redirect to another page
-	}
-
-} else {
-	// not submitted, define default values
-	$defaults = array(
-		'num1'    => '5',
-		'num2'    => '5',
-	);
-
-	$form->setDefaults($defaults);
+if ($form->isSuccess()) {
+	echo '<h2>Form was submitted and successfully validated</h2>';
+	Debugger::dump($form->values);
+	exit; // here is usually redirect to another page
 }
 
+$form->setDefaults(array(
+	'num1'    => '5',
+	'num2'    => '5',
+));
 
 
-// Render form
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
+	<meta charset="utf-8">
 	<title>Nette\Forms custom validator example | Nette Framework</title>
 
-	<style type="text/css">
+	<style>
 	.required {
 		color: maroon
 	}
@@ -93,7 +78,7 @@ if ($form->isSubmitted()) {
 		text-align: right;
 	}
 	</style>
-	<link rel="stylesheet" type="text/css" media="screen" href="files/style.css" />
+	<link rel="stylesheet" media="screen" href="files/style.css" />
 	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
 	<script>
 		Nette.validators.MyValidators_divisibilityValidator = function(elem, args, val) {

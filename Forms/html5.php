@@ -15,7 +15,6 @@ use Nette\Forms\Form,
 Debugger::enable();
 
 
-// Define form with validation rules
 $form = new Form;
 
 $form->addGroup();
@@ -47,8 +46,7 @@ $form->addSubmit('submit', 'Send');
 
 
 
-// Check if form was successfully submitted?
-if ($form->isSubmitted() && $form->isValid()) {
+if ($form->isSuccess()) {
 	echo '<h2>Form was submitted and successfully validated</h2>';
 
 	Debugger::dump($form->values);
@@ -58,16 +56,14 @@ if ($form->isSubmitted() && $form->isValid()) {
 
 
 
-// Render form
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
+	<meta charset="utf-8">
 	<title>Nette\Forms and HTML5 | Nette Framework</title>
 
-	<style type="text/css">
+	<style>
 	.required {
 		color: maroon
 	}
@@ -88,7 +84,7 @@ if ($form->isSubmitted() && $form->isValid()) {
 		text-align: right;
 	}
 	</style>
-	<link rel="stylesheet" type="text/css" media="screen" href="files/style.css" />
+	<link rel="stylesheet" media="screen" href="files/style.css" />
 	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
 </head>
 

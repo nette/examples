@@ -2,9 +2,6 @@
 
 /**
  * Nette\Forms manual form rendering.
- *
- * - separated form and rules definition
- * - manual form rendering
  */
 
 
@@ -16,35 +13,26 @@ use Nette\Forms\Form,
 Debugger::enable();
 
 
-$countries = array(
-	'Europe' => array(
-		'CZ' => 'Czech Republic',
-		'SK' => 'Slovakia',
-		'GB' => 'United Kingdom',
-	),
-	'CA' => 'Canada',
-	'US' => 'United States',
-	'?'  => 'other',
-);
-
-$sex = array(
-	'm' => 'male',
-	'f' => 'female',
-);
-
-
-
-// Define form
 $form = new Form;
 $form->addText('name');
 $form->addText('age');
-$form->addRadioList('gender', NULL, $sex);
+$form->addRadioList('gender', NULL, array(
+	'm' => 'male',
+	'f' => 'female',
+));
 $form->addText('email')->setEmptyValue('@');
 
 $form->addCheckbox('send');
 $form->addText('street');
 $form->addText('city');
-$form->addSelect('country', NULL, $countries)->setPrompt('Select your country');
+$form->addSelect('country', NULL, array(
+	'Europe' => array(
+		'CZ' => 'Czech Republic',
+		'SK' => 'Slovakia',
+	),
+	'US' => 'USA',
+	'?'  => 'other',
+))->setPrompt('Select your country');
 
 $form->addPassword('password');
 $form->addPassword('password2');
@@ -86,41 +74,32 @@ $form['password2']->addConditionOn($form['password'], $form::VALID)
 
 
 
-// Check if form was submitted?
 if ($form->isSubmitted()) {
-
-	// Check if form is valid
 	if ($form->isValid()) {
 		echo '<h2>Form was submitted and successfully validated</h2>';
-
 		Debugger::dump($form->values);
 
 		exit; // here is usually redirect to another page
 	}
 
 } else {
-	// not submitted, define default values
-	$defaults = array(
+	$form->setDefaults(array( // not submitted, define default values
 		'name'    => 'John Doe',
 		'userid'  => 231,
-		'country' => 'CZ', // Czech Republic
-	);
-
-	$form->setDefaults($defaults);
+		'country' => 'CZ',
+	));
 }
 
 
 
-// Render form
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
+	<meta charset="utf-8">
 	<title>Nette\Forms manual form rendering | Nette Framework</title>
 
-	<style type="text/css">
+	<style>
 	.required {
 		color: maroon
 	}
@@ -141,7 +120,7 @@ if ($form->isSubmitted()) {
 		text-align: right;
 	}
 	</style>
-	<link rel="stylesheet" type="text/css" media="screen" href="files/style.css" />
+	<link rel="stylesheet" media="screen" href="files/style.css" />
 	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
 </head>
 
