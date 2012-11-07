@@ -2,8 +2,6 @@
 
 /**
  * Nette\Forms naming containers example.
- *
- * - using naming containers
  */
 
 
@@ -15,55 +13,46 @@ use Nette\Forms\Form,
 Debugger::enable();
 
 
-$countries = array(
-	'Select your country',
-	'Europe' => array(
-		'CZ' => 'Czech Republic',
-		'SK' => 'Slovakia',
-		'GB' => 'United Kingdom',
-	),
-	'CA' => 'Canada',
-	'US' => 'United States',
-	'?'  => 'other',
-);
-
-$sex = array(
-	'm' => 'male',
-	'f' => 'female',
-);
-
-
-
-// Define form with validation rules
 $form = new Form;
 
 // group First person
 $form->addGroup('First person');
+
 $first = $form->addContainer('first');
 $first->addText('name', 'Your name:');
 $first->addText('email', 'Email:');
 $first->addText('street', 'Street:');
 $first->addText('city', 'City:');
-$first->addSelect('country', 'Country:', $countries);
+$first->addSelect('country', 'Country:', array(
+	'Europe' => array(
+		'CZ' => 'Czech Republic',
+		'SK' => 'Slovakia',
+	),
+	'US' => 'USA',
+	'?'  => 'other',
+));
 
 // group Second person
 $form->addGroup('Second person');
+
 $second = $form->addContainer('second');
 $second->addText('name', 'Your name:');
 $second->addText('email', 'Email:');
 $second->addText('street', 'Street:');
 $second->addText('city', 'City:');
-$second->addSelect('country', 'Country:', $countries);
+$second->addSelect('country', 'Country:', array(
+	'Europe',
+	'USA',
+));
 
-// group for buttons
+// group for button
 $form->addGroup();
 
 $form->addSubmit('submit', 'Send');
 
 
 
-// Check if form was successfully submitted?
-if ($form->isSubmitted() && $form->isValid()) {
+if ($form->isSuccess()) {
 	echo '<h2>Form was submitted and successfully validated</h2>';
 
 	Debugger::dump($form->values);
@@ -73,16 +62,14 @@ if ($form->isSubmitted() && $form->isValid()) {
 
 
 
-// Render form
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
+	<meta charset="utf-8">
 	<title>Nette\Forms naming containers example | Nette Framework</title>
 
-	<style type="text/css">
+	<style>
 	.required {
 		color: maroon
 	}
@@ -102,7 +89,7 @@ if ($form->isSubmitted() && $form->isValid()) {
 		width: 10em;
 		text-align: right;
 	}
-	<link rel="stylesheet" type="text/css" media="screen" href="files/style.css" />
+	<link rel="stylesheet" media="screen" href="files/style.css" />
 	</style>
 </head>
 

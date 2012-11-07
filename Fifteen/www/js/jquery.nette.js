@@ -16,20 +16,16 @@ if (typeof jQuery != 'function') {
 (function($) {
 
 	$.nette = {
-		success: function(payload)
-		{
-			// redirect
+		success: function(payload) {
 			if (payload.redirect) {
 				window.location.href = payload.redirect;
 				return;
 			}
 
-			// state
 			if (payload.state) {
 				$.nette.state = payload.state;
 			}
 
-			// snippets
 			if (payload.snippets) {
 				for (var i in payload.snippets) {
 					$.nette.updateSnippet(i, payload.snippets[i]);
@@ -42,14 +38,12 @@ if (typeof jQuery != 'function') {
 			}
 		},
 
-		updateSnippet: function(id, html)
-		{
+		updateSnippet: function(id, html) {
 			$('#' + id).html(html);
 		},
 
 		// create animated spinner
-		createSpinner: function(id)
-		{
+		createSpinner: function(id) {
 			return this.spinner = $('<div></div>').attr('id', id ? id : 'ajax-spinner').ajaxStart(function() {
 				$(this).show();
 

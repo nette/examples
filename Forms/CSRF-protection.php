@@ -15,18 +15,14 @@ Debugger::enable();
 
 
 $form = new Form;
-
 $form->addProtection('Security token did not match. Possible CSRF attack.', 3);
-
 $form->addHidden('id')->setDefaultValue(123);
 $form->addSubmit('submit', 'Delete item');
 
 
 
-// Check if form was successfully submitted?
-if ($form->isSubmitted() && $form->isValid()) {
+if ($form->isSuccess()) {
 	echo '<h2>Form was submitted and successfully validated</h2>';
-
 	Debugger::dump($form->values);
 
 	exit; // here is usually redirect to another page
@@ -34,16 +30,14 @@ if ($form->isSubmitted() && $form->isValid()) {
 
 
 
-// Render form
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
+	<meta charset="utf-8">
 	<title>Nette\Forms CSRF protection example | Nette Framework</title>
 
-	<style type="text/css">
+	<style>
 	.required {
 		color: maroon
 	}
@@ -64,7 +58,7 @@ if ($form->isSubmitted() && $form->isValid()) {
 		text-align: right;
 	}
 	</style>
-	<link rel="stylesheet" type="text/css" media="screen" href="files/style.css" />
+	<link rel="stylesheet" media="screen" href="files/style.css" />
 </head>
 
 <body>

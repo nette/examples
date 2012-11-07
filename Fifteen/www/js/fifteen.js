@@ -6,10 +6,12 @@ jQuery(function($) {
 
 	var active = false;
 
-	$('.fifteen a.ajax').live('click', function(event) {
+	$('body').on('click', '.fifteen a.ajax', function(event) {
 		event.preventDefault();
 		event.stopImmediatePropagation();
-		if (active || $.active) return;
+		if (active || $.active) {
+			return;
+		}
 
 		active = true;
 		var payload;
@@ -17,17 +19,21 @@ jQuery(function($) {
 		var img = $('img', this);
 		img.css('z-index', 1000);
 		img.animate({
-			'left': delta[0] * (img.attr('width') + 1) + 'px',
-			'top': delta[1] * (img.attr('height') + 1) + 'px'
+			left: delta[0] * img.attr('width'),
+			top: delta[1] * img.attr('height')
 		});
 		img.queue(function() {
 			active = false;
-			if (payload) $.nette.success(payload);
+			if (payload) {
+				$.nette.success(payload);
+			}
 		});
 
 		$.post($.nette.href = this.href, function(data) {
 			payload = data;
-			if (!active) $.nette.success(payload);
+			if (!active) {
+				$.nette.success(payload);
+			}
 		});
 
 		$.nette.spinner.css({
