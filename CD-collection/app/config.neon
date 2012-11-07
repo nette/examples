@@ -2,18 +2,13 @@
 # SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
 # http://nette.org/security-warning
 #
-common:
-	php:
-		date.timezone: Europe/Prague
+php:
+	date.timezone: Europe/Prague
 
-	nette:
-		database:
-			dsn: "sqlite:%appDir%/model/demo.db3"
+nette:
+	database:
+		dsn: "sqlite:%appDir%/model/demo.db3"
 
-	services:
-		authenticator: Authenticator
-		albumRepository: AlbumRepository
-
-production < common:
-
-development < common:
+services:
+	authenticator: Authenticator
+	albumRepository: AlbumRepository
