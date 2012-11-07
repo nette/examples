@@ -58,8 +58,13 @@ $form->setDefaults(array(
 	<title>Nette\Forms custom validator example | Nette Framework</title>
 
 	<style>
-	.required {
-		color: maroon
+	.required label {
+		font-weight: bold;
+	}
+
+	.error {
+		color: #D00;
+		font-weight: bold;
 	}
 
 	fieldset {
@@ -76,6 +81,7 @@ $form->setDefaults(array(
 	th {
 		width: 10em;
 		text-align: right;
+		font-weight: normal;
 	}
 	</style>
 	<link rel="stylesheet" media="screen" href="files/style.css" />

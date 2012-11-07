@@ -100,8 +100,13 @@ if ($form->isSubmitted()) {
 	<title>Nette\Forms manual form rendering | Nette Framework</title>
 
 	<style>
-	.required {
-		color: maroon
+	.required label {
+		font-weight: bold;
+	}
+
+	.error {
+		color: #D00;
+		font-weight: bold;
 	}
 
 	fieldset {
@@ -118,6 +123,7 @@ if ($form->isSubmitted()) {
 	th {
 		width: 10em;
 		text-align: right;
+		font-weight: normal;
 	}
 	</style>
 	<link rel="stylesheet" media="screen" href="files/style.css" />

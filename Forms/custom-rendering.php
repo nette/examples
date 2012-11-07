@@ -158,12 +158,13 @@ if ($form->isSubmitted()) {
 		text-shadow: 1px 1px 0 white;
 	}
 
-	.required {
+	.required label {
 		font-weight: bold;
 	}
 
 	.error {
-		color: red;
+		color: #D00;
+		font-weight: bold;
 	}
 
 	input.text {
