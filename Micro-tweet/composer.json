@@ -15,7 +15,7 @@
 	],
     "require": {
 		"php": ">=5.3.0",
-        "nette/nette": "dev-master"
+		"nette/nette": "2.0.x"
     },
 	"config": {
 		"vendor-dir": "www/data/libs"
