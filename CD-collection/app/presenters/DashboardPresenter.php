@@ -100,7 +100,7 @@ class DashboardPresenter extends BasePresenter
 
 		$form->addSubmit('save', 'Save')
 			->setAttribute('class', 'default')
-			->onClick[] = $this->albumFormSubmitted;
+			->onClick[] = $this->albumFormSucceeded;
 
 		$form->addSubmit('cancel', 'Cancel')
 			->setValidationScope(NULL)
@@ -112,7 +112,7 @@ class DashboardPresenter extends BasePresenter
 
 
 
-	public function albumFormSubmitted($button)
+	public function albumFormSucceeded($button)
 	{
 		$values = $button->getForm()->getValues();
 		$id = (int) $this->getParameter('id');
@@ -140,7 +140,7 @@ class DashboardPresenter extends BasePresenter
 
 		$form->addSubmit('delete', 'Delete')
 			->setAttribute('class', 'default')
-			->onClick[] = $this->deleteFormSubmitted;
+			->onClick[] = $this->deleteFormSucceeded;
 
 		$form->addProtection();
 		return $form;
@@ -148,7 +148,7 @@ class DashboardPresenter extends BasePresenter
 
 
 
-	public function deleteFormSubmitted()
+	public function deleteFormSucceeded()
 	{
 		$this->albums->findById($this->getParameter('id'))->delete();
 		$this->flashMessage('Album has been deleted.');
