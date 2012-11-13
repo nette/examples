@@ -49,7 +49,7 @@ $form->addSubmit('submit', 'Send');
 if ($form->isSuccess()) {
 	echo '<h2>Form was submitted and successfully validated</h2>';
 
-	Debugger::dump($form->values);
+	Nette\Diagnostics\Dumper::dump($form->values);
 
 	exit; // here is usually redirect to another page
 }

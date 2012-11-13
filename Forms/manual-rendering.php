@@ -77,7 +77,7 @@ $form['password2']->addConditionOn($form['password'], $form::VALID)
 if ($form->isSubmitted()) {
 	if ($form->isValid()) {
 		echo '<h2>Form was submitted and successfully validated</h2>';
-		Debugger::dump($form->values);
+		Nette\Diagnostics\Dumper::dump($form->values);
 
 		exit; // here is usually redirect to another page
 	}
