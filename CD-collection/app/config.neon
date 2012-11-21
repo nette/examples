@@ -11,8 +11,8 @@ common:
 			dsn: "sqlite:%appDir%/model/demo.db3"
 
 	services:
-		authenticator: Authenticator
-		albumRepository: AlbumRepository
+		- Authenticator
+		- AlbumRepository
 
 production < common:
 
