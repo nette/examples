@@ -1,13 +1,7 @@
 <?php
 
-// absolute filesystem path to this web root
-define('WWW_DIR', __DIR__);
+// let bootstrap create Dependency Injection container
+$container = require __DIR__ . '/../app/bootstrap.php';
 
-// absolute filesystem path to the application root
-define('APP_DIR', WWW_DIR . '/../app');
-
-// absolute filesystem path to the libraries
-define('LIBS_DIR', WWW_DIR . '/../libs');
-
-// load bootstrap file
-require APP_DIR . '/bootstrap.php';
+// run application
+$container->application->run();
