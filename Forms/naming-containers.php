@@ -95,8 +95,8 @@ if ($form->isSuccess()) {
 		text-align: right;
 		font-weight: normal;
 	}
-	<link rel="stylesheet" media="screen" href="files/style.css" />
 	</style>
+	<link rel="stylesheet" media="screen" href="files/style.css" />
 </head>
 
 <body>
