@@ -6,15 +6,11 @@ use Nette\Application\UI\Form;
 
 class DashboardPresenter extends BasePresenter
 {
-	/** @var AlbumRepository */
-	private $albums;
-
-
-	public function inject(AlbumRepository $albums)
-	{
-		$this->albums = $albums;
-	}
-
+	/**
+	 * @var AlbumRepository
+	 * @inject
+	 */
+	public $albums;
 
 
 	protected function startup()
