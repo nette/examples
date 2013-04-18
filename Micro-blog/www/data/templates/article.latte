@@ -1,7 +1,7 @@
 {url article/<id>}
 {layout "@layout.latte"}
 
-{var $article = $context->database->table('article')->get($id) OR $presenter->error(404)}
+{var $article = $context->getByType('Nette\Database\Connection')->table('article')->get($id) OR $presenter->error(404)}
 
 {#content}
 <p><a href="{$basePath}">← back</a></p>

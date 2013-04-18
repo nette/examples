@@ -1,0 +1,12 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# http://nette.org/security-warning
+#
+php:
+	date.timezone: Europe/Prague
+
+nette:
+	database:
+		dsn: 'sqlite:%appDir%/data/blog.db3'
+		reflection: conventional
+

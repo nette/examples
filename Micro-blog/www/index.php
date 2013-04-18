@@ -8,7 +8,6 @@ require __DIR__ . '/data/libs/autoload.php';
 require __DIR__ . '/data/TemplateRouter.php';
 
 // Configure application
-date_default_timezone_set('Europe/Prague');
 $configurator = new Nette\Configurator;
 
 // Enable Nette Debugger for error visualisation & logging
@@ -16,15 +15,11 @@ $configurator->enableDebugger(__DIR__ . '/data/log');
 
 // Create Dependency Injection container
 $configurator->setTempDirectory(__DIR__ . '/data/temp');
+$configurator->addConfig(__DIR__ . '/config.neon');
 $container = $configurator->createContainer();
 
 // Enable template router
-$container->router = new TemplateRouter('data/templates', __DIR__ . '/data/temp');
-
-// Add access to database
-$container->addService('database', function() {
-	return new Nette\Database\Connection('sqlite:data/blog.db3');
-});
+$container->addService('router', new TemplateRouter('data/templates', __DIR__ . '/data/temp'));
 
 // Run the application!
 $container->application->run();
