@@ -11,7 +11,7 @@ require __DIR__ . '/data/libs/autoload.php';
 
 // Configure application
 date_default_timezone_set('Europe/Prague');
-$configurator = new Nette\Config\Configurator;
+$configurator = new Nette\Configurator;
 
 // Enable Nette Debugger for error visualisation & logging
 $configurator->enableDebugger(__DIR__ . '/data/log');
