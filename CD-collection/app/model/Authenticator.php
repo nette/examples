@@ -9,12 +9,12 @@ use Nette\Security,
  */
 class Authenticator extends Nette\Object implements Security\IAuthenticator
 {
-	/** @var Nette\Database\Connection */
+	/** @var Nette\Database\SelectionFactory */
 	private $database;
 
 
 
-	public function __construct(Nette\Database\Connection $database)
+	public function __construct(Nette\Database\SelectionFactory $database)
 	{
 		$this->database = $database;
 	}
