@@ -25,13 +25,11 @@ class FifteenControl extends UI\Control
 	public $round = 0;
 
 
-
 	public function __construct()
 	{
 		parent::__construct();
 		$this->order = range(0, $this->width * $this->width - 1);
 	}
-
 
 
 	public function handleClick($x, $y)
@@ -50,7 +48,6 @@ class FifteenControl extends UI\Control
 	}
 
 
-
 	public function handleShuffle()
 	{
 		$i = 100;
@@ -66,12 +63,10 @@ class FifteenControl extends UI\Control
 	}
 
 
-
 	public function getRound()
 	{
 		return $this->round;
 	}
-
 
 
 	public function isClickable($x, $y, & $rel = NULL)
@@ -101,7 +96,6 @@ class FifteenControl extends UI\Control
 	}
 
 
-
 	private function move($x, $y)
 	{
 		$pos = $x + $y * $this->width;
@@ -111,12 +105,10 @@ class FifteenControl extends UI\Control
 	}
 
 
-
 	private function searchEmpty()
 	{
 		return array_search(0, $this->order);
 	}
-
 
 
 	public function render()
@@ -127,7 +119,6 @@ class FifteenControl extends UI\Control
 		$template->order = $this->order;
 		$template->render();
 	}
-
 
 
 	/**
@@ -150,7 +141,6 @@ class FifteenControl extends UI\Control
 
 		parent::loadState($params);
 	}
-
 
 
 	/**

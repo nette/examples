@@ -13,12 +13,10 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 	private $database;
 
 
-
 	public function __construct(Nette\Database\Connection $database)
 	{
 		$this->database = $database;
 	}
-
 
 
 	/**
@@ -43,7 +41,6 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 		unset($row->password);
 		return new Security\Identity($row->id, NULL, $row->toArray());
 	}
-
 
 
 	/**

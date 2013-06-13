@@ -15,7 +15,6 @@ use Nette\Image,
 Debugger::enable();
 
 
-
 $image = Image::fromBlank(300, 300);
 
 // white background

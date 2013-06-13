@@ -13,12 +13,10 @@ use Nette\Forms\Form,
 Debugger::enable();
 
 
-
 $form = new Form;
 $form->addProtection('Security token did not match. Possible CSRF attack.', 3);
 $form->addHidden('id')->setDefaultValue(123);
 $form->addSubmit('submit', 'Delete item');
-
 
 
 if ($form->isSuccess()) {
@@ -27,7 +25,6 @@ if ($form->isSuccess()) {
 
 	exit; // here is usually redirect to another page
 }
-
 
 
 ?>

@@ -111,7 +111,6 @@ $form->addGroup();
 $form->addSubmit('submit', 'Send');
 
 
-
 if ($form->isSubmitted()) {
 	if ($form->isValid()) {
 		echo '<h2>Form was submitted and successfully validated</h2>';
@@ -127,7 +126,6 @@ if ($form->isSubmitted()) {
 		'country' => 'CZ',
 	));
 }
-
 
 
 ?>

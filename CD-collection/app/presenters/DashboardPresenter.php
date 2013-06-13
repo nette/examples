@@ -3,7 +3,6 @@
 use Nette\Application\UI\Form;
 
 
-
 class DashboardPresenter extends BasePresenter
 {
 	/** @var AlbumRepository */
@@ -14,7 +13,6 @@ class DashboardPresenter extends BasePresenter
 	{
 		$this->albums = $albums;
 	}
-
 
 
 	protected function startup()
@@ -30,9 +28,7 @@ class DashboardPresenter extends BasePresenter
 	}
 
 
-
 	/********************* view default *********************/
-
 
 
 	public function renderDefault()
@@ -41,16 +37,13 @@ class DashboardPresenter extends BasePresenter
 	}
 
 
-
 	/********************* views add & edit *********************/
-
 
 
 	public function renderAdd()
 	{
 		$this['albumForm']['save']->caption = 'Add';
 	}
-
 
 
 	public function renderEdit($id = 0)
@@ -66,9 +59,7 @@ class DashboardPresenter extends BasePresenter
 	}
 
 
-
 	/********************* view delete *********************/
-
 
 
 	public function renderDelete($id = 0)
@@ -80,9 +71,7 @@ class DashboardPresenter extends BasePresenter
 	}
 
 
-
 	/********************* component factories *********************/
-
 
 
 	/**
@@ -111,7 +100,6 @@ class DashboardPresenter extends BasePresenter
 	}
 
 
-
 	public function albumFormSucceeded($button)
 	{
 		$values = $button->getForm()->getValues();
@@ -125,7 +113,6 @@ class DashboardPresenter extends BasePresenter
 		}
 		$this->redirect('default');
 	}
-
 
 
 	/**
@@ -147,14 +134,12 @@ class DashboardPresenter extends BasePresenter
 	}
 
 
-
 	public function deleteFormSucceeded()
 	{
 		$this->albums->findById($this->getParameter('id'))->delete();
 		$this->flashMessage('Album has been deleted.');
 		$this->redirect('default');
 	}
-
 
 
 	public function formCancelled()

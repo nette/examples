@@ -8,7 +8,6 @@ use Nette\Application\Routers,
 	Nette\Latte;
 
 
-
 /**
  * Micro-framework router for templates using {url} macro.
  *
