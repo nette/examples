@@ -13,7 +13,6 @@ use Nette\Forms\Form,
 Debugger::enable();
 
 
-
 // Define custom validator
 class MyValidators
 {
@@ -22,7 +21,6 @@ class MyValidators
 		return $item->value % $arg === 0;
 	}
 }
-
 
 
 $form = new Form;
@@ -36,7 +34,6 @@ $form->addText('num2', 'Not multiple of 5:')
 $form->addSubmit('submit', 'Send');
 
 
-
 if ($form->isSuccess()) {
 	echo '<h2>Form was submitted and successfully validated</h2>';
 	Nette\Diagnostics\Dumper::dump($form->values);
@@ -47,7 +44,6 @@ $form->setDefaults(array(
 	'num1'    => '5',
 	'num2'    => '5',
 ));
-
 
 
 ?>

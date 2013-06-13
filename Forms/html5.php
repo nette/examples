@@ -45,7 +45,6 @@ $form->addText('email', 'Send to email:')
 $form->addSubmit('submit', 'Send');
 
 
-
 if ($form->isSuccess()) {
 	echo '<h2>Form was submitted and successfully validated</h2>';
 
@@ -53,7 +52,6 @@ if ($form->isSuccess()) {
 
 	exit; // here is usually redirect to another page
 }
-
 
 
 ?>

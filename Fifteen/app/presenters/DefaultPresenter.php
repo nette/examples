@@ -1,7 +1,6 @@
 <?php
 
 
-
 class DefaultPresenter extends Nette\Application\UI\Presenter
 {
 
@@ -10,7 +9,6 @@ class DefaultPresenter extends Nette\Application\UI\Presenter
 	{
 		$this->invalidateControl('round');
 	}
-
 
 
 	/**
@@ -24,7 +22,6 @@ class DefaultPresenter extends Nette\Application\UI\Presenter
 		$fifteen->invalidateControl();
 		return $fifteen;
 	}
-
 
 
 	public function gameOver($sender, $round)

@@ -16,7 +16,6 @@ use Nette\Utils\Finder,
 Debugger::enable();
 
 
-
 /**
  * Restricts the search by number of lines.
  * @param  string
@@ -31,7 +30,6 @@ Finder::extensionMethod('lines', function($finder, $predicate){
 		return Finder::compare(count(file($file->getPathname())), $operator, $nubmer);
 	});
 });
-
 
 
 /**
@@ -50,9 +48,6 @@ Finder::extensionMethod('dimensions', function($finder, $width, $height){
 			&& (!$mH || Finder::compare($size[1], $mH[1], $mH[2]));
 	});
 });
-
-
-
 
 
 ?>

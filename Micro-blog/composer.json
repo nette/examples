@@ -1,5 +1,5 @@
 {
-    "name": "nette-examples/micro-blog",
+	"name": "nette-examples/micro-blog",
 	"type": "nette-example",
 	"description": "A simple example showing how to use Nette Framework as a micro-framework.",
 	"license": "BSD-3-Clause",
@@ -13,10 +13,10 @@
 			"homepage": "http://nette.org/contributors"
 		}
 	],
-    "require": {
+	"require": {
 		"php": ">=5.3.0",
-        "nette/nette": "dev-master"
-    },
+		"nette/nette": "dev-master"
+	},
 	"config": {
 		"vendor-dir": "www/data/libs"
 	}

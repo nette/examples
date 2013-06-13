@@ -21,7 +21,6 @@ use Nette\Forms\Form,
 Debugger::enable();
 
 
-
 class MyTranslator extends Zend_Translate implements Nette\Localization\ITranslator
 {
 	/**
@@ -35,7 +34,6 @@ class MyTranslator extends Zend_Translate implements Nette\Localization\ITransla
 		return parent::translate($message);
 	}
 }
-
 
 
 $translator = new MyTranslator('gettext', __DIR__ . '/messages.mo', 'cs');
@@ -124,7 +122,6 @@ $form->addGroup();
 $form->addSubmit('submit', 'Send');
 
 
-
 if ($form->isSubmitted()) {
 	if ($form->isValid()) {
 		echo '<h2>Form was submitted and successfully validated</h2>';
@@ -140,7 +137,6 @@ if ($form->isSubmitted()) {
 		'country' => 'CZ',
 	));
 }
-
 
 
 ?>

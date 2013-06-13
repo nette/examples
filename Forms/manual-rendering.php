@@ -73,7 +73,6 @@ $form['password2']->addConditionOn($form['password'], $form::VALID)
 	->addRule($form::EQUAL, 'Passwords do not match', $form['password']);
 
 
-
 if ($form->isSubmitted()) {
 	if ($form->isValid()) {
 		echo '<h2>Form was submitted and successfully validated</h2>';
@@ -89,7 +88,6 @@ if ($form->isSubmitted()) {
 		'country' => 'CZ',
 	));
 }
-
 
 
 ?>
@@ -183,7 +181,6 @@ if ($form->isSubmitted()) {
 		</tr>
 		</table>
 	</fieldset>
-
 
 
 	<fieldset>
