@@ -96,34 +96,6 @@ if ($form->isSubmitted()) {
 <head>
 	<meta charset="utf-8">
 	<title>Nette\Forms manual form rendering | Nette Framework</title>
-
-	<style>
-	.required label {
-		font-weight: bold;
-	}
-
-	.error {
-		color: #D00;
-		font-weight: bold;
-	}
-
-	fieldset {
-		padding: .5em;
-		margin: .5em 0;
-		background: #E4F1FC;
-		border: 1px solid #B2D1EB;
-	}
-
-	input.button {
-		font-size: 120%;
-	}
-
-	th {
-		width: 10em;
-		text-align: right;
-		font-weight: normal;
-	}
-	</style>
 	<link rel="stylesheet" media="screen" href="files/style.css" />
 	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
 </head>
