@@ -135,45 +135,10 @@ if ($form->isSubmitted()) {
 	<meta charset="utf-8">
 	<title>Nette\Forms custom rendering example | Nette Framework</title>
 
+	<link rel="stylesheet" media="screen" href="files/style.css" />
 	<style>
-	html {
-		font: 16px/1.5 "Trebuchet MS", "Geneva CE", lucida, sans-serif;
-		border-top: 4.7em solid #F4EBDB;
-	}
-
-	body {
-		max-width: 780px;
-		margin: -4.7em auto 0;
-		background: white;
-		color: #333;
-	}
-
-	h1 {
-		font-size: 1.9em;
-		margin: .5em 0 1.5em;
-		background: url(http://files.nette.org/icons/logo-e1.png) right center no-repeat;
-		color: #7A7772;
-		text-shadow: 1px 1px 0 white;
-	}
-
-	.required label {
-		font-weight: bold;
-	}
-
-	.error {
-		color: #D00;
-		font-weight: bold;
-	}
-
-	input.text {
+	textarea, select, input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="image"]):not([type="range"]) {
 		border: 1px solid #78BD3F;
-		padding: 3px;
-		color: black;
-		background: white;
-	}
-
-	input.button {
-		font-size: 120%;
 	}
 
 	dt, dd {
@@ -218,7 +183,6 @@ if ($form->isSubmitted()) {
 		background: #EEE;
 	}
 	</style>
-	<link rel="stylesheet" media="screen" href="files/style.css" />
 	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
 </head>
 

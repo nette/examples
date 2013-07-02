@@ -19,3 +19,40 @@ h1 {
 	color: #7A7772;
 	text-shadow: 1px 1px 0 white;
 }
+
+fieldset {
+	padding: .2em 1em 1em;
+	margin: .5em 0;
+	background: #E4F1FC;
+	border: 1px solid #B2D1EB;
+}
+
+textarea, select, input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="image"]):not([type="range"]) {
+	padding: .3em .5em;
+	color: black;
+	background: white;
+	border: 1px solid silver;
+}
+
+select {
+	padding-right: .3em;
+}
+
+input[type="submit"] {
+	font-size: 120%;
+}
+
+th {
+	width: 10em;
+	text-align: right;
+	font-weight: normal;
+}
+
+.required label {
+	font-weight: bold;
+}
+
+.error {
+	color: #E22;
+	font-weight: bold;
+}
