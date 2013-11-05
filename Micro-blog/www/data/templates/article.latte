@@ -3,7 +3,7 @@
 
 {var $article = $context->getByType('Nette\Database\SelectionFactory')->table('article')->get($id) OR $presenter->error(404)}
 
-{block #content}
+{block content}
 <p><a href="{$basePath}">← back</a></p>
 
 <div class="article">

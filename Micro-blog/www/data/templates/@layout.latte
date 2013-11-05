@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>{block #title|striptags|trim}Homepage{/block} | Nette Framework Micro-blog example</title>
+	<title>{block title|striptags|trim}Homepage{/block} | Nette Framework Micro-blog example</title>
 	<link rel="stylesheet" media="screen" href="{$basePath}/style.css" />
 </head>
 
 <body>
 	<h1>My Blog</h1>
 
-	{include #content}
+	{include content}
 
 	<p class="footer">This is a <a href="http://nette.org">Nette Framework</a> example.</p>
 </body>

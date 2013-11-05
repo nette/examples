@@ -16,7 +16,7 @@
 	<meta name="description" content="Nette Framework example" />
 	<meta n:ifset="$robots" name="robots" content="{$robots}">
 
-	<title>{block #title|striptags|trim}{/block} | Nette example</title>
+	<title>{block title|striptags|trim}{/block} | Nette example</title>
 
 	<link rel="stylesheet" media="screen" href="{$basePath}/css/site.css" />
 	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
@@ -26,7 +26,7 @@
 	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 
 	<div id="content">
-		{include #content}
+		{include content}
 	</div>
 
 	<p id="logged-in" n:if="$user->loggedIn">Signed in as {$user->identity->realname}. <a n:href="Sign:out">Sign out</a></p>
