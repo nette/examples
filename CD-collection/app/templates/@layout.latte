@@ -16,7 +16,7 @@
 	<meta name="description" content="Nette Framework example" />
 	<meta n:ifset="$robots" name="robots" content="{$robots}">
 
-	<title>{#title|striptags|trim}{/#} | Nette example</title>
+	<title>{block #title|striptags|trim}{/block} | Nette example</title>
 
 	<link rel="stylesheet" media="screen" href="{$basePath}/css/site.css" />
 	<script src="http://nette.github.com/resources/js/netteForms.js"></script>

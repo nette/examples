@@ -2,7 +2,7 @@
 {url [page-<page=1>]}
 {layout "@layout.latte"}
 
-{#content}
+{block #content}
 {default $page = 1}
 
 {foreach $context->getByType('Nette\Database\SelectionFactory')->table('article')->order('created')->page($page, 5) as $article}
