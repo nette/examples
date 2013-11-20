@@ -5,7 +5,7 @@
 {block content}
 {default $page = 1}
 
-{foreach $context->getByType('Nette\Database\SelectionFactory')->table('article')->order('created')->page($page, 5) as $article}
+{foreach $context->getByType('Nette\Database\Context')->table('article')->order('created')->page($page, 5) as $article}
 	<div class="article">
 		<div class="date">{$article->created|date:'F j, Y'}</div>
 
