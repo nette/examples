@@ -56,3 +56,8 @@ th {
 	color: #E22;
 	font-weight: bold;
 }
+
+footer a {
+	font-size: 70%;
+	color: gray;
+}

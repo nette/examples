@@ -2,15 +2,14 @@
 
 /**
  * Nette\Forms and HTML5.
- *
- * - for the best experience, use the latest version of browser (Internet Explorer 9, Firefox 4, Chrome 5, Safari 5, Opera 9)
  */
 
 
 require __DIR__ . '/../../Nette/loader.php';
 
 use Nette\Forms\Form,
-	Nette\Diagnostics\Debugger;
+	Nette\Diagnostics\Debugger,
+	Nette\Diagnostics\Dumper;
 
 Debugger::enable();
 
@@ -47,26 +46,20 @@ $form->addSubmit('submit', 'Send');
 
 if ($form->isSuccess()) {
 	echo '<h2>Form was submitted and successfully validated</h2>';
-
-	Nette\Diagnostics\Dumper::dump($form->values);
-
-	exit; // here is usually redirect to another page
+	Dumper::dump($form->getValues());
+	exit;
 }
 
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Nette\Forms and HTML5 | Nette Framework</title>
-	<link rel="stylesheet" media="screen" href="files/style.css" />
-	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
-</head>
+<meta charset="utf-8">
+<title>Nette\Forms and HTML5 | Nette Framework</title>
+<link rel="stylesheet" media="screen" href="assets/style.css" />
+<script src="http://nette.github.com/resources/js/netteForms.js"></script>
 
-<body>
-	<h1>Nette\Forms and HTML5</h1>
+<h1>Nette\Forms and HTML5</h1>
 
-	<?php echo $form ?>
-</body>
-</html>
+<?php echo $form ?>
+
+<footer><a href="http://doc.nette.org/en/forms">see documentation</a></footer>

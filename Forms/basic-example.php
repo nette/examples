@@ -9,6 +9,7 @@ require __DIR__ . '/../../Nette/loader.php';
 
 use Nette\Forms\Form,
 	Nette\Diagnostics\Debugger,
+	Nette\Diagnostics\Dumper,
 	Nette\Utils\Html;
 
 Debugger::enable();
@@ -33,6 +34,12 @@ $form->addRadioList('gender', 'Your gender:', array(
 	'f' => 'female',
 ));
 
+$form->addCheckboxList('colors', 'Favorite colors:', array(
+	'r' => 'red',
+	'g' => 'green',
+	'b' => 'blue',
+));
+
 $form->addText('email', 'Email:')
 	->setEmptyValue('@')
 	->addCondition($form::FILLED) // conditional rule: if is email filled, ...
@@ -44,7 +51,7 @@ $form->addGroup('Shipping address')
 	->setOption('embedNext', TRUE);
 
 $form->addCheckbox('send', 'Ship to address')
-	->addCondition($form::EQUAL, TRUE) // conditional rule: if is checkbox checked...
+	->addCondition($form::FILLED) // conditional rule: if is checkbox checked...
 		->toggle('sendBox'); // toggle div #sendBox
 
 
@@ -55,21 +62,21 @@ $form->addGroup()
 $form->addText('street', 'Street:');
 
 $form->addText('city', 'City:')
-	->addConditionOn($form['send'], $form::EQUAL, TRUE)
-		->addRule($form::FILLED, 'Enter your shipping address');
+	->addConditionOn($form['send'], $form::FILLED)
+		->setRequired('Enter your shipping address');
 
 $countries = array(
-	'Europe' => array(
-		'CZ' => 'Czech Republic',
-		'SK' => 'Slovakia',
+	'World' => array(
+		'bu' => 'Buranda',
+		'qu' => 'Qumran',
+		'st' => 'Saint Georges Island',
 	),
-	'US' => 'USA',
 	'?'  => 'other',
 );
 $form->addSelect('country', 'Country:', $countries)
 	->setPrompt('Select your country')
-	->addConditionOn($form['send'], $form::EQUAL, TRUE)
-		->addRule($form::FILLED, 'Select your country');
+	->addConditionOn($form['send'], $form::FILLED)
+		->setRequired('Select your country');
 
 
 // group Your account
@@ -80,9 +87,8 @@ $form->addPassword('password', 'Choose password:')
 	->addRule($form::MIN_LENGTH, 'The password is too short: it must be at least %d characters', 3);
 
 $form->addPassword('password2', 'Reenter password:')
-	->addConditionOn($form['password'], $form::VALID)
-		->addRule($form::FILLED, 'Reenter your password')
-		->addRule($form::EQUAL, 'Passwords do not match', $form['password']);
+	->setRequired('Reenter your password')
+	->addRule($form::EQUAL, 'Passwords do not match', $form['password']);
 
 $form->addUpload('avatar', 'Picture:')
 	->addCondition($form::FILLED)
@@ -92,43 +98,34 @@ $form->addHidden('userid');
 
 $form->addTextArea('note', 'Comment:');
 
-
 // group for buttons
 $form->addGroup();
 
 $form->addSubmit('submit', 'Send');
 
 
-if ($form->isSubmitted()) {
-	if ($form->isValid()) {
-		echo '<h2>Form was submitted and successfully validated</h2>';
-		Nette\Diagnostics\Dumper::dump($form->values);
+$form->setDefaults(array(
+	'name'    => 'John Doe',
+	'userid'  => 231,
+));
 
-		exit; // here is usually redirect to another page
-	}
 
-} else {
-	$form->setDefaults(array( // not submitted, define default values
-		'name'    => 'John Doe',
-		'userid'  => 231,
-		'country' => 'CZ',
-	));
+if ($form->isSuccess()) {
+	echo '<h2>Form was submitted and successfully validated</h2>';
+	Dumper::dump($form->getValues());
+	exit;
 }
 
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Nette\Forms basic example | Nette Framework</title>
-	<link rel="stylesheet" media="screen" href="files/style.css" />
-	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
-</head>
+<meta charset="utf-8">
+<title>Nette\Forms basic example | Nette Framework</title>
+<link rel="stylesheet" media="screen" href="assets/style.css" />
+<script src="http://nette.github.com/resources/js/netteForms.js"></script>
 
-<body>
-	<h1>Nette\Forms basic example</h1>
+<h1>Nette\Forms basic example</h1>
 
-	<?php echo $form ?>
-</body>
-</html>
+<?php echo $form ?>
+
+<footer><a href="http://doc.nette.org/en/forms">see documentation</a></footer>
