@@ -3,7 +3,7 @@
 use Nette\Application\UI\Form;
 
 
-class DashboardPresenter extends BasePresenter
+class DashboardPresenter extends Nette\Application\UI\Presenter
 {
 	/** @var AlbumRepository */
 	private $albums;
