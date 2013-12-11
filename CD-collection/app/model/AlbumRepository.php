@@ -27,6 +27,7 @@ class AlbumRepository extends Nette\Object
 	}
 
 
+	/** @return Nette\Database\Table\ActiveRow */
 	public function insert($values)
 	{
 		return $this->findAll()->insert($values);

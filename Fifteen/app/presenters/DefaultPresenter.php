@@ -7,7 +7,7 @@ class DefaultPresenter extends Nette\Application\UI\Presenter
 
 	public function renderDefault()
 	{
-		$this->invalidateControl('round');
+		$this->redrawControl('round');
 	}
 
 
@@ -19,7 +19,7 @@ class DefaultPresenter extends Nette\Application\UI\Presenter
 	{
 		$fifteen = new FifteenControl;
 		$fifteen->onGameOver[] = $this->gameOver;
-		$fifteen->invalidateControl();
+		$fifteen->redrawControl();
 		return $fifteen;
 	}
 
@@ -27,7 +27,7 @@ class DefaultPresenter extends Nette\Application\UI\Presenter
 	public function gameOver($sender, $round)
 	{
 		$this->template->flash = 'Congratulations!';
-		$this->invalidateControl('flash');
+		$this->redrawControl('flash');
 	}
 
 }
