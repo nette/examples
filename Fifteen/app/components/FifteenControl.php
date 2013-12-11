@@ -10,7 +10,7 @@ use Nette\Application\UI;
 class FifteenControl extends UI\Control
 {
 	/** @var int */
-	protected $width = 4;
+	public $width = 4;
 
 	/** @var array of function ($sender) */
 	public $onAfterClick;
@@ -80,7 +80,7 @@ class FifteenControl extends UI\Control
 			$rel = '-1,';
 			return TRUE;
 		}
-		if ($x < $this->width-1 && $pos === $empty + 1) {
+		if ($x < $this->width - 1 && $pos === $empty + 1) {
 			$rel = '+1,';
 			return TRUE;
 		}
@@ -88,7 +88,7 @@ class FifteenControl extends UI\Control
 			$rel = ',-1';
 			return TRUE;
 		}
-		if ($y < $this->width-1 && $pos === $empty + $this->width) {
+		if ($y < $this->width - 1 && $pos === $empty + $this->width) {
 			$rel = ',+1';
 			return TRUE;
 		}

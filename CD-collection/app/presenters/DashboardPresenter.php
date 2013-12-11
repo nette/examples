@@ -20,7 +20,7 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 		parent::startup();
 
 		if (!$this->user->isLoggedIn()) {
-			if ($this->user->logoutReason === Nette\Http\UserStorage::INACTIVITY) {
+			if ($this->user->logoutReason === Nette\Security\IUserStorage::INACTIVITY) {
 				$this->flashMessage('You have been signed out due to inactivity. Please sign in again.');
 			}
 			$this->redirect('Sign:in', array('backlink' => $this->storeRequest()));

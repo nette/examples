@@ -45,8 +45,6 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 
 	/**
 	 * Computes salted password hash.
-	 * @param  string
-	 * @param  string
 	 * @return string
 	 */
 	public function generateHash($password, $salt = NULL)

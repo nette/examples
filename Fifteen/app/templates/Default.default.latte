@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="utf-8">
 	<title>Fifteen - Nette Framework example</title>
 	<link rel="stylesheet" media="screen" href="{$basePath}/css/style.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript"></script>
-	<script src="{$basePath}/js/fifteen.js" type="text/javascript"></script>
-	<script src="{$basePath}/js/jquery.nette.js" type="text/javascript"></script>
 </head>
 
 <body>
-	<h1>Fifteen example &ndash; {snippet round <span>}round #{$presenter['fifteen']->round + 1}{/snippet}</h1>
+	<h1>Fifteen example &ndash; {snippet round <span>}round #{$presenter[fifteen]->round + 1}{/snippet}</h1>
 
 	{snippet flash}<h2 n:ifset="$flash">{$flash}</h2>{/snippet}
 
 	<p><a n:href="fifteen:shuffle!" class="ajax">Shuffle!</a></p>
 
 	{control fifteen}
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript"></script>
+	<script src="{$basePath}/js/fifteen.js" type="text/javascript"></script>
+	<script src="{$basePath}/js/jquery.nette.js" type="text/javascript"></script>
 </body>
 </html>

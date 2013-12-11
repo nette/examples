@@ -1,17 +1,11 @@
 <?php
 
-/**
- * This file is part of the Nette Framework (http://nette.org)
- */
-
 use Nette\Application\Routers,
 	Nette\Latte;
 
 
 /**
  * Micro-framework router for templates using {url} macro.
- *
- * @author     David Grudl
  */
 class TemplateRouter extends Routers\RouteList
 {
