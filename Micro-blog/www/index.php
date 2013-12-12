@@ -22,4 +22,4 @@ $container = $configurator->createContainer();
 $container->addService('router', new TemplateRouter('data/templates', __DIR__ . '/data/temp'));
 
 // Run the application!
-$container->application->run();
+$container->getService('application')->run();

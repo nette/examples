@@ -27,16 +27,17 @@ $container = $configurator->createContainer();
 
 // Setup router using mod_rewrite detection
 if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
-	$container->router[] = new Route('index.php', 'Front:Default:default', Route::ONE_WAY);
+	$router = $container->getService('router');
+	$router[] = new Route('index.php', 'Front:Default:default', Route::ONE_WAY);
 
-	$container->router[] = $adminRouter = new RouteList('Admin');
+	$router[] = $adminRouter = new RouteList('Admin');
 	$adminRouter[] = new Route('admin/<presenter>/<action>', 'Default:default');
 
-	$container->router[] = $frontRouter = new RouteList('Front');
+	$router[] = $frontRouter = new RouteList('Front');
 	$frontRouter[] = new Route('<presenter>/<action>[/<id>]', 'Default:default');
 
 } else {
-	$container->router = new SimpleRouter('Front:Default:default');
+	$container->addService('router', new SimpleRouter('Front:Default:default'));
 }
 
 return $container;

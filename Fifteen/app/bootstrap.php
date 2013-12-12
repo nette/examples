@@ -23,6 +23,6 @@ $configurator->createRobotLoader()
 $container = $configurator->createContainer();
 
 // Setup router
-$container->router = new SimpleRouter('Default:default');
+$container->addService('router', new SimpleRouter('Default:default'));
 
 return $container;

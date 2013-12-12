@@ -26,11 +26,12 @@ $container = $configurator->createContainer();
 
 // Setup router using mod_rewrite detection
 if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
-	$container->router[] = new Route('index.php', 'Dashboard:default', Route::ONE_WAY);
-	$container->router[] = new Route('<presenter>/<action>[/<id>]', 'Dashboard:default');
+	$router = $container->getService('router');
+	$router[] = new Route('index.php', 'Dashboard:default', Route::ONE_WAY);
+	$router[] = new Route('<presenter>/<action>[/<id>]', 'Dashboard:default');
 
 } else {
-	$container->router = new SimpleRouter('Dashboard:default');
+	$container->addService('router', new SimpleRouter('Dashboard:default'));
 }
 
 return $container;
