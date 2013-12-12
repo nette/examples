@@ -27,4 +27,4 @@ $container->addService('database', function() {
 });
 
 // Run the application!
-$container->application->run();
+$container->getService('application')->run();
