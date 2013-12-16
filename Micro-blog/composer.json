@@ -18,6 +18,6 @@
 		"nette/nette": "2.0.x"
 	},
 	"config": {
-		"vendor-dir": "www/data/libs"
+		"vendor-dir": "www/data/vendor"
 	}
 }
