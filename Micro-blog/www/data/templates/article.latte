@@ -11,7 +11,7 @@
 
 	<h1 n:block="title">{$article->title}</h1>
 
-	{!$article->content}
+	{$article->content|noescape}
 </div>
 
 <h2>Comments</h2>
@@ -19,6 +19,6 @@
 <div class="comments">
 {foreach $article->related('comment')->order('created') as $comment}
 	<p><b>{$comment->name}</b> said…</p>
-	{!$comment->content}
+	{$comment->content|noescape}
 {/foreach}
 </div>
