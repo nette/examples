@@ -11,7 +11,7 @@
 
 		<h1><a href="article/{$article->id}">{$article->title}</a></h1>
 
-		{!$article->content}
+		{$article->content|noescape}
 	</div>
 {/foreach}
 
