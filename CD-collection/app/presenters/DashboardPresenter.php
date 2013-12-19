@@ -9,7 +9,7 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	private $albums;
 
 
-	public function inject(AlbumRepository $albums)
+	public function __construct(AlbumRepository $albums)
 	{
 		$this->albums = $albums;
 	}
