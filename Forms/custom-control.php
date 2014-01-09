@@ -61,14 +61,13 @@ class DateInput extends Nette\Forms\Controls\BaseControl
 	public function getControl()
 	{
 		$name = $this->getHtmlName();
-		return Html::el('input')->name($name . '[day]')->id($this->getHtmlId())->value($this->day)
-
-			. Nette\Forms\Helpers::createSelectBox(
+		return Html::el()
+			->add(Html::el('input')->name($name . '[day]')->id($this->getHtmlId())->value($this->day))
+			->add(Nette\Forms\Helpers::createSelectBox(
 				array(1 => 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
 				array('selected?' => $this->month)
-				)->name($name . '[month]')
-
-			. Html::el('input')->name($name . '[year]')->value($this->year);
+				)->name($name . '[month]'))
+			->add(Html::el('input')->name($name . '[year]')->value($this->year));
 	}
 
 
