@@ -10,6 +10,7 @@ require __DIR__ . '/../../Nette/loader.php';
 
 use Nette\Forms\Form,
 	Nette\Diagnostics\Debugger,
+	Nette\Diagnostics\Dumper,
 	Nette\Utils\Html;
 
 Debugger::enable();
