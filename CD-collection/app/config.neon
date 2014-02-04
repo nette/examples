@@ -6,9 +6,13 @@ php:
 	date.timezone: Europe/Prague
 
 nette:
+	application:
+		mapping:
+			*: App\*Module\Presenters\*Presenter
+
 	database:
 		dsn: "sqlite:%appDir%/model/demo.db3"
 
 services:
-	- Authenticator
-	- AlbumRepository
+	- App\Model\Authenticator
+	- App\Model\AlbumRepository

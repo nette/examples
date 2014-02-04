@@ -1,6 +1,9 @@
 <?php
 
-use Nette\Security,
+namespace App\Model;
+
+use Nette,
+	Nette\Security,
 	Nette\Utils\Strings;
 
 

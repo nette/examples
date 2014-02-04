@@ -1,8 +1,8 @@
 <?php
 
-namespace DemoApp\FrontModule;
+namespace DemoApp\FrontModule\Presenters;
 
-class CatalogListPresenter extends \BasePresenter
+class CatalogListPresenter extends \DemoApp\Presenters\BasePresenter
 {
 
 }

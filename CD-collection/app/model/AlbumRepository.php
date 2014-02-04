@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Model;
+
+use Nette;
+
 
 class AlbumRepository extends Nette\Object
 {

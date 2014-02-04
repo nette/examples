@@ -1,8 +1,8 @@
 <?php
 
-namespace DemoApp\AdminModule;
+namespace DemoApp\AdminModule\Presenters;
 
-class DefaultPresenter extends \BasePresenter
+class DefaultPresenter extends \DemoApp\Presenters\BasePresenter
 {
 
 }

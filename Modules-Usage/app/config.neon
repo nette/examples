@@ -8,4 +8,4 @@ php:
 nette:
 	application:
 		mapping:
-			*: DemoApp\*Module\*Presenter
+			*: DemoApp\*Module\Presenters\*Presenter
