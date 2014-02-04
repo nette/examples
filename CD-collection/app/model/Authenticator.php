@@ -1,8 +1,9 @@
 <?php
 
-use Nette\Security,
-	Nette\Utils\Strings,
-	Nette\Security\Passwords;
+namespace App\Model;
+
+use Nette,
+	Nette\Security;
 
 
 /**
@@ -33,7 +34,7 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 		if (!$row) {
 			throw new Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
 
-		} elseif (!Passwords::verify($password, $row->password)) {
+		} elseif (!Security\Passwords::verify($password, $row->password)) {
 			throw new Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
 		}
 

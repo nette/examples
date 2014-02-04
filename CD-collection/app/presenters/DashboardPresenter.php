@@ -1,15 +1,19 @@
 <?php
 
-use Nette\Application\UI\Form;
+namespace App\Presenters;
+
+use App\Model,
+	Nette,
+	Nette\Application\UI\Form;
 
 
 class DashboardPresenter extends Nette\Application\UI\Presenter
 {
-	/** @var AlbumRepository */
+	/** @var Model\AlbumRepository */
 	private $albums;
 
 
-	public function __construct(AlbumRepository $albums)
+	public function __construct(Model\AlbumRepository $albums)
 	{
 		$this->albums = $albums;
 	}
