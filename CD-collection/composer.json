@@ -14,7 +14,7 @@
 		}
 	],
 	"require": {
-		"php": ">=5.3.0",
+		"php": ">=5.3.7",
 		"nette/nette": "dev-master"
 	}
 }
