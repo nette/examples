@@ -68,11 +68,11 @@ $form->getElementPrototype()->class('form-horizontal');
 
 foreach ($form->getControls() as $control) {
 	if ($control instanceof Controls\Button) {
-		$control->setAttribute('class', empty($usedPrimary) ? 'btn btn-primary' : 'btn');
+		$control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn');
 		$usedPrimary = TRUE;
 
 	} elseif ($control instanceof Controls\Checkbox || $control instanceof Controls\CheckboxList || $control instanceof Controls\RadioList) {
-		$control->getLabelPrototype()->class($control->getControlPrototype()->type);
+		$control->getLabelPrototype()->addClass($control->getControlPrototype()->type);
 		$control->getSeparatorPrototype()->setName(NULL);
 	}
 }
