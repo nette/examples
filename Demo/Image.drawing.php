@@ -2,7 +2,6 @@
 
 /**
  * Nette\Image drawing example.
- * @author     David Grudl
  */
 
 

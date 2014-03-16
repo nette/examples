@@ -4,8 +4,6 @@ use Nette\Application\UI;
 
 /**
  * The Fifteen game control
- *
- * @author     David Grudl
  */
 class FifteenControl extends UI\Control
 {
