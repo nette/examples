@@ -1,7 +1,6 @@
 <?php
 
-use Nette\Application\Routers,
-	Nette\Latte;
+use Nette\Application\Routers;
 
 
 /**
@@ -18,21 +17,22 @@ class TemplateRouter extends Routers\RouteList
 			$routes = array();
 			foreach (Nette\Utils\Finder::findFiles('*.latte')->from($path) as $file) {
 				$latte = new Latte\Engine;
-				$macroSet = new Latte\Macros\MacroSet($latte->compiler);
+				$macroSet = new Latte\Macros\MacroSet($latte->getCompiler());
 				$macroSet->addMacro('url', function($node) use (&$routes, $file) {
 					$routes[$node->args] = (string) $file;
 				});
-				$latte->__invoke(file_get_contents($file));
+				$latte->compile($file);
 			}
 			file_put_contents($cacheFile, '<?php return ' . var_export($routes, TRUE) . ';');
 		}
 
 		foreach ($routes as $mask => $file) {
-			$this[] = new Routers\Route($mask, function($presenter) use ($file) {
-				return $presenter->createTemplate(NULL, function() {
-					$latte = new Nette\Latte\Engine;
-					$macroSet = new Latte\Macros\MacroSet($latte->compiler);
-					$macroSet->addMacro('url', '');
+			$this[] = new Routers\Route($mask, function($presenter) use ($file, $cachePath) {
+				return $presenter->createTemplate(NULL, function() use ($cachePath) {
+					$latte = new Latte\Engine;
+					$latte->setTempDirectory($cachePath . '/cache');
+					$macroSet = new Latte\Macros\MacroSet($latte->getCompiler());
+					$macroSet->addMacro('url', function(){}); // ignore
 					return $latte;
 				})->setFile($file);
 			});
