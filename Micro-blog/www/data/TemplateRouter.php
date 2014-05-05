@@ -14,15 +14,7 @@ class TemplateRouter extends Routers\RouteList
 		if (is_file($cacheFile = $cachePath . '/routes.php')) {
 			$routes = require $cacheFile;
 		} else {
-			$routes = array();
-			foreach (Nette\Utils\Finder::findFiles('*.latte')->from($path) as $file) {
-				$latte = new Latte\Engine;
-				$macroSet = new Latte\Macros\MacroSet($latte->getCompiler());
-				$macroSet->addMacro('url', function($node) use (&$routes, $file) {
-					$routes[$node->args] = (string) $file;
-				});
-				$latte->compile($file);
-			}
+			$routes = $this->scanRoutes($path);
 			file_put_contents($cacheFile, '<?php return ' . var_export($routes, TRUE) . ';');
 		}
 
@@ -37,6 +29,21 @@ class TemplateRouter extends Routers\RouteList
 				})->setFile($file);
 			});
 		}
+	}
+
+
+	public function scanRoutes($path)
+	{
+		$routes = array();
+		$latte = new Latte\Engine;
+		$macroSet = new Latte\Macros\MacroSet($latte->getCompiler());
+		$macroSet->addMacro('url', function($node) use (&$routes, &$file) {
+			$routes[$node->args] = (string) $file;
+		});
+		foreach (Nette\Utils\Finder::findFiles('*.latte')->from($path) as $file) {
+			$latte->compile($file);
+		}
+		return $routes;
 	}
 
 }
