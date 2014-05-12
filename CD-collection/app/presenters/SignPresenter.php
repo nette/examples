@@ -32,10 +32,9 @@ class SignPresenter extends Nette\Application\UI\Presenter
 	}
 
 
-	public function signInFormSucceeded($form)
+	public function signInFormSucceeded($form, $values)
 	{
 		try {
-			$values = $form->getValues();
 			$this->getUser()->login($values->username, $values->password);
 
 		} catch (Nette\Security\AuthenticationException $e) {
