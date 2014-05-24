@@ -1,6 +1,6 @@
 {
 	"name": "nette-examples/cd-collection",
-	"type": "nette-example",
+	"type": "project",
 	"description": "A simple example showing components as the reusable stand-alone units.",
 	"license": "BSD-3-Clause",
 	"authors": [
