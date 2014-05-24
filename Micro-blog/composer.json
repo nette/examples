@@ -1,6 +1,6 @@
 {
 	"name": "nette-examples/micro-blog",
-	"type": "nette-example",
+	"type": "project",
 	"description": "A simple example showing how to use Nette Framework as a micro-framework.",
 	"license": "BSD-3-Clause",
 	"authors": [

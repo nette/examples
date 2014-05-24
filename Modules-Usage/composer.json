@@ -1,6 +1,6 @@
 {
 	"name": "nette-examples/modules-usage",
-	"type": "nette-example",
+	"type": "project",
 	"description": "The example demonstrates the usage of modules and submodules.",
 	"license": "BSD-3-Clause",
 	"authors": [
