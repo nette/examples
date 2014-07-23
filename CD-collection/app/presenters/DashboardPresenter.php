@@ -96,7 +96,7 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 			->onClick[] = $this->albumFormSucceeded;
 
 		$form->addSubmit('cancel', 'Cancel')
-			->setValidationScope(NULL)
+			->setValidationScope(array())
 			->onClick[] = $this->formCancelled;
 
 		$form->addProtection();
