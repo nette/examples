@@ -85,11 +85,9 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	protected function createComponentAlbumForm()
 	{
 		$form = new Form;
-		$form->addText('artist', 'Artist:')
-			->setRequired('Please enter an artist.');
+		$form->addText('artist', 'Artist:');
 
-		$form->addText('title', 'Title:')
-			->setRequired('Please enter a title.');
+		$form->addText('title', 'Title:');
 
 		$form->addSubmit('save', 'Save')
 			->setAttribute('class', 'default')
@@ -98,6 +96,11 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 		$form->addSubmit('cancel', 'Cancel')
 			->setValidationScope(NULL)
 			->onClick[] = $this->formCancelled;
+
+		$form["artist"]->addConditionOn($form['save'], Form::SUBMITTED, TRUE)
+			->setRequired('Please enter an artist.');
+		$form["title"]->addConditionOn($form['save'], Form::SUBMITTED, TRUE)
+			->setRequired('Please enter a title.');
 
 		$form->addProtection();
 		return $form;
