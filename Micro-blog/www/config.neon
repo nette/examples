@@ -5,7 +5,6 @@
 php:
 	date.timezone: Europe/Prague
 
-nette:
-	database:
-		dsn: 'sqlite:%appDir%/data/blog.db3'
-		reflection: conventional
+database:
+	dsn: 'sqlite:%appDir%/data/blog.db3'
+	reflection: conventional
