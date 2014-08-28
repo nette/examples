@@ -32,7 +32,7 @@ class TemplateRouter extends Routers\RouteList
 				return $presenter->createTemplate(NULL, function() {
 					$latte = new Nette\Latte\Engine;
 					$macroSet = new Latte\Macros\MacroSet($latte->compiler);
-					$macroSet->addMacro('url', '');
+					$macroSet->addMacro('url', function() {});
 					return $latte;
 				})->setFile($file);
 			});
