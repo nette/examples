@@ -5,7 +5,7 @@
  */
 
 
-require __DIR__ . '/../../Nette/loader.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use Nette\Image,
 	Nette\Diagnostics\Debugger;

@@ -6,7 +6,7 @@
  */
 
 
-require __DIR__ . '/../../Nette/loader.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use Nette\Utils\Finder,
 	Nette\Tools,
