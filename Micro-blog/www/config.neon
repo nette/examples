@@ -7,4 +7,4 @@ php:
 
 database:
 	dsn: 'sqlite:%appDir%/data/blog.db3'
-	reflection: conventional
+	conventions: static

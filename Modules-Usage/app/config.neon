@@ -5,7 +5,6 @@
 php:
 	date.timezone: Europe/Prague
 
-nette:
-	application:
-		mapping:
-			*: DemoApp\*Module\Presenters\*Presenter
+application:
+	mapping:
+		*: DemoApp\*Module\Presenters\*Presenter
