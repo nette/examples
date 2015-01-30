@@ -10,10 +10,10 @@ class FifteenControl extends UI\Control
 	/** @var int */
 	public $width = 4;
 
-	/** @var array of function ($sender) */
+	/** @var callable[]  function ($sender) */
 	public $onAfterClick;
 
-	/** @var array of function ($sender, $round) */
+	/** @var callable[]  function ($sender, $round) */
 	public $onGameOver;
 
 	/** @persistent array */

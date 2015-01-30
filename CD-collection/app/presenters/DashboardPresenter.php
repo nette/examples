@@ -23,8 +23,8 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	{
 		parent::startup();
 
-		if (!$this->user->isLoggedIn()) {
-			if ($this->user->logoutReason === Nette\Security\IUserStorage::INACTIVITY) {
+		if (!$this->getUser()->isLoggedIn()) {
+			if ($this->getUser()->logoutReason === Nette\Security\IUserStorage::INACTIVITY) {
 				$this->flashMessage('You have been signed out due to inactivity. Please sign in again.');
 			}
 			$this->redirect('Sign:in', array('backlink' => $this->storeRequest()));
@@ -93,11 +93,11 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 
 		$form->addSubmit('save', 'Save')
 			->setAttribute('class', 'default')
-			->onClick[] = $this->albumFormSucceeded;
+			->onClick[] = array($this, 'albumFormSucceeded');
 
 		$form->addSubmit('cancel', 'Cancel')
 			->setValidationScope(array())
-			->onClick[] = $this->formCancelled;
+			->onClick[] = array($this, 'formCancelled');
 
 		$form->addProtection();
 		return $form;
@@ -127,11 +127,11 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	{
 		$form = new Form;
 		$form->addSubmit('cancel', 'Cancel')
-			->onClick[] = $this->formCancelled;
+			->onClick[] = array($this, 'formCancelled');
 
 		$form->addSubmit('delete', 'Delete')
 			->setAttribute('class', 'default')
-			->onClick[] = $this->deleteFormSucceeded;
+			->onClick[] = array($this, 'deleteFormSucceeded');
 
 		$form->addProtection();
 		return $form;
