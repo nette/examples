@@ -7,4 +7,4 @@ php:
 
 application:
 	mapping:
-		*: DemoApp\*Module\Presenters\*Presenter
+		*: DemoApp\Module\*\Presenters\*Presenter
