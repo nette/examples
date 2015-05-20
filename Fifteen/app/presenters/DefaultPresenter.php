@@ -18,7 +18,7 @@ class DefaultPresenter extends Nette\Application\UI\Presenter
 	protected function createComponentFifteen()
 	{
 		$fifteen = new FifteenControl;
-		$fifteen->onGameOver[] = array($this, 'gameOver');
+		$fifteen->onGameOver[] = [$this, 'gameOver'];
 		$fifteen->redrawControl();
 		return $fifteen;
 	}

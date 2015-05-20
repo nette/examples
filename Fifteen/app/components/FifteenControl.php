@@ -17,7 +17,7 @@ class FifteenControl extends UI\Control
 	public $onGameOver;
 
 	/** @persistent array */
-	public $order = array();
+	public $order = [];
 
 	/** @persistent int */
 	public $round = 0;

@@ -27,7 +27,7 @@ class SignPresenter extends Nette\Application\UI\Presenter
 
 		$form->addSubmit('send', 'Sign in');
 
-		$form->onSuccess[] = array($this, 'signInFormSucceeded');
+		$form->onSuccess[] = [$this, 'signInFormSucceeded'];
 		return $form;
 	}
 

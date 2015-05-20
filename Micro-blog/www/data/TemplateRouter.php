@@ -34,7 +34,7 @@ class TemplateRouter extends Routers\RouteList
 
 	public function scanRoutes($path)
 	{
-		$routes = array();
+		$routes = [];
 		$latte = new Latte\Engine;
 		$macroSet = new Latte\Macros\MacroSet($latte->getCompiler());
 		$macroSet->addMacro('url', function($node) use (&$routes, &$file) {
