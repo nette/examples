@@ -2,8 +2,8 @@
 
 namespace App\Model;
 
-use Nette,
-	Nette\Security;
+use Nette;
+use Nette\Security;
 
 
 /**

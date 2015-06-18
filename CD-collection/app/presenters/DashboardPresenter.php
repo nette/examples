@@ -2,9 +2,9 @@
 
 namespace App\Presenters;
 
-use App\Model,
-	Nette,
-	Nette\Application\UI\Form;
+use App\Model;
+use Nette;
+use Nette\Application\UI\Form;
 
 
 class DashboardPresenter extends Nette\Application\UI\Presenter
