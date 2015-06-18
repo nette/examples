@@ -1,7 +1,7 @@
 <?php
 
-use Nette\Application\Routers,
-	Nette\Latte;
+use Nette\Application\Routers;
+use Nette\Latte;
 
 
 /**

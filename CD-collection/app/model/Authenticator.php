@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-use Nette,
-	Nette\Security,
-	Nette\Utils\Strings;
+use Nette;
+use Nette\Security;
+use Nette\Utils\Strings;
 
 
 /**
