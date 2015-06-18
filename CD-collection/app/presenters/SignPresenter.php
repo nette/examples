@@ -2,8 +2,8 @@
 
 namespace App\Presenters;
 
-use Nette,
-	Nette\Application\UI;
+use Nette;
+use Nette\Application\UI;
 
 
 class SignPresenter extends Nette\Application\UI\Presenter

@@ -1,8 +1,8 @@
 <?php
 
-use Nette\Application\Routers\Route,
-	Nette\Application\Routers\RouteList,
-	Nette\Application\Routers\SimpleRouter;
+use Nette\Application\Routers\Route;
+use Nette\Application\Routers\RouteList;
+use Nette\Application\Routers\SimpleRouter;
 
 
 // Load Nette Framework
