@@ -4,7 +4,7 @@
  * @copyright  Copyright (c) 2009, 2010 Jan Marek
  * @copyright  Copyright (c) 2009, 2010 David Grudl
  * @license    MIT
- * @link       http://nette.org/cs/extras/jquery-ajax
+ * @link       https://addons.nette.org/honza-marek/jquery-ajax
  */
 
 /*
