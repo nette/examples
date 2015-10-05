@@ -57,4 +57,4 @@ if ($form->isSuccess()) {
 
 <?php echo $form ?>
 
-<footer><a href="http://doc.nette.org/en/forms">see documentation</a></footer>
+<footer><a href="https://doc.nette.org/en/forms">see documentation</a></footer>

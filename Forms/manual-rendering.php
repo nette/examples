@@ -46,7 +46,7 @@ if ($form->isSuccess()) {
 	<meta charset="utf-8">
 	<title>Nette\Forms manual form rendering | Nette Framework</title>
 	<link rel="stylesheet" media="screen" href="assets/style.css" />
-	<script src="http://nette.github.com/resources/js/netteForms.js"></script>
+	<script src="//nette.github.com/resources/js/netteForms.js"></script>
 </head>
 
 <body>

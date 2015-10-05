@@ -122,10 +122,10 @@ if ($form->isSuccess()) {
 <meta charset="utf-8">
 <title>Nette\Forms basic example | Nette Framework</title>
 <link rel="stylesheet" media="screen" href="assets/style.css" />
-<script src="http://nette.github.com/resources/js/netteForms.js"></script>
+<script src="//nette.github.com/resources/js/netteForms.js"></script>
 
 <h1>Nette\Forms basic example</h1>
 
 <?php echo $form ?>
 
-<footer><a href="http://doc.nette.org/en/forms">see documentation</a></footer>
+<footer><a href="https://doc.nette.org/en/forms">see documentation</a></footer>
