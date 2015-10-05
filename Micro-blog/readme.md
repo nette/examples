@@ -1,10 +1,10 @@
 Micro-blog (Nette Framework example)
 ------------------------------------
 
-A simple example showing how to use [Nette Framework](http://nette.org) as a micro-framework.
+A simple example showing how to use [Nette Framework](https://nette.org) as a micro-framework.
 
 
-What is [Nette Framework](http://nette.org)?
+What is [Nette Framework](https://nette.org)?
 --------------------------------------------
 
 Nette Framework is a popular tool for PHP web development. It is designed to be
@@ -18,7 +18,7 @@ Installing
 ----------
 
 The best way to install Nette Framework is to download latest package
-from http://nette.org/download or using [Composer](http://doc.nette.org/composer):
+from https://nette.org/download or using [Composer](https://doc.nette.org/composer):
 
 	curl -s http://getcomposer.org/installer | php
 	php composer.phar update
