@@ -5,6 +5,9 @@
 php:
 	date.timezone: Europe/Prague
 
+application:
+	scanDirs: no
+
 database:
 	dsn: 'sqlite:%appDir%/data/blog.db3'
 	conventions: static
