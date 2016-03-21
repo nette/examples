@@ -85,7 +85,7 @@ jQuery(function($) {
 	$.nette.createSpinner();
 
 	// apply AJAX unobtrusive way
-	$('a.ajax').live('click', function(event) {
+	$('body').on('click', 'a.ajax', function(event) {
 		event.preventDefault();
 		if ($.active) return;
 
