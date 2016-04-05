@@ -5,8 +5,10 @@ namespace App\Model;
 use Nette;
 
 
-class AlbumRepository extends Nette\Object
+class AlbumRepository
 {
+	use Nette\SmartObject;
+
 	/** @var Nette\Database\Context */
 	private $database;
 

@@ -9,8 +9,10 @@ use Nette\Security;
 /**
  * Users authenticator.
  */
-class Authenticator extends Nette\Object implements Security\IAuthenticator
+class Authenticator implements Security\IAuthenticator
 {
+	use Nette\SmartObject;
+
 	/** @var Nette\Database\Context */
 	private $database;
 
