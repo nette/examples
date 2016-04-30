@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<h1>Fifteen example &ndash; {snippet round <span>}round #{$presenter[fifteen]->round + 1}{/snippet}</h1>
+	<h1>Fifteen example &ndash; <span n:snippet=round>round #{$presenter[fifteen]->round + 1}</span></h1>
 
 	{snippet flash}<h2 n:ifset="$flash">{$flash}</h2>{/snippet}
 

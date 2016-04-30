@@ -24,7 +24,7 @@ class TemplateRouter extends Routers\RouteList
 					$latte = new Latte\Engine;
 					$latte->setTempDirectory($cachePath . '/cache');
 					$macroSet = new Latte\Macros\MacroSet($latte->getCompiler());
-					$macroSet->addMacro('url', function () {}); // ignore
+					$macroSet->addMacro('url', function () {}, NULL, NULL, $macroSet::ALLOWED_IN_HEAD); // ignore
 					return $latte;
 				})->setFile($file);
 			});
@@ -39,7 +39,7 @@ class TemplateRouter extends Routers\RouteList
 		$macroSet = new Latte\Macros\MacroSet($latte->getCompiler());
 		$macroSet->addMacro('url', function ($node) use (&$routes, &$file) {
 			$routes[$node->args] = (string) $file;
-		});
+		}, NULL, NULL, $macroSet::ALLOWED_IN_HEAD);
 		foreach (Nette\Utils\Finder::findFiles('*.latte')->from($path) as $file) {
 			$latte->compile($file);
 		}
