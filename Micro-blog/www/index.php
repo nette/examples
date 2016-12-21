@@ -12,8 +12,8 @@ require __DIR__ . '/data/TemplateRouter.php';
 // Configure application
 $configurator = new Nette\Configurator;
 
-// Enable Nette Debugger for error visualisation & logging
-$configurator->enableDebugger(__DIR__ . '/data/log');
+// Enable Tracy for error visualisation & logging
+$configurator->enableTracy(__DIR__ . '/data/log');
 
 // Create Dependency Injection container
 $configurator->setTempDirectory(__DIR__ . '/data/temp');

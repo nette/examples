@@ -92,7 +92,7 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 			->setRequired('Please enter a title.');
 
 		$form->addSubmit('save', 'Save')
-			->setAttribute('class', 'default')
+			->setHtmlAttribute('class', 'default')
 			->onClick[] = [$this, 'albumFormSucceeded'];
 
 		$form->addSubmit('cancel', 'Cancel')
@@ -130,7 +130,7 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 			->onClick[] = [$this, 'formCancelled'];
 
 		$form->addSubmit('delete', 'Delete')
-			->setAttribute('class', 'default')
+			->setHtmlAttribute('class', 'default')
 			->onClick[] = [$this, 'deleteFormSucceeded'];
 
 		$form->addProtection();

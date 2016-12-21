@@ -16,7 +16,7 @@
 	"require": {
 		"php": ">=5.6",
 		"nette/application": "^2.4",
-		"nette/bootstrap": "^2.4",
+		"nette/bootstrap": "^2.4.2",
 		"nette/database": "^2.4",
 		"nette/robot-loader": "^2.4",
 		"latte/latte": "^2.4",

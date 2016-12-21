@@ -13,8 +13,8 @@ if (@!include __DIR__ . '/../vendor/autoload.php') {
 // Configure application
 $configurator = new Nette\Configurator;
 
-// Enable Nette Debugger for error visualisation & logging
-$configurator->enableDebugger(__DIR__ . '/../log');
+// Enable Tracy for error visualisation & logging
+$configurator->enableTracy(__DIR__ . '/../log');
 
 // Enable RobotLoader - this will load all classes automatically
 $configurator->setTempDirectory(__DIR__ . '/../temp');
