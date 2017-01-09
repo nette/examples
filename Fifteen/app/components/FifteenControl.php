@@ -67,7 +67,7 @@ class FifteenControl extends UI\Control
 	}
 
 
-	public function isClickable($x, $y, & $rel = NULL)
+	public function isClickable($x, $y, &$rel = NULL)
 	{
 		$rel = NULL;
 		$pos = $x + $y * $this->width;
@@ -145,7 +145,7 @@ class FifteenControl extends UI\Control
 	 * @param  array
 	 * @return void
 	 */
-	public function saveState(array & $params)
+	public function saveState(array &$params)
 	{
 		parent::saveState($params);
 		if (isset($params['order'])) {
