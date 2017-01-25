@@ -119,11 +119,9 @@ class FifteenControl extends UI\Control
 
 
 	/**
-	 * Loads params
-	 * @param  array
-	 * @return void
+	 * Loads params.
 	 */
-	public function loadState(array $params)
+	public function loadState(array $params): void
 	{
 		if (isset($params['order'])) {
 			$params['order'] = explode('.', (string) $params['order']);
@@ -141,11 +139,9 @@ class FifteenControl extends UI\Control
 
 
 	/**
-	 * Save params
-	 * @param  array
-	 * @return void
+	 * Save params.
 	 */
-	public function saveState(array &$params)
+	public function saveState(array &$params): void
 	{
 		parent::saveState($params);
 		if (isset($params['order'])) {
