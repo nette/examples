@@ -25,10 +25,9 @@ class Authenticator implements Security\IAuthenticator
 
 	/**
 	 * Performs an authentication.
-	 * @return Nette\Security\Identity
 	 * @throws Nette\Security\AuthenticationException
 	 */
-	public function authenticate(array $credentials)
+	public function authenticate(array $credentials): Security\IIdentity
 	{
 		list($username, $password) = $credentials;
 		$row = $this->database->table('users')->where('username', $username)->fetch();
