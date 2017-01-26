@@ -22,10 +22,6 @@ if (typeof jQuery != 'function') {
 				return;
 			}
 
-			if (payload.state) {
-				$.nette.state = payload.state;
-			}
-
 			if (payload.snippets) {
 				for (var i in payload.snippets) {
 					$.nette.updateSnippet(i, payload.snippets[i]);
@@ -58,7 +54,6 @@ if (typeof jQuery != 'function') {
 		},
 
 		// current page state
-		state: null,
 		href: null,
 
 		// spinner element
