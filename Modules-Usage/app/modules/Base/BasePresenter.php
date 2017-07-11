@@ -10,10 +10,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	protected function beforeRender()
 	{
 		$this->template->viewName = $this->getView();
-		$this->template->root = isset($_SERVER['SCRIPT_FILENAME']) ? realpath(dirname(dirname($_SERVER['SCRIPT_FILENAME']))) : NULL;
+		$this->template->root = isset($_SERVER['SCRIPT_FILENAME']) ? realpath(dirname(dirname($_SERVER['SCRIPT_FILENAME']))) : null;
 
 		$a = strrpos($this->getName(), ':');
-		if ($a === FALSE) {
+		if ($a === false) {
 			$this->template->moduleName = '';
 			$this->template->presenterName = $this->getName();
 		} else {
