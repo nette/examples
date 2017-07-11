@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Presenters;
@@ -55,5 +54,4 @@ class SignPresenter extends Nette\Application\UI\Presenter
 		$this->flashMessage('You have been signed out.');
 		$this->redirect('in');
 	}
-
 }

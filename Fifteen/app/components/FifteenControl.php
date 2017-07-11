@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 use Nette\Application\UI;
@@ -150,5 +149,4 @@ class FifteenControl extends UI\Control
 			$params['order'] = implode('.', $params['order']);
 		}
 	}
-
 }
