@@ -68,30 +68,30 @@ class FifteenControl extends UI\Control
 	}
 
 
-	public function isClickable($x, $y, &$rel = NULL)
+	public function isClickable($x, $y, &$rel = null)
 	{
-		$rel = NULL;
+		$rel = null;
 		$pos = $x + $y * $this->width;
 		$empty = $this->searchEmpty();
 		$y = (int) ($empty / $this->width);
 		$x = $empty % $this->width;
 		if ($x > 0 && $pos === $empty - 1) {
 			$rel = '-1,';
-			return TRUE;
+			return true;
 		}
 		if ($x < $this->width - 1 && $pos === $empty + 1) {
 			$rel = '+1,';
-			return TRUE;
+			return true;
 		}
 		if ($y > 0 && $pos === $empty - $this->width) {
 			$rel = ',-1';
-			return TRUE;
+			return true;
 		}
 		if ($y < $this->width - 1 && $pos === $empty + $this->width) {
 			$rel = ',+1';
-			return TRUE;
+			return true;
 		}
-		return FALSE;
+		return false;
 	}
 
 
