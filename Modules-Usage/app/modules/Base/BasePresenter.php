@@ -7,7 +7,6 @@ use Nette;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
-
 	protected function beforeRender()
 	{
 		$this->template->viewName = $this->getView();
@@ -22,5 +21,4 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			$this->template->presenterName = substr($this->getName(), $a + 1);
 		}
 	}
-
 }

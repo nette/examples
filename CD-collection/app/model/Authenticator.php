@@ -44,5 +44,4 @@ class Authenticator implements Security\IAuthenticator
 		unset($arr['password']);
 		return new Security\Identity($row->id, NULL, $arr);
 	}
-
 }

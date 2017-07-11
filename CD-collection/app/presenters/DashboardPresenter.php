@@ -150,5 +150,4 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	{
 		$this->redirect('default');
 	}
-
 }

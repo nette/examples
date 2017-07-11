@@ -38,5 +38,4 @@ class AlbumRepository
 	{
 		return $this->findAll()->insert($values);
 	}
-
 }

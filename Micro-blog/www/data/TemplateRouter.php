@@ -8,7 +8,6 @@ use Nette\Application\Routers;
  */
 class TemplateRouter extends Routers\RouteList
 {
-
 	public function __construct($path, $cachePath)
 	{
 		if (is_file($cacheFile = $cachePath . '/routes.php')) {
@@ -45,5 +44,4 @@ class TemplateRouter extends Routers\RouteList
 		}
 		return $routes;
 	}
-
 }

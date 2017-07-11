@@ -152,5 +152,4 @@ class FifteenControl extends UI\Control
 			$params['order'] = implode('.', $params['order']);
 		}
 	}
-
 }

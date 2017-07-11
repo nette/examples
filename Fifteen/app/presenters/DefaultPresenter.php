@@ -3,8 +3,6 @@
 
 class DefaultPresenter extends Nette\Application\UI\Presenter
 {
-
-
 	public function renderDefault()
 	{
 		$this->redrawControl('round');
@@ -29,5 +27,4 @@ class DefaultPresenter extends Nette\Application\UI\Presenter
 		$this->template->flash = 'Congratulations!';
 		$this->redrawControl('flash');
 	}
-
 }
