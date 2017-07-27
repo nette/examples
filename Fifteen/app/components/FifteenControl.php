@@ -105,7 +105,7 @@ class FifteenControl extends UI\Control
 
 	private function searchEmpty()
 	{
-		return array_search(0, $this->order);
+		return array_search(0, $this->order, true);
 	}
 
 
@@ -126,7 +126,7 @@ class FifteenControl extends UI\Control
 	public function loadState(array $params)
 	{
 		if (isset($params['order'])) {
-			$params['order'] = explode('.', (string) $params['order']);
+			$params['order'] = array_map('intval', explode('.', (string) $params['order']));
 
 			// validate
 			$copy = $params['order'];
