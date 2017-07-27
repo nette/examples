@@ -28,7 +28,7 @@ $configurator->addConfig(__DIR__ . '/config.neon');
 $container = $configurator->createContainer();
 
 // Setup router using mod_rewrite detection
-if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
+if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules(), true)) {
 	$router = $container->getByType(Nette\Application\IRouter::class);
 	$router[] = new Route('index.php', 'Front:Default:default', Route::ONE_WAY);
 
