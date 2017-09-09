@@ -1,0 +1,5 @@
+parameters:
+	dumpFile: %appDir%/dump/sqlite.sql
+
+database:
+	dsn: 'sqlite::memory:'
