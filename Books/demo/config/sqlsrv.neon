@@ -1,0 +1,7 @@
+parameters:
+	dumpFile: %appDir%/dump/sqlsrv.sql
+
+database:
+	dsn: 'sqlsrv:server=127.0.0.1;database=nette_test'
+	user:
+	password:
