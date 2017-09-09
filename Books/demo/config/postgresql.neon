@@ -1,0 +1,7 @@
+parameters:
+	dumpFile: %appDir%/dump/postgresql.sql
+
+database:
+	dsn: 'pgsql:host=127.0.0.1;dbname=nette_test'
+	user: postgres
+	password:

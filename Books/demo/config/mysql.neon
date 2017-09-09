@@ -1,0 +1,7 @@
+parameters:
+	dumpFile: %appDir%/dump/mysql.sql
+
+database:
+	dsn: 'mysql:host=127.0.0.1;dbname=nette_test'
+	user: root
+	password:
