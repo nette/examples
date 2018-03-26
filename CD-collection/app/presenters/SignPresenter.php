@@ -15,9 +15,8 @@ class SignPresenter extends Nette\Application\UI\Presenter
 
 	/**
 	 * Sign-in form factory.
-	 * @return Nette\Application\UI\Form
 	 */
-	protected function createComponentSignInForm()
+	protected function createComponentSignInForm(): UI\Form
 	{
 		$form = new UI\Form;
 		$form->addText('username', 'Username:')
@@ -33,7 +32,7 @@ class SignPresenter extends Nette\Application\UI\Presenter
 	}
 
 
-	public function signInFormSucceeded($form, $values)
+	public function signInFormSucceeded(UI\Form $form, \stdClass $values): void
 	{
 		try {
 			$this->getUser()->login($values->username, $values->password);
@@ -48,7 +47,7 @@ class SignPresenter extends Nette\Application\UI\Presenter
 	}
 
 
-	public function actionOut()
+	public function actionOut(): void
 	{
 		$this->getUser()->logout();
 		$this->flashMessage('You have been signed out.');

@@ -20,23 +20,20 @@ class AlbumRepository
 	}
 
 
-	/** @return Nette\Database\Table\Selection */
-	public function findAll()
+	public function findAll(): Nette\Database\Table\Selection
 	{
 		return $this->database->table('albums');
 	}
 
 
-	/** @return Nette\Database\Table\ActiveRow */
-	public function findById($id)
+	public function findById(int $id): Nette\Database\Table\ActiveRow
 	{
 		return $this->findAll()->get($id);
 	}
 
 
-	/** @return Nette\Database\Table\ActiveRow */
-	public function insert($values)
+	public function insert(iterable $values): void
 	{
-		return $this->findAll()->insert($values);
+		$this->findAll()->insert($values);
 	}
 }

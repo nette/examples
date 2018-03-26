@@ -9,7 +9,7 @@ use Nette\Application\Routers;
  */
 class TemplateRouter extends Routers\RouteList
 {
-	public function __construct($path, $cachePath)
+	public function __construct(string $path, string $cachePath)
 	{
 		if (is_file($cacheFile = $cachePath . '/routes.php')) {
 			$routes = require $cacheFile;
@@ -19,8 +19,8 @@ class TemplateRouter extends Routers\RouteList
 		}
 
 		foreach ($routes as $mask => $file) {
-			$this[] = new Routers\Route($mask, function ($presenter) use ($file, $cachePath) {
-				return $presenter->createTemplate(null, function () use ($cachePath) {
+			$this[] = new Routers\Route($mask, function (NetteModule\MicroPresenter $presenter) use ($file, $cachePath) {
+				return $presenter->createTemplate(null, function () use ($cachePath): Latte\Engine {
 					$latte = new Latte\Engine;
 					$latte->setTempDirectory($cachePath . '/cache');
 					$macroSet = new Latte\Macros\MacroSet($latte->getCompiler());
@@ -32,7 +32,7 @@ class TemplateRouter extends Routers\RouteList
 	}
 
 
-	public function scanRoutes($path)
+	public function scanRoutes(string $path): array
 	{
 		$routes = [];
 		$latte = new Latte\Engine;

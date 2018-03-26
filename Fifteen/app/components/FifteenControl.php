@@ -11,10 +11,10 @@ class FifteenControl extends UI\Control
 	/** @var int */
 	public $width = 4;
 
-	/** @var callable[]  function ($sender) */
+	/** @var callable[]  function (FifteenControl $sender): void */
 	public $onAfterClick;
 
-	/** @var callable[]  function ($sender, $round) */
+	/** @var callable[]  function (FifteenControl $sender, int $round): void */
 	public $onGameOver;
 
 	/** @persistent array */
@@ -31,7 +31,7 @@ class FifteenControl extends UI\Control
 	}
 
 
-	public function handleClick($x, $y)
+	public function handleClick(int $x, int $y): void
 	{
 		if (!$this->isClickable($x, $y)) {
 			throw new UI\BadSignalException('Action not allowed.');
@@ -47,7 +47,7 @@ class FifteenControl extends UI\Control
 	}
 
 
-	public function handleShuffle()
+	public function handleShuffle(): void
 	{
 		$i = 100;
 		while ($i) {
@@ -62,13 +62,13 @@ class FifteenControl extends UI\Control
 	}
 
 
-	public function getRound()
+	public function getRound(): int
 	{
 		return $this->round;
 	}
 
 
-	public function isClickable($x, $y, &$rel = null)
+	public function isClickable(int $x, int $y, string &$rel = null): bool
 	{
 		$rel = null;
 		$pos = $x + $y * $this->width;
@@ -95,7 +95,7 @@ class FifteenControl extends UI\Control
 	}
 
 
-	private function move($x, $y)
+	private function move(int $x, int $y): void
 	{
 		$pos = $x + $y * $this->width;
 		$emptyPos = $this->searchEmpty();
@@ -104,13 +104,13 @@ class FifteenControl extends UI\Control
 	}
 
 
-	private function searchEmpty()
+	private function searchEmpty(): int
 	{
 		return array_search(0, $this->order, true);
 	}
 
 
-	public function render()
+	public function render(): void
 	{
 		$template = $this->template;
 		$template->width = $this->width;

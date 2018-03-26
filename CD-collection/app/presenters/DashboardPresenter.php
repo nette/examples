@@ -20,7 +20,7 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	}
 
 
-	protected function startup()
+	protected function startup(): void
 	{
 		parent::startup();
 
@@ -36,7 +36,7 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	/********************* view default *********************/
 
 
-	public function renderDefault()
+	public function renderDefault(): void
 	{
 		$this->template->albums = $this->albums->findAll()->order('artist')->order('title');
 	}
@@ -45,13 +45,13 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	/********************* views add & edit *********************/
 
 
-	public function renderAdd()
+	public function renderAdd(): void
 	{
 		$this['albumForm']['save']->caption = 'Add';
 	}
 
 
-	public function renderEdit($id = 0)
+	public function renderEdit(int $id): void
 	{
 		$form = $this['albumForm'];
 		if (!$form->isSubmitted()) {
@@ -67,7 +67,7 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	/********************* view delete *********************/
 
 
-	public function renderDelete($id = 0)
+	public function renderDelete(int $id): void
 	{
 		$this->template->album = $this->albums->findById($id);
 		if (!$this->template->album) {
@@ -81,9 +81,8 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 
 	/**
 	 * Edit form factory.
-	 * @return Form
 	 */
-	protected function createComponentAlbumForm()
+	protected function createComponentAlbumForm(): Form
 	{
 		$form = new Form;
 		$form->addText('artist', 'Artist:')
@@ -105,7 +104,7 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	}
 
 
-	public function albumFormSucceeded($button)
+	public function albumFormSucceeded(Nette\Forms\Controls\SubmitButton $button): void
 	{
 		$values = $button->getForm()->getValues();
 		$id = (int) $this->getParameter('id');
@@ -122,9 +121,8 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 
 	/**
 	 * Delete form factory.
-	 * @return Form
 	 */
-	protected function createComponentDeleteForm()
+	protected function createComponentDeleteForm(): Form
 	{
 		$form = new Form;
 		$form->addSubmit('cancel', 'Cancel')
@@ -139,15 +137,15 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 	}
 
 
-	public function deleteFormSucceeded()
+	public function deleteFormSucceeded(): void
 	{
-		$this->albums->findById($this->getParameter('id'))->delete();
+		$this->albums->findById((int) $this->getParameter('id'))->delete();
 		$this->flashMessage('Album has been deleted.');
 		$this->redirect('default');
 	}
 
 
-	public function formCancelled()
+	public function formCancelled(): void
 	{
 		$this->redirect('default');
 	}

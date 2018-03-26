@@ -8,7 +8,7 @@ use Nette;
 
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
-	protected function beforeRender()
+	protected function beforeRender(): void
 	{
 		$this->template->viewName = $this->getView();
 		$this->template->root = isset($_SERVER['SCRIPT_FILENAME']) ? realpath(dirname(dirname($_SERVER['SCRIPT_FILENAME']))) : null;
