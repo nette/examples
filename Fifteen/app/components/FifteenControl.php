@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Nette\Application\UI;
@@ -26,7 +27,6 @@ class FifteenControl extends UI\Control
 
 	public function __construct()
 	{
-		parent::__construct();
 		$this->order = range(0, $this->width * $this->width - 1);
 	}
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 // let bootstrap create Dependency Injection container
