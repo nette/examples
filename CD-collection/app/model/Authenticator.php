@@ -18,10 +18,14 @@ class Authenticator implements Security\IAuthenticator
 	/** @var Nette\Database\Context */
 	private $database;
 
+	/** @var Security\Passwords */
+	private $passwords;
 
-	public function __construct(Nette\Database\Context $database)
+
+	public function __construct(Nette\Database\Context $database, Security\Passwords $passwords)
 	{
 		$this->database = $database;
+		$this->passwords = $passwords;
 	}
 
 
@@ -37,7 +41,7 @@ class Authenticator implements Security\IAuthenticator
 		if (!$row) {
 			throw new Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
 
-		} elseif (!Security\Passwords::verify($password, $row->password)) {
+		} elseif (!$this->passwords->verify($password, $row->password)) {
 			throw new Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
 		}
 
