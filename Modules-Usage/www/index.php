@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-// let bootstrap create Dependency Injection container
-$container = require __DIR__ . '/../app/bootstrap.php';
+if (@!include __DIR__ . '/../vendor/autoload.php') {
+	die('Install Nette using `composer update`');
+}
 
-// run application
-$container->getByType(Nette\Application\Application::class)
+App\Booting::boot()
+	->createContainer()
+	->getByType(Nette\Application\Application::class)
 	->run();

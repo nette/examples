@@ -21,5 +21,8 @@
 		"latte/latte": "^2.5",
 		"tracy/tracy": "^2.6"
 	},
+	"autoload": {
+		"classmap": ["app/Booting.php"]
+	},
 	"minimum-stability": "dev"
 }
