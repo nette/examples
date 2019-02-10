@@ -32,8 +32,8 @@ class Booting
 		// Setup router using mod_rewrite detection
 		if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules(), true)) {
 			$router = new RouteList;
-			$router[] = new Route('index.php', 'Dashboard:default', Route::ONE_WAY);
-			$router[] = new Route('<presenter>/<action>[/<id>]', 'Dashboard:default');
+			$router->addRoute('index.php', 'Dashboard:default', Route::ONE_WAY);
+			$router->addRoute('<presenter>/<action>[/<id>]', 'Dashboard:default');
 
 		} else {
 			$router = new SimpleRouter('Dashboard:default');
