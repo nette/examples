@@ -42,7 +42,7 @@ class TemplateRouter extends Routers\RouteList
 			$routes[$node->args] = (string) $file;
 		}, null, null, $macroSet::ALLOWED_IN_HEAD);
 		foreach (Nette\Utils\Finder::findFiles('*.latte')->from($path) as $file) {
-			$latte->compile($file);
+			$latte->compile((string) $file);
 		}
 		return $routes;
 	}
