@@ -22,7 +22,7 @@
 		"latte/latte": "^2.5",
 		"tracy/tracy": "^2.6"
 	},
-	"minimum-stability": "dev",
+	"minimum-stability": "stable",
 	"config": {
 		"vendor-dir": "www/data/vendor"
 	}

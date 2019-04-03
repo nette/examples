@@ -28,5 +28,5 @@
 	"autoload": {
 		"classmap": ["app/Booting.php"]
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "stable"
 }
