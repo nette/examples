@@ -6,7 +6,7 @@ if (@!include __DIR__ . '/../vendor/autoload.php') {
 	die('Install Nette using `composer update`');
 }
 
-App\Booting::boot()
+App\Bootstrap::boot()
 	->createContainer()
 	->getByType(Nette\Application\Application::class)
 	->run();

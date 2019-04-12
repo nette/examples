@@ -10,7 +10,7 @@ use Nette\Application\Routers\SimpleRouter;
 use Nette\Configurator;
 
 
-class Booting
+class Bootstrap
 {
 	public static function boot(): Configurator
 	{
@@ -32,16 +32,11 @@ class Booting
 		// Setup router using mod_rewrite detection
 		if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules(), true)) {
 			$router = new RouteList;
-			$router->addRoute('index.php', 'Front:Default:default', Route::ONE_WAY);
-
-			$router->withModule('Admin')
-				->addRoute('admin/<presenter>/<action>', 'Default:default');
-
-			$router->withModule('Front')
-				->addRoute('<presenter>/<action>[/<id>]', 'Default:default');
+			$router->addRoute('index.php', 'Dashboard:default', Route::ONE_WAY);
+			$router->addRoute('<presenter>/<action>[/<id>]', 'Dashboard:default');
 
 		} else {
-			$router = new SimpleRouter('Front:Default:default');
+			$router = new SimpleRouter('Dashboard:default');
 		}
 		$configurator->addServices(['router' => $router]);
 
