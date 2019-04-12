@@ -8,7 +8,7 @@ use Nette\Application\Routers\SimpleRouter;
 use Nette\Configurator;
 
 
-class Booting
+class Bootstrap
 {
 	public static function boot(): Configurator
 	{
