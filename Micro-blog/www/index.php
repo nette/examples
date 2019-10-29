@@ -19,7 +19,7 @@ $configurator->enableTracy(__DIR__ . '/data/log');
 
 // Create Dependency Injection container
 $configurator->setTempDirectory(__DIR__ . '/data/temp');
-$configurator->addConfig(__DIR__ . '/config.neon');
+$configurator->addConfig(__DIR__ . '/data/config.neon');
 $container = $configurator->createContainer();
 
 // Enable template router
