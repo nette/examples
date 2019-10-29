@@ -1,2 +1,4 @@
+Require all granted
+
 # disable directory listing
 Options -Indexes
