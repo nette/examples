@@ -27,7 +27,7 @@ class Bootstrap
 			->register();
 
 		// Create Dependency Injection container from config.neon file
-		$configurator->addConfig(__DIR__ . '/config.neon');
+		$configurator->addConfig(__DIR__ . '/config/common.neon');
 
 		// Setup router using mod_rewrite detection
 		if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules(), true)) {
