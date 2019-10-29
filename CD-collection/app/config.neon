@@ -10,7 +10,7 @@ application:
 		*: App\*Module\Presenters\*Presenter
 
 database:
-	dsn: "sqlite:%appDir%/model/demo.db3"
+	dsn: "sqlite:%appDir%/Model/demo.db3"
 
 services:
 	- App\Model\Authenticator
