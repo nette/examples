@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use Nette\Application\Routers\Route;
-use Nette\Application\Routers\RouteList;
-use Nette\Application\Routers\SimpleRouter;
 use Nette\Configurator;
 
 
@@ -28,17 +25,6 @@ class Bootstrap
 
 		// Create Dependency Injection container from config.neon file
 		$configurator->addConfig(__DIR__ . '/config/common.neon');
-
-		// Setup router using mod_rewrite detection
-		if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules(), true)) {
-			$router = new RouteList;
-			$router->addRoute('index.php', 'Dashboard:default', Route::ONE_WAY);
-			$router->addRoute('<presenter>/<action>[/<id>]', 'Dashboard:default');
-
-		} else {
-			$router = new SimpleRouter('Dashboard:default');
-		}
-		$configurator->addServices(['router' => $router]);
 
 		return $configurator;
 	}

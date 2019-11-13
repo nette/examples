@@ -8,3 +8,6 @@ php:
 application:
 	mapping:
 		*: DemoApp\Module\*\Presenters\*Presenter
+
+services:
+	router: App\Router\RouterFactory::createRouter
