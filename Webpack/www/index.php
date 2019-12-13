@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
-$container = require __DIR__ . '/../app/bootstrap.php';
+if (@!include __DIR__ . '/../vendor/autoload.php') {
+	die('Install Nette using `composer update`');
+}
 
-$container->getByType(Nette\Application\Application::class)->run();
+App\Bootstrap::boot()
+	->createContainer()
+	->getByType(Nette\Application\Application::class)
+	->run();

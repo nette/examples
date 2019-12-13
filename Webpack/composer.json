@@ -15,5 +15,7 @@
 		"latte/latte": "^2.7",
 		"tracy/tracy": "^2.7"
 	},
-	"prefer-stable": true
+	"autoload": {
+		"classmap": ["app/Bootstrap.php"]
+	}
 }
