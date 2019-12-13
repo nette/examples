@@ -1,0 +1,31 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>{ifset title}{include title|stripHtml} | {/ifset}Nette + Webpack 4</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {block #head}
+        {* This CSS bundle is generated via Webpack. See webpack.config.js *}
+        <link rel="stylesheet" href="{$basePath}/dist/front.bundle.css">
+    {/block}
+</head>
+
+<body>
+<div class="container">
+    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+    {include #content}
+</div>
+
+{block #scripts}
+    {* This JS bundle is generated via Webpack. See webpack.config.js *}
+    <script src="{$basePath}/dist/front.bundle.js"></script>
+{/block}
+</body>
+</html>
