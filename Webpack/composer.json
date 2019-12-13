@@ -15,5 +15,8 @@
 		"latte/latte": "^2.7",
 		"tracy/tracy": "^2.7"
 	},
+	"autoload": {
+		"classmap": ["app/Bootstrap.php"]
+	},
 	"minimum-stability": "dev"
 }
