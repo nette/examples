@@ -1,0 +1,19 @@
+{
+	"name": "nette/examples",
+	"description": "Nette Framework 3 + Webpack 4",
+	"type": "project",
+	"license": "MIT",
+	"require": {
+		"php": "^7.3",
+		"nette/application": "^3.0",
+		"nette/bootstrap": "^3.0",
+		"nette/di": "^3.0",
+		"nette/forms": "^3.0",
+		"nette/http": "^3.0",
+		"nette/robot-loader": "^3.0",
+		"nette/utils": "^3.0",
+		"latte/latte": "^2.7",
+		"tracy/tracy": "^2.7"
+	},
+	"prefer-stable": true
+}
