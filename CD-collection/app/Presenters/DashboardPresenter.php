@@ -100,7 +100,6 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 			->setValidationScope([])
 			->onClick[] = [$this, 'formCancelled'];
 
-		$form->addProtection();
 		return $form;
 	}
 
@@ -133,7 +132,6 @@ class DashboardPresenter extends Nette\Application\UI\Presenter
 			->setHtmlAttribute('class', 'default')
 			->onClick[] = [$this, 'deleteFormSucceeded'];
 
-		$form->addProtection();
 		return $form;
 	}
 
