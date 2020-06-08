@@ -15,7 +15,7 @@ class Bootstrap
 		$configurator = new Configurator;
 
 		// Enable Tracy for error visualisation & logging
-		//$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
+		//$configurator->setDebugMode('secret@23.75.345.200'); // enable for your remote IP
 		$configurator->enableTracy(__DIR__ . '/../log');
 
 		// Enable RobotLoader - this will load all classes automatically
