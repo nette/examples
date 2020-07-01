@@ -22,7 +22,9 @@
 		"tracy/tracy": "^2.6"
 	},
 	"autoload": {
-		"classmap": ["app/Bootstrap.php"]
+		"psr-4": {
+			"App\\": "app"
+		}
 	},
 	"minimum-stability": "stable"
 }
