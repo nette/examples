@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Presenters;
 
@@ -13,7 +13,7 @@ class HomepagePresenter extends BasePresenter
 {
 	public function renderDefault(): void
 	{
-		$this->template->datetime = new DateTime();
+		$this->template->datetime = new DateTime;
 	}
 
 
@@ -33,7 +33,7 @@ class HomepagePresenter extends BasePresenter
 
 	protected function createComponentUserForm(): Form
 	{
-		$form = new Form();
+		$form = new Form;
 
 		$form->addText('username', 'Username')
 			->setRequired('Username is mandatory')

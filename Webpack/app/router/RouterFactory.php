@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace App;
 
@@ -10,10 +10,6 @@ use Nette\Application\Routers\RouteList;
 
 class RouterFactory
 {
-
-	/**
-	 * @return IRouter
-	 */
 	public static function createRouter(): IRouter
 	{
 		$router = new RouteList;
