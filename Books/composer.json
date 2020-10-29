@@ -5,5 +5,5 @@
 		"nette/bootstrap": "^3.0",
 		"tracy/tracy": "^2.6"
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "stable"
 }
